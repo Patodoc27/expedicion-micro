@@ -709,6 +709,8 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
 function tomar(L,P,it){
   if(it.mal){danio(L,P);toast(it.mal,iconoMol(it.tp),4.6);for(var q=0;q<10;q++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(q*0.63)*170,vy:Math.sin(q*0.63)*170,t:0,d:0.5,dib:function(c,f,k){c.fillStyle='rgba(224,80,60,'+k+')';c.beginPath();c.arc(f.x,f.y,5*k+1,0,7);c.fill();}});return;}
   if(it.tp==='cor'){sfx('ok');if(L.cor<3){L.cor++;pintarCor();toast('¡Recuperaste un corazón!',null,2);}else{L.pts+=20;L.textos.push({x:it.x,y:it.y-30,t:0,s:'+20'});}return;}
+  if(it.tp==='est'){sfx('ok');L.pts+=15;$('hPts').textContent=totalPts()+L.pts;L.textos.push({x:it.x,y:it.y-30,t:0,s:'+15'});
+    for(var i2=0;i2<8;i2++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(i2*0.79)*140,vy:Math.sin(i2*0.79)*140-70,t:0,d:0.5,tp:'chispa'});return;}
   sfx('mol');L.pts+=10;$('hPts').textContent=totalPts()+L.pts;
   L.textos.push({x:it.x,y:it.y-30,t:0,s:'+10'});if(MOL[it.tp].f)L.textos.push({x:it.x,y:it.y-64,t:0,fm:MOL[it.tp].f});
   for(var i=0;i<10;i++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(i*0.63)*160,vy:Math.sin(i*0.63)*160,t:0,d:0.45,tp:'chispa'});
@@ -729,6 +731,7 @@ function dibujar(){var L=JG.L,P=JG.P,cm=JG.cam;if(!L)return;
   if(L.meta&&L.dibMeta)L.dibMeta(c,L);
   if(L.cps)L.cps.forEach(function(q){bandera(c,q.x,q.y,q.ok);});
   L.items.forEach(function(it){if(it.got||it.oculto)return;var by=Math.sin(L.t*2.4+it.ph)*5;if(it.tp==='cor'){corazonCv(c,it.x,it.y+by,1.7+0.12*Math.sin(L.t*4));return;}
+    if(it.tp==='est'){estrellaCv(c,it.x,it.y+by,1.15+0.1*Math.sin(L.t*4+it.ph));return;}
     var hc=HALO[it.tp]||'255,255,255',pu=0.5+0.5*Math.sin(L.t*3+it.ph);c.save();var g=c.createRadialGradient(it.x,it.y+by,2,it.x,it.y+by,48);g.addColorStop(0,'rgba(255,255,255,.95)');g.addColorStop(0.35,'rgba('+hc+',.45)');g.addColorStop(1,'rgba('+hc+',0)');c.fillStyle=g;c.beginPath();c.arc(it.x,it.y+by,48,0,7);c.fill();c.strokeStyle='rgba('+hc+','+(0.25+0.4*(1-pu))+')';c.lineWidth=3;c.beginPath();c.arc(it.x,it.y+by,30+pu*16,0,7);c.stroke();c.restore();
     dibujarMol(c,it.tp,it.x,it.y+by,it.tp==='glu'?1.25:1.35,Math.sin(L.t+it.ph)*0.25);
     formula(c,MOL[it.tp].f,it.x,it.y+by+(it.tp==='glu'?44:30),15,'#22313B');});
@@ -784,7 +787,7 @@ function post(c,L,cm,P){var i,x,y,g;
   g.addColorStop(0,L.isla==='F'?'#7CD36A':'#F2A65A');g.addColorStop(1,L.isla==='F'?'#2E9E5B':'#D45B36');c.fillStyle=g;c.fillRect(0,0,VW*fr,7);
   if(L.cps)L.cps.forEach(function(q){var f=L.vertical?clamp(1-(q.y-200)/(L.H-340),0,1):clamp(q.x/(L.meta?L.meta.x+L.meta.w/2:L.W),0,1);c.fillStyle=q.ok?'#1F6B44':'#fff';c.beginPath();c.arc(VW*f,3.5,4.5,0,7);c.fill();});
   // indicador de la molécula más cercana fuera de pantalla
-  var best=null,bd=1e9;L.items.forEach(function(it){if(it.got||it.oculto||it.mal||it.tp==='cor')return;var d=Math.abs(it.x-P.x)+Math.abs(it.y-P.y);if(d<bd){bd=d;best=it;}});
+  var best=null,bd=1e9;L.items.forEach(function(it){if(it.got||it.oculto||it.mal||it.tp==='cor'||it.tp==='est')return;var d=Math.abs(it.x-P.x)+Math.abs(it.y-P.y);if(d<bd){bd=d;best=it;}});
   if(best){var sx=best.x-cm.x,sy=best.y-cm.y,m=60,top=110,bot=VH-150;
     if(sx<m||sx>VW-m||sy<top||sy>bot){var cx=clamp(sx,m,VW-m),cy=clamp(sy,top,bot),an=Math.atan2(sy-cy,sx-cx),pul=1+Math.sin(L.t*5)*0.08;
       c.save();c.translate(cx,cy);c.scale(pul,pul);c.fillStyle='rgba(255,255,255,.92)';c.shadowColor='rgba(0,0,0,.25)';c.shadowBlur=10;c.beginPath();c.arc(0,0,30,0,7);c.fill();c.shadowBlur=0;
@@ -1758,6 +1761,9 @@ function arranque(){cargar();cv=$('cv');c=cv.getContext('2d');ajustar();window.a
 function corazonCv(c,x,y,s){c.save();c.translate(x,y);c.scale(s,s);var g=c.createRadialGradient(0,0,2,0,0,26);g.addColorStop(0,'rgba(255,200,200,.7)');g.addColorStop(1,'rgba(255,200,200,0)');c.fillStyle=g;c.beginPath();c.arc(0,0,26,0,7);c.fill();
   c.fillStyle='#E8574A';c.strokeStyle='#B83A2E';c.lineWidth=2;c.beginPath();c.moveTo(0,10);c.bezierCurveTo(-18,-2,-12,-17,0,-7);c.bezierCurveTo(12,-17,18,-2,0,10);c.fill();c.stroke();
   c.fillStyle='rgba(255,255,255,.65)';c.beginPath();c.ellipse(-6,-7,3.4,2.2,-0.5,0,7);c.fill();c.restore();}
+function estrellaCv(c,x,y,sc){c.save();c.translate(x,y);c.scale(sc,sc);var g=c.createRadialGradient(0,0,2,0,0,30);g.addColorStop(0,'rgba(255,236,140,.85)');g.addColorStop(1,'rgba(255,214,80,0)');c.fillStyle=g;c.beginPath();c.arc(0,0,30,0,7);c.fill();
+  c.fillStyle='#FFC93C';c.strokeStyle='#D98E1F';c.lineWidth=2.4;c.lineJoin='round';c.beginPath();for(var i=0;i<10;i++){var r=i%2?6.5:15,a=-Math.PI/2+i*Math.PI/5;var px=Math.cos(a)*r,py=Math.sin(a)*r;if(i)c.lineTo(px,py);else c.moveTo(px,py);}c.closePath();c.fill();c.stroke();
+  c.fillStyle='rgba(255,255,255,.8)';c.beginPath();c.arc(-4,-4,2.6,0,7);c.fill();c.restore();}
 ESTILO.granoDer=function(c,p,L){var k=p.dt0||0;c.save();if(k>0)c.translate((Math.random()-0.5)*4*(1+k*4),k*8);ESTILO.grano(c,p);c.restore();
   if(k>0){c.strokeStyle='rgba(60,35,15,.7)';c.lineWidth=2;c.beginPath();c.moveTo(p.x+30,p.y+4);c.lineTo(p.x+44,p.y+20);c.lineTo(p.x+38,p.y+34);c.moveTo(p.x+76,p.y+6);c.lineTo(p.x+66,p.y+24);c.stroke();}};
 function camino(seed,x0,x1,o){var r=rnd(seed),s=[],p=[],x=x0,y=o.y0,i=0;
@@ -1779,6 +1785,8 @@ NIV.F1=function(VW,VH){var W=11000,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,
     else{if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'glu':'co2',j%8===2?MG:MC));
       if(j%6===0)items.push(trampa(s.x+s.w*0.75,s.y-150,'co2',MC));}});
   var sh=S[Math.floor(n*0.6)];items.push({x:sh.x+sh.w*0.85,y:sh.y-120,tp:'cor'});
+  S.forEach(function(s,j){if(j>0&&j<n-1&&j%4===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
+  S.forEach(function(s,j){if(j%4===3&&s.w>340)items.push({x:s.x+155,y:s.y-260,tp:'est'});});
   var cps=[Math.floor(n/4),Math.floor(n/2),Math.floor(3*n/4)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-145;
   return {isla:'F',nombre:'1 · La raíz: entra el agua',W:W,H:720,plat:plat,peligros:[],items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-200,y:380,w:110,h:220},
     eq:{h2o:0,co2:0,glu:0,o2:0},cola0:[],datos:{h2o:'Agua (H<sub>2</sub>O): materia que entra a la planta.'},
@@ -1798,7 +1806,7 @@ NIV.F1=function(VW,VH){var W=11000,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,
 
 /* ---------- F2: xilema (≈1 min, burbujas si te quedas quieto) ---------- */
 NIV.F2=function(VW,VH){
-  var W=1280,H=6200,iz=150,de=1130,plat=[],cad=[],VEL=95,SEP=300,carr=[[180,390,0],[535,745,100],[890,1100,200]],r=rnd(23),peli=[];
+  var W=1280,H=6200,iz=150,de=1130,plat=[],cad=[],VEL=95,SEP=300,carr=[[180,390,0],[535,745,100],[890,1100,200]],r=rnd(23),peli=[],items=[];
   plat.push(P_(-600,-200,iz+600,H+600,'solid','pared'));plat.push(P_(de,-200,600+W,H+600,'solid','pared'));
   carr.forEach(function(k){var ys=[];for(var y=H+100-k[2];y>=130;y-=SEP)ys.push(y);ys.forEach(function(y){var p=P_(k[0],y,k[1]-k[0],18,'one','racimo');p.cad=1;p.N=ys.length;plat.push(p);cad.push(p);});});
   plat.push(P_(-400,H-60,W+800,200,'solid','raizX'));
@@ -1811,8 +1819,9 @@ NIV.F2=function(VW,VH){
       c.fillStyle=g;c.beginPath();c.arc(h.x,h.y,rr2,0,7);c.fill();c.strokeStyle='rgba(110,160,205,.95)';c.lineWidth=2.5;c.stroke();etiqueta(c,'aire',h.x,h.y-rr2-12,12);},
     msg:'¡Burbuja de aire! El aire corta la columna de agua.'};}
   var lnR=Math.floor(r()*3);for(var y=H-700;y>420;y-=470){peli.push(burbuja(lnR,y));lnR=(lnR+1+Math.floor(r()*2))%3;}
+  [[0,900],[1,1700],[2,2400],[0,3000],[1,3800],[2,4500],[0,5100]].forEach(function(e){var k=carr[e[0]];items.push({x:(k[0]+k[1])/2,y:H-e[1],tp:'est'});});
   function carril(P){var cx=P.x+15,b=0,bd=1e9;carr.forEach(function(k,i){var d=Math.abs(cx-(k[0]+k[1])/2);if(d<bd){bd=d;b=i;}});return b;}
-  return {isla:'F',nombre:'2 · El tallo: el agua sube por el xilema',W:W,H:H,vertical:true,plat:plat,peligros:peli,items:[],minX:iz,maxX:de,cps:[],
+  return {isla:'F',nombre:'2 · El tallo: el agua sube por el xilema',W:W,H:H,vertical:true,plat:plat,peligros:peli,items:items,minX:iz,maxX:de,cps:[],
     inicio:{x:600,y:H-140},meta:{x:iz,y:0,w:de-iz,h:150},eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],gen:3,quieto:0,
     objetivo:function(L){return 'Súbete al agua que sube y esquiva el aire ('+Math.round(clamp(100*(1-(JG.P.y-150)/(H-290)),0,100))+'%)';},
     metaOK:function(){return true;},
@@ -1849,9 +1858,9 @@ NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[
   var MO='Eso era oxígeno: en la fotosíntesis no entra, sale de la hoja. Junta solo dióxido de carbono.';
   [1500,3300,5000,6900,8700].forEach(function(t,i){items.push(trampa(t+(i%2)*120,i%2?520:400,'o2',MO));});
   items.push({x:5600,y:270,tp:'cor'});
-  var vientos=[2200,4300,6400,8500].map(function(t){return {x:t,y:300,w:560,h:320,fx:-210};});
+  plat.filter(function(p){return p.st==='celula';}).forEach(function(p,i){if(i%3===1)items.push({x:p.x+p.w/2,y:p.y-110,tp:'est'});});
   var cps=[3,6,9].filter(function(k){return k<estX.length;}).map(function(k){return {x:estX[k]-160,y:610};}),mx=W-140;
-  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:150,plat:plat,items:items,vientos:vientos,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
+  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:150,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
     peligros:[{dibujar:function(c,h,L){oclusivas(c,L);}}],
     msgCaida:'Saliste de la hoja por un estoma abierto. Vuelves al último punto de control.',
     eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],
@@ -1860,12 +1869,9 @@ NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[
     metaOK:function(L){var f=6-L.eq.co2;return f<=0?true:'Te faltan '+f+' moléculas de dióxido de carbono.';},
     update:function(L,dt,P){est.forEach(function(e,i){var ph=((L.t+e.ph)%e.per);e.ab=lerp(e.ab,ph<4?1:0,dt*4);e.pl.on=!(ph<4);
         var it=L.items[i];if(it.oculto&&e.ab>0.8){it.oculto=false;it.sube=true;}if(it.sube){it.y=lerp(it.y,it.yObj,dt*1.2);if(Math.abs(it.y-it.yObj)<2)it.sube=false;}});
-      if(!L.avisoV&&vientos.some(function(z){return choca(P,z);})){L.avisoV=1;toast('El vapor de agua se mueve hacia los estomas y te frena. ¡Salta y empuja!',iconoMol('h2o'),3.6);}},
+      },
     fondo:fondoHoja,
-    detras:function(c,L){detrasHoja2(c,L,mx);vientos.forEach(function(z){var g=c.createLinearGradient(0,z.y,0,z.y+z.h);g.addColorStop(0,'rgba(140,200,240,0)');g.addColorStop(0.5,'rgba(140,200,240,.28)');g.addColorStop(1,'rgba(140,200,240,0)');c.fillStyle=g;c.fillRect(z.x,z.y,z.w,z.h);
-      for(var i=0;i<7;i++){var xx=z.x+z.w-((L.t*170+i*z.w/7)%z.w),yy=z.y+40+((i*67)%(z.h-80));c.save();c.globalAlpha=0.55;dibujarMol(c,'h2o',xx,yy,0.8,L.t+i);c.restore();
-        c.strokeStyle='rgba(255,255,255,.85)';c.lineWidth=3;c.lineCap='round';c.beginPath();c.moveTo(xx-18,yy-12);c.lineTo(xx-30,yy);c.lineTo(xx-18,yy+12);c.stroke();}
-      etiqueta(c,'vapor de agua hacia los estomas: te frena',z.x+z.w/2,z.y+14,12);});}};};
+    detras:function(c,L){detrasHoja2(c,L,mx);}};};
 
 /* ---------- F4: cloroplasto (≈1 min, 6 grupos, luz de colores y caídas) ---------- */
 NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','memClo')],granas=[],islas=[],x=870,y=520,k=0,islaEn=[3200,6200];
@@ -1875,12 +1881,14 @@ NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
     else{var lw=200+r()*90,mv=(k%4===3)?{ax:60,per:3.2+r()}:null;plat.push(P_(x,y,lw,14,'one','lamela',mv));x+=lw+(mv?60:0);}
     x+=110+r()*50;k++;y=clamp(y+(r()<0.5?-1:1)*(25+r()*60),380,550);}
   var fin=P_(x,630,W-x+60,140,'solid','memClo');plat.push(fin);
+  var items=[];granas.forEach(function(g,i){if(i%3===1)items.push({x:g.x+g.w/2,y:g.y-140,tp:'est'});});
+  islas.forEach(function(is){items.push({x:is.x+230,y:560,tp:'est'});});
   var nG=granas.length,marc=[];for(var j=0;j<6;j++){var gm=granas[Math.min(nG-1,Math.round((j+0.5)*nG/6))];gm.meta=true;gm.carga=0;marc.push(gm);}
   var haces=[];marc.forEach(function(g,i){var cx=g.x+g.w/2;haces.push({b:cx-40,a:280,v:0.55+0.06*(i%3),ph:i*1.3,col:i%2?'B':'R'});if(i%2===1)haces.push({b:cx+170,a:300,v:0.72,ph:i*2+1,col:'G'});});
   var COL={R:['255,130,110','luz roja'],B:['120,160,255','luz azul'],G:['120,225,120','luz verde']};
   function hx(h,t){return h.b+Math.sin(t*h.v+h.ph)*h.a;}
   var cx=W-240,cy=470;
-  return {isla:'F',nombre:'4 · El cloroplasto: la luz y la fabricación',W:W,H:720,techo:60,plat:plat,items:[],peligros:[],
+  return {isla:'F',nombre:'4 · El cloroplasto: la luz y la fabricación',W:W,H:720,techo:60,plat:plat,items:items,peligros:[],
     cps:islas.map(function(i){return {x:i.x+60,y:630};}),inicio:{x:300,y:540},meta:{x:W-360,y:420,w:240,h:210},
     msgCaida:'Caíste entre los tilacoides y te saliste del cloroplasto. Vuelves al último punto de control.',
     eq:{h2o:6,co2:6,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o','co2','co2','co2','co2','co2','co2'],
@@ -1921,6 +1929,8 @@ NIV.R1=function(VW,VH){var W=10200,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610
     else if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'co2':'h2o',j%8===2?MC:MH));
     else if(j>3)items.push(trampa(s.x+s.w*0.7,s.y-150,'co2',MC));});
   var sh=S[Math.floor(n*0.7)];items.push({x:sh.x+sh.w*0.8,y:sh.y-130,tp:'cor'});
+  S.forEach(function(s,j){if(j>0&&j<n-1&&j%4===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
+  S.forEach(function(s,j){if(j%4===3&&s.w>380)items.push({x:s.x+130,y:s.y-260,tp:'est'});});
   var cps=[Math.floor(n/4),Math.floor(n/2),Math.floor(3*n/4)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-150;
   return {isla:'R',nombre:'1 · El citoplasma: llegan la glucosa y el oxígeno',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-300,y:400,w:150,h:200},
     eq:{glu:0,o2:0,co2:0,h2o:0,en:false},cola0:[],
@@ -1948,6 +1958,7 @@ NIV.R2=function(VW,VH){var W=9600,plat=[P_(-50,640,W+100,140,'solid','memMito')]
   var items=[[600,560],[1500,520],[2200,470],[2750,410],[4100,540],[5400,520],[5960,370],[6900,450],[7300,390],[8300,520]].map(function(a){return {x:a[0],y:a[1],tp:'o2'};});
   var MG='Esa era una glucosa entera: se dividió en el citoplasma. A la mitocondria entran sus mitades.',MC='Eso era dióxido de carbono: aquí se forma, no reacciona con la glucosa.';
   items.push(trampa(1900,560,'glu',MG),trampa(3160,470,'co2',MC),trampa(5750,555,'glu',MG),trampa(6650,560,'co2',MC),trampa(8600,555,'co2',MC),{x:5150,y:520,tp:'cor'});
+  [[1165,370],[2750,400],[3400,540],[5960,360],[6600,540],[7315,380],[8515,400]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
   var mx=W-255;
   return {isla:'R',nombre:'2 · La mitocondria: se libera la energía',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,est:0,
     cps:[{x:2300,y:640},{x:4950,y:640},{x:7700,y:640}],inicio:{x:300,y:560},meta:{x:W-360,y:420,w:200,h:220},
@@ -1983,6 +1994,7 @@ NIV.R3=function(VW,VH){var W=10400,plat=[];
   [[300,520],[690,390],[880,540],[2550,520],[2720,390],[3050,470],[3570,380],[4500,520],[6080,470],[6220,380],[6350,540],[7100,500],[8500,520],[9000,520],[9770,370]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'o2'});});
   var MC='Eso era dióxido de carbono: es un desecho de la respiración celular, no aporta energía.',MH='Eso era agua: es un producto de la respiración celular, no aporta energía.';
   items.push(trampa(1300,555,'co2',MC),trampa(2150,555,'co2',MC),trampa(3700,555,'h2o',MH),trampa(5000,555,'co2',MC),trampa(7150,410,'co2',MC),trampa(8100,555,'h2o',MH),trampa(9500,555,'co2',MC),{x:6250,y:300,tp:'cor'});
+  [[685,370],[2715,370],[3565,360],[6215,360],[8765,370],[9765,360],[4100,540],[7600,540]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
   var COSTO=35;
   return {isla:'R',nombre:'3 · La célula usa la energía',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,usos:{},energia:50,calorT:0,
     cps:[{x:2420,y:600},{x:5960,y:600},{x:8400,y:600}],inicio:{x:200,y:520},meta:{x:W-170,y:380,w:170,h:220},
@@ -2028,8 +2040,8 @@ NIV.R3=function(VW,VH){var W=10400,plat=[];
   TXT.F1.intro='Junta <b>6 moléculas de agua</b> y entra a la raíz. Cuidado: en el suelo flotan sustancias que la raíz <b>no absorbe</b>; si las tocas, pierdes un corazón. Algunos granos sueltos se desmoronan si te quedas parado.';
   TXT.F1.lista=[['h2o','Agua · H<sub>2</sub>O · materia que entra'],['glu','Glucosa: la raíz no la absorbe (trampa)'],['co2','CO<sub>2</sub>: no entra por la raíz (trampa)']];
   TXT.F2.intro='El agua sube por el <b>xilema</b> como una columna: la hoja la «tira» hacia arriba al transpirar. Súbete al agua y esquiva el <b>aire</b>. Si te quedas quieto, se forman burbujas justo encima de ti: cambia de vaso.';
-  TXT.F3.intro='Atrapa <b>6 moléculas de dióxido de carbono</b> que entran por los <b>estomas</b>. La corriente de vapor de agua te frena, y entre el CO<sub>2</sub> flota <b>oxígeno</b>, que en la fotosíntesis no entra: sale. No te caigas por un estoma abierto.';
-  TXT.F3.lista=[['co2','Dióxido de carbono · CO<sub>2</sub> · materia que entra'],['o2','Oxígeno: sale de la hoja (trampa)'],['h2o','Vapor de agua: corriente que te frena']];
+  TXT.F3.intro='Atrapa <b>6 moléculas de dióxido de carbono</b> que entran por los <b>estomas</b>. Entre el CO<sub>2</sub> flota <b>oxígeno</b>, que en la fotosíntesis no entra: sale. No te caigas por un estoma abierto.';
+  TXT.F3.lista=[['co2','Dióxido de carbono · CO<sub>2</sub> · materia que entra'],['o2','Oxígeno: sale de la hoja (trampa)']];
   TXT.F4.intro='Carga los <b>6 grupos de tilacoides</b> marcados parándote sobre ellos cuando llega la luz. La luz <b>roja</b> y la <b>azul</b> sirven; la <b>verde</b> casi no: la clorofila la refleja. Si caes entre los tilacoides, sales del cloroplasto.';
   TXT.F4.lista=[['luz','Luz roja y azul: la clorofila la absorbe'],['clo','Luz verde: la clorofila la refleja'],['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · sale'],['o2','Oxígeno · O<sub>2</sub> · sale']];
   TXT.R1.intro='Junta <b>1 glucosa</b> y <b>6 moléculas de oxígeno</b>, pasa por la zona donde la glucosa se divide y entra a la mitocondria. Cuidado: el <b>dióxido de carbono</b> y el <b>agua</b> no son reactivos de la respiración celular.';
