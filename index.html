@@ -732,11 +732,36 @@ function ajustaTrampas(L){
       var nx=a.x+280;
       if(piso&&nx<=piso.x+piso.w-45)b.x=nx;
       else{var ix=L.items.indexOf(b);if(ix>=0)L.items.splice(ix,1);males.splice(i,1);i--;}}}}
+/* Ningun item encima de otro: a menos de 60px se ven apilados y una
+   estrella sobre una molecula no se puede agarrar. Se mueve el item mas
+   "movible" (estrella > coleccionable > trampa) a un lugar libre; las
+   trampas solo se mueven a lugares donde sigan siendo seguras. */
+function separaItems(L){
+  var plats=L.plat.filter(function(p){return p.w>=80;});
+  function bajo(it){var sup=null,dy=1e9;plats.forEach(function(p){var top=p.y;if(it.x>=p.x-24&&it.x<=p.x+p.w+24&&top>=it.y-6&&top-it.y<dy){dy=top-it.y;sup=p;}});return sup;}
+  function libre(nx,ny,it){for(var k=0;k<L.items.length;k++){var o=L.items[k];if(o===it||o.got)continue;if(Math.abs(nx-o.x)<60&&Math.abs(ny-o.y)<60)return false;}return true;}
+  var it=L.items.filter(function(i){return !i.got;});
+  for(var pas=0;pas<6;pas++){var quedo=false;
+    for(var i=0;i<it.length;i++){for(var j=i+1;j<it.length;j++){var a=it[i],b=it[j];
+      if(Math.abs(b.x-a.x)<60&&Math.abs(b.y-a.y)<60){
+        var mv;
+        if(a.mal&&b.mal)mv=b;else if(a.mal)mv=b;else if(b.mal)mv=a;
+        else if(a.tp==='est')mv=a;else if(b.tp==='est')mv=b;else mv=b;
+        var otro=mv===a?b:a,cand=[],d,cix,puesto=false;
+        for(d=0;d<5;d++){var dd=110+d*60;cand.push([otro.x+dd,otro.y]);cand.push([otro.x-dd,otro.y]);}
+        cand.push([mv.x,mv.y-85]);cand.push([mv.x,mv.y+85]);
+        for(cix=0;cix<cand.length&&!puesto;cix++){var cx=cand[cix][0],cy=cand[cix][1];
+          if(mv.mal){var s2=bajo({x:cx,y:cy});if(!s2||s2.y-cy>95)continue;}
+          if(libre(cx,cy,mv)){mv.x=cx;mv.y=cy;puesto=true;}}
+        if(!puesto)mv.y=otro.y-95;
+        quedo=true;
+      }}}
+    if(!quedo)break;}}
 function iniciarNivel(id){
   var def=NIV[id](VW,VH);var L=def;L.id=id;L.t=0;L.cor=3;L.pts=0;L.fx=[];L.textos=[];L.fin=false;L.vistos={};
   L.plat.forEach(function(p){p.ox=p.x;p.oy=p.y;p.dx=0;p.dy=0;if(p.on===undefined)p.on=true;if(p.mv&&p.mv.cond){p.x=p.ox+Math.sin(p.mv.ph||0)*(p.mv.ax||0);p.y=p.oy+Math.sin(p.mv.ph||0)*(p.mv.ay||0);}});
   L.items.forEach(function(it){it.got=false;it.ph=Math.random()*6;});
-  separaTrampas(L);ajustaTrampas(L);
+  separaTrampas(L);ajustaTrampas(L);separaItems(L);
   L.cp={x:L.inicio.x,y:L.inicio.y};L.estTomadas=0;L.estNecesarias=L.estNecesarias||Math.min(6,Math.max(3,Math.ceil(L.items.filter(function(it){return it.tp==='est';}).length*.3)));
   var P=nuevoJugador(L.inicio.x,L.inicio.y);P.cola=(L.cola0||[]).slice();
   JG.L=L;JG.P=P;JG.pausa=false;JG.shake=0;JG.toastT=0;$('toast').className='toast';K.l=K.r=K.u=0;
