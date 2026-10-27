@@ -694,10 +694,20 @@ var JG={L:null,P:null,cam:{x:0,y:0},pausa:false,acc:0,ult:0,toastT:0};
 
 function nuevoJugador(x,y){return {x:x,y:y,w:30,h:74,vx:0,vy:0,face:1,suelo:null,coy:0,inv:0,est:'idle',hist:[],cola:[],aura:0};}
 
+/* Nunca dos moleculas-trampa juntas: minimo 260px de separacion horizontal
+   (o 140px de altura entre ellas). Si no hay donde correrlas, se eliminan. */
+function separaTrampas(L){
+  var males=L.items.filter(function(i){return i.mal;}).sort(function(a,b){return a.x-b.x;}),i,a,b;
+  for(i=1;i<males.length;i++){a=males[i-1];b=males[i];
+    if(Math.abs(b.x-a.x)<260&&Math.abs(b.y-a.y)<140){
+      var nx=a.x+280;
+      if(nx>L.W-80){L.items.splice(L.items.indexOf(b),1);males.splice(i,1);i--;}
+      else b.x=nx;}}}
 function iniciarNivel(id){
   var def=NIV[id](VW,VH);var L=def;L.id=id;L.t=0;L.cor=3;L.pts=0;L.fx=[];L.textos=[];L.fin=false;L.vistos={};
   L.plat.forEach(function(p){p.ox=p.x;p.oy=p.y;p.dx=0;p.dy=0;if(p.on===undefined)p.on=true;if(p.mv&&p.mv.cond){p.x=p.ox+Math.sin(p.mv.ph||0)*(p.mv.ax||0);p.y=p.oy+Math.sin(p.mv.ph||0)*(p.mv.ay||0);}});
   L.items.forEach(function(it){it.got=false;it.ph=Math.random()*6;});
+  separaTrampas(L);
   L.cp={x:L.inicio.x,y:L.inicio.y};L.estTomadas=0;L.estNecesarias=L.estNecesarias||Math.min(6,Math.max(3,Math.ceil(L.items.filter(function(it){return it.tp==='est';}).length*.3)));
   var P=nuevoJugador(L.inicio.x,L.inicio.y);P.cola=(L.cola0||[]).slice();
   JG.L=L;JG.P=P;JG.pausa=false;JG.shake=0;JG.toastT=0;$('toast').className='toast';K.l=K.r=K.u=0;
@@ -1570,7 +1580,7 @@ var TXT={
   lista:[['luz','Luz: aporta energía, no es materia'],['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · sale'],['o2','Oxígeno · O<sub>2</sub> · sale']],
   apr:'La clorofila capta la energía de la luz. Con ella, el agua y el dióxido de carbono se transforman en glucosa y oxígeno: los átomos se reordenan.',
   quiz:[{q:'¿Qué papel cumple la luz en la fotosíntesis?',o:['Aporta la energía para la reacción','Se convierte en átomos de glucosa','Es un reactivo, igual que el agua','Solo calienta la hoja de la planta'],c:0,e:'La luz no es materia: es energía. La clorofila la capta y esa energía queda guardada en la glucosa.'},
-   {q:'¿Por qué la luz no se escribe como reactivo en la ecuación?',o:['Porque es energía, no materia','Porque la planta no la necesita','Porque se escribe como producto','Porque ya está dentro del agua'],c:0,e:'En la ecuación se escriben solo las sustancias (materia). La luz es energía: se anota sobre la flecha, como condición.'},
+   {q:'¿Qué les pasa a los átomos del agua y del dióxido de carbono en la fotosíntesis?',o:['Se reordenan: forman glucosa y oxígeno','Desaparecen para liberar energía','Se transforman en energía luminosa nueva','Siguen iguales dentro del cloroplasto'],c:0,e:'La materia no desaparece: los mismos átomos se reordenan y forman glucosa y oxígeno.'},
    {q:'¿De dónde salen los átomos de carbono para fabricar la glucosa?',o:['Del dióxido de carbono del aire','Del agua que absorbe la raíz','De la luz que llega a la hoja','De la clorofila, que se va gastando'],c:0,e:'El único reactivo que tiene carbono (C) es el dióxido de carbono (CO<sub>2</sub>) que entra del aire.'}]},
  R1:{t:'El citoplasma: llegan la glucosa y el oxígeno',d:'En el citoplasma de una célula, junta glucosa y oxígeno. Aquí la glucosa se divide en dos mitades.',
   intro:'Junta <b>1 glucosa</b> y <b>6 moléculas de oxígeno</b>. Pasa por la zona donde la glucosa se divide y entra a la mitocondria.',
@@ -1818,10 +1828,11 @@ function faroListo(is,err){sfx('nivel');var ambas=ST.faro.F&&ST.faro.R;
 
 
 /* ---------- FINAL ---------- */
+function rangoOf(pts,f){return pts<2800?(f?'Novata':'Novato'):pts<4200?(f?'Bioexploradora':'Bioexplorador'):pts<5400?'Bioaprendiz':pts<6600?'Bioespecialista':pts<7600?(f?'Bioexperta':'Bioexperto'):'Bioleyenda';}
 function verFinal(){if(!(ST.faro.F&&ST.faro.R)&&!LIBRE){abrirModal(cabeza('n','Certificado','Todavía no')+'<div class="cuerpo"><p>Para obtener el certificado tienes que completar los niveles de las dos islas y encender los dos faros.</p><div class="pie"><button class="btn" id="nOk">Entendido</button></div></div>');$('nOk').onclick=cerrarModal;return;}
   mostrar('final');var p=ST.perfil,e=totalEst(),f=PJ[p.pj].g==='f';
   $('cNom').textContent=p.nom+' '+p.ape;$('cSec').textContent='Sección '+p.sec;$('cPts').textContent=totalPts();$('cEst').textContent=e;$('cPreg').textContent=totalCorrectas()+' de '+totalPreg();$('cEcuF').innerHTML=ecuHTML('F');$('cEcuR').innerHTML=ecuHTML('R');
-  $('cRango').textContent=e>=19?(f?'Exploradora experta':'Explorador experto'):e>=14?(f?'Exploradora avanzada':'Explorador avanzado'):(f?'Exploradora':'Explorador');
+  $('cRango').textContent=rangoOf(totalPts(),f);
   var hn='';['F','R'].forEach(function(is){ORDEN[is].forEach(function(id){var pr=ST.prog[id];hn+='<div class="'+is.toLowerCase()+'">'+(is==='F'?'Fotosíntesis':'Respiración')+' '+id.charAt(1)+' · '+TXT[id].t+'<span>'+estrellasHTML(pr?pr.est:0)+'</span></div>';});hn+='<div class="'+is.toLowerCase()+'">Faro '+(is==='F'?'Fotosíntesis':'Respiración')+'<span>'+(ST.faro[is]?SVG.tilde:'')+'</span></div>';});$('cNiv').innerHTML=hn;
   var k=$('cvCert'),x=k.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,600,720);
   var g=x.createRadialGradient(300,380,40,300,380,300);g.addColorStop(0,'#FFF3D1');g.addColorStop(1,'rgba(255,243,209,0)');x.fillStyle=g;x.fillRect(0,0,600,720);
@@ -2144,26 +2155,26 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
 (function(){
   var preguntasExtra={
     F1:[
-      ['Un cardón tiene raíces bajo tierra. ¿De dónde obtiene el carbono para fabricar azúcares?',['Del dióxido de carbono que entra por sus partes verdes','Del agua que absorben sus raíces','De las sales minerales del suelo','De la luz que llega al tallo'],0,'El carbono de los azúcares proviene del dióxido de carbono del aire.'],
-      ['¿Qué sucedería si una planta no pudiera absorber suficiente agua?',['Le faltaría una sustancia necesaria para la fotosíntesis','Fabricaría más glucosa sin agua','El agua se transformaría en luz','Solo dejaría de respirar durante la noche'],0,'El agua es una de las sustancias que intervienen en la fotosíntesis.']],
+      ['¿De qué se alimenta una planta como el cardón?',['Fabrica su propia materia orgánica','Come granos del suelo con la raíz','Usa la luz como si fuera comida','Absorbe tierra por los estomas'],0,'Las plantas no se alimentan de tierra: fabrican su materia orgánica (glucosa) en las partes verdes.'],
+      ['¿Qué sucedería si una planta no pudiera absorber suficiente agua?',['Le faltaría un reactivo para la fotosíntesis','Fabricaría más glucosa sin agua','El agua se transformaría en luz solar','Dejaría de respirar solamente durante la noche'],0,'El agua es una de las sustancias que intervienen en la fotosíntesis.']],
     F2:[
       ['En un cardón, ¿qué parte verde puede realizar fotosíntesis?',['El tallo verde','Las espinas secas','La raíz enterrada','Las semillas sin germinar'],0,'En el cardón, el tallo verde realiza fotosíntesis.'],
-      ['El agua que viaja por el xilema llega a una parte verde. ¿Para qué puede utilizarse?',['Como sustancia que participa en la fotosíntesis','Como energía luminosa','Como glucosa ya terminada','Como dióxido de carbono'],0,'El agua es materia: participa como reactivo, no es luz ni glucosa.']],
+      ['El agua que viaja por el xilema llega a una parte verde. ¿Para qué puede utilizarse?',['Como reactivo en la fotosíntesis','Como una condición, igual que la luz','Como glucosa ya fabricada','Como dióxido de carbono'],0,'El agua es materia: participa como reactivo, no es luz ni glucosa.']],
     F3:[
       ['¿Cuál de estos grupos contiene organismos capaces de realizar fotosíntesis?',['Plantas, algas y cianobacterias','Perros, hongos y lombrices','Hongos, mariposas y personas','Personas, insectos y hongos'],0,'Además de las plantas, muchas algas y cianobacterias realizan fotosíntesis.'],
-      ['Si entra dióxido de carbono a una parte verde, ¿qué aporta para fabricar azúcares?',['Átomos de carbono','Rayos de luz','Energía para saltar','Sales minerales'],0,'El dióxido de carbono aporta el carbono de las moléculas orgánicas.']],
+      ['Si los estomas de una hoja se cerraran por mucho tiempo, ¿qué le faltaría a la fotosíntesis?',['Dióxido de carbono','Agua y sales minerales','Luz para la clorofila','Oxígeno del aire'],0,'Por los estomas entra el dióxido de carbono: sin él no hay materia para fabricar glucosa.']],
     F4:[
-      ['La fotosíntesis es un ejemplo de anabolismo porque…',['forma moléculas orgánicas más complejas usando energía','descompone glucosa y libera energía','convierte directamente luz en átomos','utiliza glucosa para formar dióxido de carbono'],0,'Anabolismo: se construyen moléculas más complejas a partir de otras más sencillas; requiere energía.'],
-      ['¿Qué ocurre con la energía luminosa aprovechada en la fotosíntesis?',['Se transforma y queda almacenada como energía química en sustancias orgánicas','Se convierte por completo en átomos de carbono','Desaparece al fabricarse la glucosa','Se guarda sin cambios dentro del agua'],0,'La energía se transforma: parte queda almacenada como energía química en los azúcares.']],
+      ['La fotosíntesis es un ejemplo de anabolismo porque…',['fabrica materia orgánica compleja','descompone glucosa y libera energía','convierte directamente luz en átomos','utiliza glucosa para formar dióxido de carbono'],0,'Anabolismo: se construyen moléculas más complejas a partir de otras más sencillas; requiere energía.'],
+      ['¿Qué ocurre con la energía luminosa aprovechada en la fotosíntesis?',['Se guarda como energía química en la glucosa','Se convierte por completo en átomos de carbono','Desaparece al fabricarse la glucosa','Se guarda sin cambios dentro del agua'],0,'La energía se transforma: parte queda almacenada como energía química en los azúcares.']],
     R1:[
-      ['Un hongo, una planta y un animal necesitan energía para sus células. ¿Quiénes realizan respiración celular?',['Los tres','Solo el animal','Solo la planta','Solo el hongo'],0,'Plantas, hongos y animales realizan respiración celular.'],
-      ['¿Respirar con pulmones y realizar respiración celular significan exactamente lo mismo?',['No: la respiración celular sucede en las células','Sí: todas las células tienen pulmones','Sí: solo los animales la realizan','No: la respiración celular produce luz'],0,'La respiración celular es un proceso de las células, no el movimiento del aire en los pulmones.']],
+      ['¿Qué ocurre con la glucosa en el citoplasma al comenzar la respiración celular?',['Se divide en dos mitades','Se convierte directamente en energía','Se junta con el dióxido de carbono','Sale de la célula sin cambios'],0,'La primera etapa ocurre en el citoplasma: la glucosa se divide en dos mitades.'],
+      ['¿Respirar con pulmones y realizar respiración celular significan exactamente lo mismo?',['No: ocurre dentro de las células','Sí: todas las células tienen pulmones','Sí: solo los animales la realizan','No: la respiración celular fabrica luz'],0,'La respiración celular es un proceso de las células, no el movimiento del aire en los pulmones.']],
     R2:[
-      ['La respiración celular es un ejemplo de catabolismo porque…',['degrada sustancias orgánicas y permite liberar energía','construye glucosa usando energía luminosa','fabrica moléculas de oxígeno a partir de luz','necesita fabricar clorofila para funcionar'],0,'Catabolismo: se degradan sustancias complejas y se libera energía.'],
+      ['La respiración celular es un ejemplo de catabolismo porque…',['degrada glucosa y libera su energía','construye glucosa usando energía luminosa','fabrica moléculas de oxígeno con luz','necesita clorofila para funcionar'],0,'Catabolismo: se degradan sustancias complejas y se libera energía.'],
       ['Para representar la respiración celular que estudiaste, ¿qué necesita ingresar junto con la glucosa?',['Oxígeno','Luz solar','Clorofila','Dióxido de carbono'],0,'En el proceso representado en este juego intervienen glucosa y oxígeno.']],
     R3:[
-      ['¿Qué sucede con la energía liberada durante la respiración celular?',['Una parte se aprovecha para trabajos celulares y otra se transfiere como calor','Toda se convierte en dióxido de carbono','Desaparece cuando la célula se mueve','Toda vuelve a transformarse en luz solar'],0,'La célula aprovecha una parte de la energía; otra se transfiere al entorno como calor.'],
-      ['Por la noche, las células vivas del cardón siguen necesitando energía. ¿Qué proceso continúa?',['La respiración celular','La fotosíntesis impulsada por el Sol','La fabricación de luz por las espinas','La conversión de oxígeno en luz'],0,'La respiración celular no depende directamente de que haya luz.']]
+      ['¿Qué sucede con la energía liberada durante la respiración celular?',['Una parte se aprovecha y otra se pierde como calor','Toda se convierte en dióxido de carbono que sale de la célula','Desaparece cuando la célula se mueve','Toda vuelve a transformarse en luz solar'],0,'La célula aprovecha una parte de la energía; otra se transfiere al entorno como calor.'],
+      ['En la ecuación de la respiración celular, la materia que sale de la célula es…',['Dióxido de carbono y agua','Dióxido de carbono y glucosa','Glucosa y oxígeno','Oxígeno y agua'],0,'Salen los productos: dióxido de carbono y agua. La glucosa y el oxígeno son los que entran.']]
   };
   Object.keys(preguntasExtra).forEach(function(id){
     preguntasExtra[id].forEach(function(a){TXT[id].quiz.push({q:a[0],o:a[1],c:a[2],e:a[3]});});
@@ -2209,11 +2220,11 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
   // Misión de transferencia: se abre antes del certificado, al completar ambos faros.
   var finalOriginal=verFinal;
   var cierre=[
-    ['Un cardón está iluminado. ¿Qué ocurre en las partes verdes de sus células?',['Puede haber fotosíntesis y también respiración celular','Se detiene por completo la respiración celular','Solo ocurre respiración celular','Se convierte la luz directamente en oxígeno'],0,'Con luz y las sustancias necesarias, las partes verdes pueden realizar ambos procesos.'],
+    ['Un cardón está iluminado. ¿Qué ocurre en las partes verdes de sus células?',['Fotosíntesis y respiración celular','Se detiene por completo la respiración celular','Solo ocurre respiración celular','La luz se convierte directamente en oxígeno'],0,'Con luz y las sustancias necesarias, las partes verdes pueden realizar ambos procesos.'],
     ['Una noche sin luz, ¿qué proceso puede continuar en las células del cardón?',['La respiración celular','La fotosíntesis gracias a la oscuridad','La producción de glucosa con luz solar','Ningún proceso que requiera energía'],0,'Aunque no hay fotosíntesis impulsada por la luz, la respiración celular puede continuar.'],
     ['¿Cuál de estas transformaciones necesita un aporte de energía para construir materia orgánica?',['Fotosíntesis: anabolismo','Respiración celular: catabolismo','Respiración celular: fotosíntesis','Fotosíntesis: degradación de glucosa'],0,'La fotosíntesis es un ejemplo de anabolismo: construye azúcares con aporte de energía luminosa.'],
     ['¿Cuál permite liberar energía de la glucosa para el trabajo celular?',['Respiración celular: catabolismo','Fotosíntesis: anabolismo','Fotosíntesis: digestión de glucosa','Ninguna: la célula solo usa luz'],0,'La respiración celular es un proceso catabólico que permite aprovechar la energía de la glucosa.'],
-    ['¿Qué afirmación diferencia correctamente materia y energía?',['El dióxido de carbono y el agua son materia; la luz es energía','La luz es una molécula de glucosa','El oxígeno es energía pura y no materia','El calor está formado por átomos nuevos'],0,'Las sustancias están formadas por materia. La luz y el calor son formas de transferencia de energía.']
+    ['¿Qué afirmación diferencia correctamente materia y energía?',['CO₂ y agua: materia. Luz: energía','La luz es una molécula de glucosa','El oxígeno es energía pura y no materia','El calor está formado por átomos nuevos'],0,'Las sustancias están formadas por materia. La luz y el calor son formas de transferencia de energía.']
   ];
   function misionFinal(i,correctas){var q=cierre[i],is='F',orden=mezclar(q[1].map(function(_,j){return j;}));
     abrirModal(cabeza(is,'Misión final · '+(i+1)+' de '+cierre.length,'El equilibrio del cardón')+
@@ -2243,7 +2254,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
   function trampaSalida(L,metaVieja,metaOriginal,soloAire){
     var u0=L.update,aviso=0;
     L.update=function(l,dt,P){if(u0)u0(l,dt,P);
-      if(!l.fin&&choca(P,metaVieja)&&(!soloAire||!P.suelo)){
+      if(!l.fin&&choca(P,metaVieja)&&(!soloAire||(!P.suelo&&P.vy<-60))){
         var rr=metaOriginal(l);
         if(rr===true){l.fin=true;l.bloqueo=true;completar();}
         else if(rr&&l.t-aviso>3){aviso=l.t;toast(rr,null,2.6);}}};

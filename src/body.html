@@ -1,0 +1,83 @@
+<!-- ============ INICIO ============ -->
+<section class="scr on" id="inicio">
+  <canvas class="fondo" id="cvIni"></canvas>
+  <div class="ini-card">
+    <div class="ini-izq">
+      <div class="marca">
+        <svg viewBox="0 0 80 80"><circle cx="40" cy="40" r="38" fill="#FFF3D1"/><path d="M40 66 C40 50 40 40 40 28" stroke="#1F6B44" stroke-width="5" fill="none" stroke-linecap="round"/><path d="M40 44 C26 44 18 34 18 22 C32 22 40 30 40 44Z" fill="#3DBA6E"/><path d="M40 36 C52 36 62 28 62 16 C48 16 40 24 40 36Z" fill="#2E9E5B"/><circle cx="58" cy="56" r="9" fill="#E0704A"/><circle cx="52" cy="52" r="4" fill="#F2A65A"/><circle cx="22" cy="58" r="6" fill="#FFC43D"/></svg>
+        <div><h1>Expedición <span>Micro</span></h1><p>Isla Fotosíntesis · Isla Respiración celular</p></div>
+      </div>
+      <div class="ini-intro">Vas a ser miniaturizado hasta el tamaño de las moléculas para recorrer dos islas. En la <b>Isla Fotosíntesis</b> vas a seguir cómo la planta fabrica materia orgánica a partir de materia inorgánica. En la <b>Isla Respiración celular</b> vas a ver cómo las células obtienen energía. Cada isla tiene sus propios niveles y desafíos.</div>
+      <div class="fila2">
+        <div class="campo"><label for="inNom">Nombre</label><input id="inNom" maxlength="30" autocomplete="off" placeholder="Escribe tu nombre"></div>
+        <div class="campo"><label for="inApe">Apellido</label><input id="inApe" maxlength="30" autocomplete="off" placeholder="Escribe tu apellido"></div>
+      </div>
+      <div class="campo"><label>Sección</label>
+        <div class="secc" id="secc"><button data-s="A">Sección A</button><button data-s="B">Sección B</button></div>
+      </div>
+      <div class="ini-err" id="iniErr"></div>
+      <div><button class="btn" id="btnEmpezar"><svg viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Comenzar la expedición</button></div>
+    </div>
+    <div class="ini-der">
+      <h2>Elige tu personaje</h2>
+      <div class="pjs" id="pjs"></div>
+    </div>
+  </div>
+</section>
+
+<!-- ============ MAPA ============ -->
+<section class="scr" id="mapa">
+  <svg class="mapa" id="svgMapa" viewBox="0 0 1600 900" preserveAspectRatio="xMidYMid slice"></svg>
+  <div class="barra">
+    <canvas id="cvAvMapa" width="116" height="116"></canvas>
+    <div class="quien"><b id="mNom"></b><span id="mSec"></span></div>
+    <div class="esp"></div>
+    <div class="chip"><svg viewBox="0 0 24 24"><path d="M12 2l3 6.5 7 .8-5.2 4.8 1.4 7L12 17.6 5.8 21.1l1.4-7L2 9.3l7-.8z" fill="#FFC43D" stroke="#C98A00" stroke-width="1.2"/></svg><span id="mEst">0</span></div>
+    <div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2E9E5B"/><path d="M8 12.5l3 3 5-6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg>Puntaje <span id="mPts">0</span></div>
+    <button class="ibtn" id="btnSonido1" title="Sonido"></button>
+    <button class="btn terra" id="btnFinal" style="padding:10px 22px;font-size:19px">Ver mi certificado</button>
+  </div>
+  <div class="panel-est" id="panelEst"></div>
+</section>
+
+<!-- ============ JUEGO ============ -->
+<section class="scr" id="juego">
+  <canvas id="cv"></canvas>
+  <div class="hud">
+    <div class="tit"><small id="hIsla"></small><b id="hNivel"></b></div>
+    <div class="corazones" id="hCor"></div>
+    <div class="obj" id="hObj"></div>
+    <div style="flex:1"></div>
+    <div class="chip"><svg viewBox="0 0 24 24"><circle cx="12" cy="12" r="10" fill="#2E9E5B"/><path d="M8 12.5l3 3 5-6" stroke="#fff" stroke-width="2.6" fill="none" stroke-linecap="round"/></svg><span id="hPts">0</span></div>
+    <button class="ibtn" id="btnSonido2" title="Sonido"></button>
+    <button class="ibtn" id="btnPausa" title="Pausa"><svg viewBox="0 0 24 24"><rect x="6" y="5" width="4" height="14" rx="1.5" fill="#22313B"/><rect x="14" y="5" width="4" height="14" rx="1.5" fill="#22313B"/></svg></button>
+  </div>
+  <div class="toast" id="toast"></div>
+  <div class="ecu" id="ecu"></div>
+  <div class="tactil" id="tactil">
+    <div class="tbtn" data-k="l" style="left:26px"><svg viewBox="0 0 24 24"><path d="M15 5l-7 7 7 7" stroke="#22313B" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="tbtn" data-k="r" style="left:140px"><svg viewBox="0 0 24 24"><path d="M9 5l7 7-7 7" stroke="#22313B" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+    <div class="tbtn" data-k="u" style="right:30px"><svg viewBox="0 0 24 24"><path d="M5 15l7-7 7 7" stroke="#22313B" stroke-width="3.2" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg></div>
+  </div>
+</section>
+
+<!-- ============ FINAL ============ -->
+<section class="scr" id="final">
+  <div class="cert">
+    <div class="cizq"><canvas id="cvCert" width="600" height="720"></canvas><b id="cNom"></b><span id="cSec" style="font-weight:800;color:#6B7A85"></span></div>
+    <div class="cder">
+      <small style="font-weight:800;letter-spacing:.1em;color:#6B7A85">CERTIFICADO DE EXPEDICIÓN</small>
+      <h1>¡Expedición Micro completada!</h1>
+      <div class="rango" id="cRango"></div>
+      <div class="res"><div><b id="cPts">0</b><span>puntos</span></div><div><b id="cEst">0</b><span>estrellas de 21</span></div><div><b id="cPreg">0</b><span>respuestas correctas</span></div></div>
+      <div class="comp">
+        <div class="cf"><h3 style="color:#1F6B44">Isla Fotosíntesis</h3><p><b>Dónde:</b> en los cloroplastos de las células de la planta (hojas y partes verdes).</p><p><b>Cuándo:</b> cuando hay luz.</p><p><b>Qué ocurre:</b> la planta fabrica materia orgánica (glucosa) a partir de materia inorgánica (agua y dióxido de carbono) y libera oxígeno.</p></div>
+        <div class="cr"><h3 style="color:#B4492A">Isla Respiración celular</h3><p><b>Dónde:</b> comienza en el citoplasma y se completa en las mitocondrias de las células de todos los seres vivos, también de las plantas.</p><p><b>Cuándo:</b> todo el tiempo, con luz y sin luz.</p><p><b>Qué ocurre:</b> la glucosa reacciona con el oxígeno; se forman dióxido de carbono y agua y se libera energía.</p></div>
+      </div>
+      <div class="cniv" id="cNiv"></div>
+      <div class="pie noimp"><button class="btn claro" id="btnVolverMapa">Volver al mapa</button><button class="btn mar" onclick="window.print()">Imprimir certificado</button></div>
+    </div>
+  </div>
+</section>
+
+<div class="velo" id="velo"><div class="modal" id="modal"></div></div>
