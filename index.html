@@ -326,7 +326,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
       </div>
       <div class="ini-err" id="iniErr"></div>
       <div><button class="btn" id="btnEmpezar"><svg viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Comenzar la expedición</button></div>
-      <div class="campo" id="top6wrap" style="display:none"><label style="color:#A06A1E">Mejores 6 exploradores</label><div id="top6"></div></div>
+      <div class="campo" id="top6wrap"><label style="color:#A06A1E">Mejores 6 exploradores</label><div id="top6"><div id="top6msg" style="font-size:13px;color:#7A6A4A;font-weight:700;padding:4px 2px">Cargando mejores puntajes…</div></div></div>
     </div>
     <div class="ini-der">
       <h2>Elige tu personaje</h2>
@@ -2568,9 +2568,13 @@ verFinal=function(){
 };
 function cargarTop6(){
   var wrap=$('top6wrap');if(!wrap)return;
+  var respondio=false;
+  function vacio(msg){if(respondio)return;respondio=true;
+    $('top6').innerHTML='<div style="font-size:13px;color:#7A6A4A;font-weight:700;padding:4px 2px">'+msg+'</div>';}
+  setTimeout(function(){vacio('Todavía no hay puntajes — ¡sé el primero en llegar al certificado!');},9000);
   window.emTop6=function(lista){
-    if(!lista||!lista.length){wrap.style.display='none';return;}
-    wrap.style.display='';
+    if(!lista||!lista.length){vacio('Todavía no hay puntajes — ¡sé el primero en llegar al certificado!');return;}
+    respondio=true;
     var miNombre=(ST.perfil?(ST.perfil.nom+' '+ST.perfil.ape):'').replace(/\s+/g,' ').toLowerCase();
     $('top6').innerHTML=lista.slice(0,6).map(function(q,i){
       var pos=i+1,c=pos===1?['#F7C948','#A97B0F']:pos===2?['#D9E1E7','#7E8C96']:['#D99A5B','#8F5A28'];
