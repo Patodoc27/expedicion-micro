@@ -326,6 +326,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
       </div>
       <div class="ini-err" id="iniErr"></div>
       <div><button class="btn" id="btnEmpezar"><svg viewBox="0 0 24 24"><path d="M5 12h12M12 6l6 6-6 6" stroke="#fff" stroke-width="3" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>Comenzar la expedición</button></div>
+      <div class="campo" id="top6wrap" style="display:none"><label style="color:#A06A1E">Mejores 6 exploradores</label><div id="top6"></div></div>
     </div>
     <div class="ini-der">
       <h2>Elige tu personaje</h2>
@@ -385,7 +386,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
       </div>
       <div class="cecus"><div id="cEcuF"></div><div id="cEcuR"></div></div>
       <div class="cniv" id="cNiv"></div>
-      <div class="pie noimp"><button class="btn claro" id="btnVolverMapa">Volver al mapa</button><button class="btn mar" onclick="window.print()">Imprimir certificado</button></div>
+      <div class="pie noimp"><button class="btn claro" id="btnVolverMapa">Volver al mapa</button><button class="btn" id="btnPDF">Descargar PDF</button><button class="btn mar" onclick="window.print()">Imprimir</button></div>
     </div>
   </div>
 </section>
@@ -2161,7 +2162,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
       ['En un cardón, ¿qué parte verde puede realizar fotosíntesis?',['El tallo verde','Las espinas secas','La raíz enterrada','Las semillas sin germinar'],0,'En el cardón, el tallo verde realiza fotosíntesis.'],
       ['El agua que viaja por el xilema llega a una parte verde. ¿Para qué puede utilizarse?',['Como reactivo en la fotosíntesis','Como una condición, igual que la luz','Como glucosa ya fabricada','Como dióxido de carbono'],0,'El agua es materia: participa como reactivo, no es luz ni glucosa.']],
     F3:[
-      ['¿Cuál de estos grupos contiene organismos capaces de realizar fotosíntesis?',['Plantas, algas y cianobacterias','Perros, hongos y lombrices','Hongos, mariposas y personas','Personas, insectos y hongos'],0,'Además de las plantas, muchas algas y cianobacterias realizan fotosíntesis.'],
+      ['¿Qué seres vivos realizan fotosíntesis?',['Plantas, algas y bacterias (algunas)','Animales','Hongos','Solo las plantas'],0,'La hacen las plantas, las algas y algunas bacterias (como las cianobacterias). Los animales y los hongos no.'],
       ['Si los estomas de una hoja se cerraran por mucho tiempo, ¿qué le faltaría a la fotosíntesis?',['Dióxido de carbono','Agua y sales minerales','Luz para la clorofila','Oxígeno del aire'],0,'Por los estomas entra el dióxido de carbono: sin él no hay materia para fabricar glucosa.']],
     F4:[
       ['La fotosíntesis es un ejemplo de anabolismo porque…',['fabrica materia orgánica compleja','descompone glucosa y libera energía','convierte directamente luz en átomos','utiliza glucosa para formar dióxido de carbono'],0,'Anabolismo: se construyen moléculas más complejas a partir de otras más sencillas; requiere energía.'],
@@ -2234,7 +2235,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
     Array.prototype.forEach.call(document.querySelectorAll('.ops button'),function(b){b.onclick=function(){var j=+b.getAttribute('data-j'),ok=j===q[2];
       Array.prototype.forEach.call(document.querySelectorAll('.ops button'),function(el){el.disabled=true;if(+el.getAttribute('data-j')===q[2])el.className='bien';});
       if(!ok)b.className='mal';sfx(ok?'ok':'mal');var ex=$('qExp');ex.className='expl on '+(ok?'bien':'mal');ex.innerHTML=(ok?'¡Correcto! ':'Revisá la explicación. ')+q[3];$('retoSig').style.display='';
-      $('retoSig').onclick=function(){if(i+1<cierre.length)misionFinal(i+1,correctas+(ok?1:0));else{ST.integracion=true;ST.integracionAciertos=correctas+(ok?1:0);guardar();finalOriginal();}};
+      $('retoSig').onclick=function(){if(i+1<cierre.length)misionFinal(i+1,correctas+(ok?1:0));else{ST.integracion=true;ST.integracionAciertos=correctas+(ok?1:0);guardar();verFinal();}};
     };});
   }
   verFinal=function(){if(ST.faro.F&&ST.faro.R&&!ST.integracion&&!LIBRE){misionFinal(0,0);return;}finalOriginal();};
@@ -2425,6 +2426,81 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
   var prev=NIV.F2;
   NIV.F2=function(VW,VH){var L=prev(VW,VH);L.estNecesarias=6;return L;};
 })();
+
+/* ============ PLANILLA · CERTIFICADO PDF · REINICIO LIMPIO ============ */
+var SHEETS_URL=''; /* pegar aqui la URL del Apps Script (termina en /exec) */
+function mmssT(s){s=Math.round(s);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
+function codigoCert(){if(!ST.codigo){var r=function(){return ('000'+Math.floor(Math.random()*46656).toString(36).toUpperCase()).slice(-4);};ST.codigo='EM-'+r()+'-'+r();}return ST.codigo;}
+var _perdiste0=perdiste;
+perdiste=function(){ST.intentos=(ST.intentos||0)+1;_perdiste0();};
+var _jugar0=jugar;
+jugar=function(id){if(!ST.t0)ST.t0=Date.now();_jugar0(id);};
+function enviarPlanilla(){
+  if(!SHEETS_URL||ST.enviado)return;ST.enviado=1;
+  var seg=ST.t0?Math.round((Date.now()-ST.t0)/1000):0;
+  var datos='codigo='+encodeURIComponent(codigoCert())+'&ape='+encodeURIComponent(ST.perfil.ape)+'&nom='+encodeURIComponent(ST.perfil.nom)+'&sec='+encodeURIComponent(ST.perfil.sec)+'&tiempo='+seg+'&tiempoLegible='+encodeURIComponent(mmssT(seg))+'&pts='+totalPts()+'&intentos='+((ST.intentos||0)+1);
+  try{fetch(SHEETS_URL,{method:'POST',mode:'no-cors',headers:{'Content-Type':'application/x-www-form-urlencoded'},body:datos});}catch(e){}
+}
+function limpiarProgreso(){
+  var sv=ST.sonido,pf=ST.perfil;
+  ST={perfil:pf,prog:{},quiz:{},faro:{},pts:0,sonido:sv,intentos:0,t0:null,codigo:null,enviado:0};
+  guardar();
+}
+function pdfDescargar(){
+  var cv=$('cvCert'),jpg=cv.toDataURL('image/jpeg',0.88).split(',')[1],bin=atob(jpg),n=bin.length;
+  var W=612,H=792,iw=540,ih=Math.round(540*cv.height/cv.width),ox=Math.round((W-iw)/2),oy=Math.round((H-ih)/2);
+  var cont='q '+iw+' 0 0 '+ih+' '+ox+' '+oy+' cm /Im0 Do Q';
+  var head='%PDF-1.4\n';
+  var o1='1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n';
+  var o2='2 0 obj\n<< /Type /Pages /Kids [3 0 R] /Count 1 >>\nendobj\n';
+  var o3='3 0 obj\n<< /Type /Page /Parent 2 0 R /MediaBox [0 0 '+W+' '+H+'] /Contents 4 0 R /Resources << /XObject << /Im0 5 0 R >> /ProcSet [/PDF /ImageC] >> >>\nendobj\n';
+  var o4='4 0 obj\n<< /Length '+cont.length+' >>\nstream\n'+cont+'\nendstream\nendobj\n';
+  var o5a='5 0 obj\n<< /Type /XObject /Subtype /Image /Width '+cv.width+' /Height '+cv.height+' /ColorSpace /DeviceRGB /BitsPerComponent 8 /Filter /DCTDecode /Length '+n+' >>\nstream\n';
+  var o5b='\nendstream\nendobj\n';
+  function p10(x){return ('0000000000'+x).slice(-10);}
+  var b1=head.length,b2=b1+o1.length,b3=b2+o2.length,b4=b3+o3.length,b5=b4+o4.length;
+  var xrefPos=b5+o5a.length+n+o5b.length;
+  var xref='xref\n0 6\n0000000000 65535 f \n'+p10(b1)+' 00000 n \n'+p10(b2)+' 00000 n \n'+p10(b3)+' 00000 n \n'+p10(b4)+' 00000 n \n'+p10(b5)+' 00000 n \n';
+  var trailer='trailer\n<< /Size 6 /Root 1 0 R >>\nstartxref\n'+xrefPos+'\n%%EOF';
+  var all=head+o1+o2+o3+o4+o5a+bin+o5b+xref+trailer,bytes=new Uint8Array(all.length),i;
+  for(i=0;i<all.length;i++)bytes[i]=all.charCodeAt(i)&255;
+  var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
+  a.download='certificado-expedicion-micro-'+codigoCert()+'.pdf';a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},5000);
+}
+var _verFinal0=verFinal;
+verFinal=function(){
+  var antesFaro=ST.faro.F&&ST.faro.R;
+  _verFinal0();
+  if(!antesFaro&&!LIBRE)return;
+  if($('final').className.indexOf('on')<0)return;
+  var cod=codigoCert(),seg=ST.t0?Math.round((Date.now()-ST.t0)/1000):0;
+  var x=$('cvCert').getContext('2d');
+  x.font='bold 15px Nunito,sans-serif';x.fillStyle='#355C59';x.textAlign='center';
+  x.fillText('Fecha: '+new Date().toLocaleDateString('es-AR')+'  ·  Tiempo de juego: '+mmssT(seg),300,672);
+  x.font='bold 17px Nunito,sans-serif';x.fillStyle='#A06A1E';
+  x.fillText('Código de verificación: '+cod,300,697);
+  var info=document.getElementById('cCod');
+  if(!info){info=document.createElement('div');info.id='cCod';info.style.cssText='text-align:center;font-weight:800;color:#A06A1E;font-size:16px;margin:6px 0';$('cNiv').parentNode.insertBefore(info,$('cNiv'));}
+  info.textContent='Código de verificación: '+cod+'  ·  Tiempo: '+mmssT(seg);
+  $('btnPDF').onclick=function(){sfx('clic');pdfDescargar();};
+  enviarPlanilla();
+  guardar();
+  setTimeout(limpiarProgreso,1500);
+};
+function cargarTop6(){
+  var wrap=$('top6wrap');if(!wrap)return;
+  window.emTop6=function(lista){
+    if(!lista||!lista.length){wrap.style.display='none';return;}
+    wrap.style.display='';
+    $('top6').innerHTML=lista.slice(0,6).map(function(q,i){
+      return '<div style="display:flex;justify-content:space-between;gap:10px;background:'+(i%2?'#FFF6E2':'#FFEFC9')+';border-radius:9px;padding:5px 10px;font-size:14px;margin:2px 0"><b>'+(i+1)+'. '+String(q.nom||'').replace(/</g,'')+' '+String(q.ape||'').replace(/</g,'')+'</b><span>'+(q.sec||'')+'</span><b>'+q.pts+' pts · '+q.tiempo+'</b></div>';
+    }).join('');
+  };
+  if(SHEETS_URL){var s=document.createElement('script');s.src=SHEETS_URL+'?top=6&callback=emTop6';document.body.appendChild(s);}
+  else{try{var lista=JSON.parse(localStorage.getItem('expedicion-micro-ranking-local-v2')||'[]');window.emTop6(lista.map(function(q){return {nom:(q.nombre||'').split(' ')[0],ape:(q.nombre||'').split(' ').slice(1).join(' '),sec:q.seccion,pts:q.puntos,tiempo:q.tiempo?mmssT(q.tiempo):''};}));}catch(e){}}
+}
+var _arranque0=arranque;
+arranque=function(){_arranque0();cargarTop6();};
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arranque);else arranque();
 
