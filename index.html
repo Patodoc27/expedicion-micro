@@ -764,7 +764,7 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
   // puntos de control
   if(L.cps)L.cps.forEach(function(q){if(!q.ok&&(L.vertical?P.y<q.y:P.x>q.x)){q.ok=true;L.cp={x:q.x,y:q.y-80};toast('Punto de control guardado.',null,1.6);}});
   // meta
-  if(L.meta&&!L.fin&&choca(P,L.meta)){var r=(L.estTomadas||0)<(L.estNecesarias||0)?'Conseguí '+(L.estNecesarias-L.estTomadas)+' estrella(s) más para abrir la salida.':L.metaOK(L);if(r===true){L.fin=true;L.bloqueo=true;if(L.alLlegar)L.alLlegar(L,P);else completar();}
+  if(L.meta&&!L.fin&&choca(P,L.meta)&&(!L.saltaMeta||!P.suelo)){var r=(L.estTomadas||0)<(L.estNecesarias||0)?'Conseguí '+(L.estNecesarias-L.estTomadas)+' estrella(s) más para abrir la salida.':L.metaOK(L);if(r===true){L.fin=true;L.bloqueo=true;if(L.alLlegar)L.alLlegar(L,P);else completar();}
     else if(r&&(!L.avisoT||L.t-L.avisoT>3)){L.avisoT=L.t;toast(r,null,2.6);}}
   }
   // efectos
@@ -1708,6 +1708,7 @@ function completar(){var L=JG.L,id=L.id,is=L.isla;sfx('nivel');var est=L.cor>=3?
   var o=ORDEN[is],sig=o[o.indexOf(id)+1]||null;
   abrirModal(cabeza(is,'¡Nivel completado!',TXT[id].t)+'<div class="cuerpo"><div class="estgr">'+estrellasHTML(est)+'</div>'+
     '<p style="text-align:center;font-weight:700">'+(est===3?'¡Sin perder ningún corazón!':est===2?'Perdiste un corazón. ¡Muy bien!':'¡Lo lograste!')+' · '+(L.pts+est*20)+' puntos</p>'+
+    (function(){var f=(L.items||[]).filter(function(i){return i.tp==='est'&&!i.got;}).length;return f>0?'<p style="text-align:center;font-size:15px;color:#A06A1E;margin:4px 0 0">Te quedaron '+f+' estrellita(s) sin agarrar por el camino.</p>':'';})()+
     '<div class="preg" style="background:'+(is==='F'?'#EAF7EF':'#FDEFE6')+'"><h3>Lo que aprendiste</h3><p>'+TXT[id].apr+'</p></div>'+
     '<div class="pie"><button class="btn'+(is==='R'?' terra':'')+'" id="mQuiz">Responder '+TXT[id].quiz.length+' preguntas</button></div></div>');
   $('mQuiz').onclick=function(){quiz(id,0,0,sig);};}
@@ -1861,11 +1862,14 @@ function cuantos(P,tp){return P.cola.filter(function(t){return t===tp;}).length;
 NIV.F1=function(VW,VH){var W=6400,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,wMin:320,wMax:560,gMin:110,gMax:155,dy:50,pozo:4,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
   S.forEach(function(s){plat.push(P_(s.x,s.y,s.w,400,'solid','grano'));});
   C.p.forEach(function(q){var p=P_(q.x-55,q.y,110,40,'one','granoDer');p.der=1;plat.push(p);});
+  for(var bi=0;bi<3-C.p.length;bi++){var bj=Math.floor(n*(0.3+bi*0.3)),bs=S[bj],bn=S[Math.min(n-1,bj+1)],bb=P_(bs.x+bs.w+20,Math.min(bs.y,bn.y)-25,110,40,'one','granoDer');bb.der=1;plat.push(bb);C.p.push({x:bb.x+55,y:bb.y});}
   var MG='Eso era glucosa: la planta no la toma del suelo, la fabrica en las hojas.',MC='Eso era dióxido de carbono: el que usa la fotosíntesis entra por las hojas, desde el aire, no por la raíz.';
   S.forEach(function(s,j){if(j===0||j===n-1)return;
     if(j%2===1){if(s.w>340){plat.push(P_(s.x+50,s.y-140,210,24,'one','raicilla'));items.push({x:s.x+155,y:s.y-200,tp:'h2o'});}else items.push({x:s.x+s.w/2,y:s.y-120,tp:'h2o'});}
     else{if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'glu':'co2',j%8===2?MG:MC));}});
   var sh=S[Math.floor(n*0.6)];items.push({x:sh.x+sh.w*0.85,y:sh.y-120,tp:'cor'});
+  var MO='Eso era oxígeno: la planta lo libera por las hojas, no lo toma del suelo.';
+  [[0.2,'glu',MG],[0.36,'glu',MG],[0.5,'o2',MO],[0.64,'glu',MG],[0.8,'glu',MG]].forEach(function(d){var s=S[Math.floor(n*d[0])];if(s)items.push(trampa(s.x+s.w*0.6,s.y-130,d[1],d[2]));});
   S.forEach(function(s,j){if(j>0&&j<n-1&&j%3===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
   var cps=[Math.floor(n/3),Math.floor(2*n/3)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-145;
   return {isla:'F',nombre:'1 · La raíz: entra el agua',W:W,H:720,plat:plat,peligros:[],items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-200,y:380,w:110,h:220},
@@ -1939,7 +1943,7 @@ NIV.F3=function(VW,VH){var W=6400,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[]
   items.push({x:3600,y:300,tp:'cor'});
   plat.filter(function(p){return p.st==='celula';}).forEach(function(p,i){if(i%3===1)items.push({x:p.x+p.w/2,y:p.y-110,tp:'est'});});
   var cps=[2,4].filter(function(k){return k<estX.length;}).map(function(k){return {x:estX[k]-160,y:610};}),mx=W-140;
-  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:285,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
+  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:285,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},saltaMeta:1,meta:{x:W-220,y:430,w:160,h:180},
     peligros:[{dibujar:function(c,h,L){oclusivas(c,L);}}],
     msgCaida:'Saliste de la hoja por un estoma abierto. Vuelves al último punto de control.',
     mMax:{co2:3,h2o:3,glu:1,o2:1},eq:{h2o:3,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o'],
@@ -2146,7 +2150,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
       ['En un cardón, ¿qué parte verde puede realizar fotosíntesis?',['El tallo verde','Las espinas secas','La raíz enterrada','Las semillas sin germinar'],0,'En el cardón, el tallo verde realiza fotosíntesis.'],
       ['El agua que viaja por el xilema llega a una parte verde. ¿Para qué puede utilizarse?',['Como sustancia que participa en la fotosíntesis','Como energía luminosa','Como glucosa ya terminada','Como dióxido de carbono'],0,'El agua es materia: participa como reactivo, no es luz ni glucosa.']],
     F3:[
-      ['¿Cuál de estos grupos contiene organismos capaces de realizar fotosíntesis?',['Cardones, algas y cianobacterias','Perros, hongos y cardones','Hongos, mariposas y personas','Personas, insectos y hongos'],0,'Además de las plantas, muchas algas y cianobacterias realizan fotosíntesis.'],
+      ['¿Cuál de estos grupos contiene organismos capaces de realizar fotosíntesis?',['Plantas, algas y cianobacterias','Perros, hongos y lombrices','Hongos, mariposas y personas','Personas, insectos y hongos'],0,'Además de las plantas, muchas algas y cianobacterias realizan fotosíntesis.'],
       ['Si entra dióxido de carbono a una parte verde, ¿qué aporta para fabricar azúcares?',['Átomos de carbono','Rayos de luz','Energía para saltar','Sales minerales'],0,'El dióxido de carbono aporta el carbono de las moléculas orgánicas.']],
     F4:[
       ['La fotosíntesis es un ejemplo de anabolismo porque…',['forma moléculas orgánicas más complejas usando energía','descompone glucosa y libera energía','convierte directamente luz en átomos','utiliza glucosa para formar dióxido de carbono'],0,'Anabolismo: se construyen moléculas más complejas a partir de otras más sencillas; requiere energía.'],
