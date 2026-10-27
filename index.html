@@ -1883,7 +1883,7 @@ NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
   var items=[];granas.forEach(function(g,i){if(i%3===1)items.push({x:g.x+g.w/2,y:g.y-140,tp:'est'});});
   islas.forEach(function(is){items.push({x:is.x+230,y:560,tp:'est'});});
   var nG=granas.length,marc=[];for(var j=0;j<6;j++){var gm=granas[Math.min(nG-1,Math.round((j+0.5)*nG/6))];gm.meta=true;gm.carga=0;marc.push(gm);}
-  var haces=[];marc.forEach(function(g,i){var cx=g.x+g.w/2;haces.push({b:cx-40,a:280,v:0.55+0.06*(i%3),ph:i*1.3,col:i%2?'B':'R'});if(i%2===1)haces.push({b:cx+170,a:300,v:0.72,ph:i*2+1,col:'G'});});
+  var haces=[];marc.forEach(function(g,i){var cx=g.x+g.w/2;haces.push({b:cx-40,a:200,v:0.55+0.06*(i%3),ph:i*1.3,col:i%2?'B':'R'});if(i%2===1)haces.push({b:cx+170,a:230,v:0.72,ph:i*2+1,col:'G'});});
   var COL={R:['255,130,110','luz roja'],B:['120,160,255','luz azul'],G:['120,225,120','luz verde']};
   function hx(h,t){return h.b+Math.sin(t*h.v+h.ph)*h.a;}
   var cx=W-240,cy=470;
@@ -1894,11 +1894,11 @@ NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
     objetivo:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n<6?'Carga los tilacoides marcados con luz roja o azul ('+n+'/6)':'Ve a la zona de fabricación';},
     metaOK:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n>=6?true:'Faltan '+(6-n)+' grupos de tilacoides por cargar con luz.';},
     update:function(L,dt,P){marc.forEach(function(g){if(g.activo)return;var c0=g.x+g.w/2,luz=false,verde=false;
-        haces.forEach(function(h){if(Math.abs(hx(h,L.t)-c0)<95){if(h.col==='G')verde=true;else luz=true;}});
-        if(P.suelo===g){if(luz){g.carga=Math.min(1,g.carga+dt/1.1);if(g.carga>=1){g.activo=true;sfx('luz');L.pts+=30;L.textos.push({x:c0,y:g.y-40,t:0,s:'+30'});toast('¡La clorofila captó la energía de la luz!',icoClorofila(),2.6);pintarObj();}}
-          else{g.carga=Math.max(0,g.carga-dt*0.3);if(verde&&L.t-(L.avG||-99)>6){L.avG=L.t;toast('La luz verde casi no sirve: la clorofila no la absorbe, la refleja. Por eso las hojas se ven verdes.',icoClorofila(),4.4);}
+        haces.forEach(function(h){if(Math.abs(hx(h,L.t)-c0)<130){if(h.col==='G')verde=true;else luz=true;}});
+        if(P.suelo===g){if(luz){g.carga=Math.min(1,g.carga+dt/0.8);if(g.carga>=1){g.activo=true;sfx('luz');L.pts+=30;L.textos.push({x:c0,y:g.y-40,t:0,s:'+30'});toast('¡La clorofila captó la energía de la luz!',icoClorofila(),2.6);pintarObj();}}
+          else{g.carga=Math.max(0,g.carga-dt*0.1);if(verde&&L.t-(L.avG||-99)>6){L.avG=L.t;toast('La luz verde casi no sirve: la clorofila no la absorbe, la refleja. Por eso las hojas se ven verdes.',icoClorofila(),4.4);}
             else if(!verde&&L.t-(L.avL||-99)>7){L.avL=L.t;toast('Sin luz no hay energía: espera un haz rojo o azul.',icoLuz(),2.8);}}}
-        else g.carga=Math.max(0,g.carga-dt*0.3);});},
+        else g.carga=Math.max(0,g.carga-dt*0.1);});},
     alLlegar:function(L,P){var cola=P.cola.slice();P.cola=[];
       cola.forEach(function(tp,i){var h=P.hist[Math.min(P.hist.length-1,10+i*11)];L.fx.push({t:0,d:1.6+i*0.05,m:tp,x0:h.x,y0:h.y,dib:function(c,f){var u=Math.min(1,f.t/1.3),e=u*u*(3-2*u);dibujarMol(c,f.m,lerp(f.x0,cx,e),lerp(f.y0,cy,e)-Math.sin(e*3.14)*80,0.9*(1-e*0.5),f.t*3);}});});
       setTimeout(function(){sfx('luz');L.eq.glu=1;L.eq.o2=6;pintarEcu();P.cola=['glu'];
