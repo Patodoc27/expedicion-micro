@@ -704,11 +704,39 @@ function separaTrampas(L){
       var nx=a.x+280;
       if(nx>L.W-80){L.items.splice(L.items.indexOf(b),1);males.splice(i,1);i--;}
       else b.x=nx;}}}
+/* Toda molecula-trampa tiene que ser esquivable: si queda flotando en la
+   "zona muerta" (ni caminable por debajo ni saltable por arriba) se baja al
+   piso de la plataforma mas cercana. Las que quedan sobre un hueco se
+   reubican sobre la plataforma solida mas cercana o se eliminan. */
+function ajustaTrampas(L){
+  var plats=L.plat.filter(function(p){return p.w>=80;});
+  for(var i=L.items.length-1;i>=0;i--){var it=L.items[i];if(!it.mal)continue;
+    var sup=null,dy=1e9;
+    plats.forEach(function(p){var top=p.y;if(it.x>=p.x-20&&it.x<=p.x+p.w+20&&top>=it.y-6&&top-it.y<dy){dy=top-it.y;sup=p;}});
+    if(!sup){
+      var best=null,bd=1e9;
+      plats.forEach(function(p){var cx=Math.max(p.x+60,Math.min(it.x,p.x+p.w-60)),d=Math.abs(cx-it.x)+Math.abs(p.y-it.y)*0.5;if(d<bd){bd=d;best={p:p,x:cx};}});
+      if(best&&bd<800){it.x=best.x;it.y=best.p.y-30;}else L.items.splice(i,1);
+      continue;}
+    var altura=sup.y-it.y;
+    if(altura<90||altura>300)it.y=sup.y-30;
+    var margen=45;
+    if(it.x<sup.x+margen)it.x=sup.x+margen;
+    if(it.x>sup.x+sup.w-margen)it.x=sup.x+sup.w-margen;}
+  /* ultima pasada: separar trampas que quedaron juntas sobre la misma
+     superficie, pero solo corriéndolas donde siga habiendo plataforma */
+  var males=L.items.filter(function(i){return i.mal;}).sort(function(a,b){return a.x-b.x;});
+  for(var i=1;i<males.length;i++){var a=males[i-1],b=males[i];
+    if(Math.abs(b.x-a.x)<260&&Math.abs(b.y-a.y)<140){
+      var piso=null;plats.forEach(function(p){var top=p.y;if(b.x>=p.x-20&&b.x<=p.x+p.w+20&&top>=b.y-6&&top-b.y<60)piso=p;});
+      var nx=a.x+280;
+      if(piso&&nx<=piso.x+piso.w-45)b.x=nx;
+      else{var ix=L.items.indexOf(b);if(ix>=0)L.items.splice(ix,1);males.splice(i,1);i--;}}}}
 function iniciarNivel(id){
   var def=NIV[id](VW,VH);var L=def;L.id=id;L.t=0;L.cor=3;L.pts=0;L.fx=[];L.textos=[];L.fin=false;L.vistos={};
   L.plat.forEach(function(p){p.ox=p.x;p.oy=p.y;p.dx=0;p.dy=0;if(p.on===undefined)p.on=true;if(p.mv&&p.mv.cond){p.x=p.ox+Math.sin(p.mv.ph||0)*(p.mv.ax||0);p.y=p.oy+Math.sin(p.mv.ph||0)*(p.mv.ay||0);}});
   L.items.forEach(function(it){it.got=false;it.ph=Math.random()*6;});
-  separaTrampas(L);
+  separaTrampas(L);ajustaTrampas(L);
   L.cp={x:L.inicio.x,y:L.inicio.y};L.estTomadas=0;L.estNecesarias=L.estNecesarias||Math.min(6,Math.max(3,Math.ceil(L.items.filter(function(it){return it.tp==='est';}).length*.3)));
   var P=nuevoJugador(L.inicio.x,L.inicio.y);P.cola=(L.cola0||[]).slice();
   JG.L=L;JG.P=P;JG.pausa=false;JG.shake=0;JG.toastT=0;$('toast').className='toast';K.l=K.r=K.u=0;
