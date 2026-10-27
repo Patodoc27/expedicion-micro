@@ -2560,39 +2560,43 @@ function pintarCert(){
   x.strokeStyle='#1F6B44';x.lineWidth=2;x.strokeRect(28,28,W-56,H-56);
   x.textAlign='center';
   x.fillStyle='#6B7A85';x.font='800 14px Nunito,sans-serif';
-  x.fillText('E X P E D I C I Ó N   M I C R O',310,78);
+  x.fillText('E X P E D I C I Ó N   M I C R O',310,88);
   x.fillStyle='#1F6B44';x.font='800 46px Fredoka,"Nunito",sans-serif';
-  x.fillText('Certificado',310,128);
-  x.strokeStyle='#C9A227';x.lineWidth=2.5;x.beginPath();x.moveTo(170,148);x.lineTo(450,148);x.stroke();
-  x.fillStyle='#355C59';x.font='700 19px Nunito,sans-serif';x.fillText('Se otorga a',310,192);
+  x.fillText('Certificado',310,142);
+  x.strokeStyle='#C9A227';x.lineWidth=2.5;x.beginPath();x.moveTo(170,164);x.lineTo(450,164);x.stroke();
+  x.fillStyle='#355C59';x.font='700 19px Nunito,sans-serif';x.fillText('Se otorga a',310,206);
   var nm=p.nom+' '+p.ape,nf=42;
   x.font='800 '+nf+'px Fredoka,"Nunito",sans-serif';
   while(x.measureText(nm).width>520&&nf>20){nf-=2;x.font='800 '+nf+'px Fredoka,"Nunito",sans-serif';}
-  x.fillStyle='#A06A1E';x.fillText(nm,310,240);
+  x.fillStyle='#A06A1E';x.fillText(nm,310,256);
   x.fillStyle='#355C59';x.font='700 18px Nunito,sans-serif';
-  x.fillText('1°'+(p.sec||'')+'  ·  completó los 7 niveles de las dos islas',310,272);
-  x.fillText('Isla Fotosíntesis e Isla Respiración celular',310,296);
+  x.fillText('1°'+(p.sec||'')+'  ·  completó los 7 niveles de las dos islas',310,290);
+  x.fillText('Isla Fotosíntesis e Isla Respiración celular',310,316);
   /* stats */
-  rr(x,70,325,W-140,92,16);x.fillStyle='#FFF6E0';x.fill();x.strokeStyle='#EAD9A8';x.lineWidth=2;x.stroke();
+  rr(x,70,348,W-140,92,16);x.fillStyle='#FFF6E0';x.fill();x.strokeStyle='#EAD9A8';x.lineWidth=2;x.stroke();
   var sc=[[pts,'puntos'],[est+'/21','estrellas'],[preg+'/'+totP,'respuestas']];
   for(var si=0;si<3;si++){var cx=70+(W-140)/6+si*(W-140)/3;
-    x.fillStyle='#1F6B44';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(String(sc[si][0]),cx,368);
-    x.fillStyle='#8A7B6B';x.font='700 13px Nunito,sans-serif';x.fillText(sc[si][1],cx,394);}
+    x.fillStyle='#1F6B44';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(String(sc[si][0]),cx,391);
+    x.fillStyle='#8A7B6B';x.font='700 13px Nunito,sans-serif';x.fillText(sc[si][1],cx,417);}
   /* rango */
-  x.fillStyle='#6B7A85';x.font='800 13px Nunito,sans-serif';x.fillText('R A N G O   A L C A N Z A D O',310,452);
-  var pw=340;rr(x,(W-pw)/2,466,pw,64,32);x.fillStyle=col;x.fill();
-  x.fillStyle='#fff';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(rg,310,508);
-  if(rg==='Bioleyenda'){x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.arc((W-pw)/2+30,498,10,0,7);x.fill();x.beginPath();x.arc((W+pw)/2-30,498,10,0,7);x.fill();}
-  /* decor: moléculas y personaje */
-  dibujarMol(x,'co2',100,625,1.4,-0.3);dibujarMol(x,'h2o',520,625,1.4,0.3);
-  dibujarMol(x,'glu',100,750,1.4,0.2);dibujarMol(x,'o2',520,750,1.5,0.5);
-  x.fillStyle='#F3E9D8';x.beginPath();x.ellipse(310,792,140,17,0,0,7);x.fill();
-  dibujarPJ(x,p.pj,310,790,2.7,1,0,'idle',{});
+  x.fillStyle='#6B7A85';x.font='800 13px Nunito,sans-serif';x.fillText('R A N G O   A L C A N Z A D O',310,478);
+  var pw=340;rr(x,(W-pw)/2,492,pw,64,32);x.fillStyle=col;x.fill();
+  x.fillStyle='#fff';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(rg,310,534);
+  if(rg==='Bioleyenda'){x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.arc((W-pw)/2+30,524,10,0,7);x.fill();x.beginPath();x.arc((W+pw)/2-30,524,10,0,7);x.fill();}
+  /* campo de moléculas decorativas alrededor del personaje */
+  dibujarMol(x,'o2',82,132,1.0,0.4);dibujarMol(x,'h2o',538,136,1.0,-0.4);
+  dibujarMol(x,'co2',96,610,1.15,-0.3);dibujarMol(x,'h2o',524,605,1.15,0.3);
+  dibujarMol(x,'glu',88,700,1.15,0.2);dibujarMol(x,'o2',536,706,1.15,0.5);
+  dibujarMol(x,'h2o',170,668,0.85,0.1);dibujarMol(x,'co2',450,672,0.85,-0.2);
+  dibujarMol(x,'o2',232,742,0.8,0.4);dibujarMol(x,'h2o',392,738,0.8,-0.4);
+  dibujarMol(x,'glu',140,748,0.9,-0.2);dibujarMol(x,'co2',482,750,0.9,0.25);
+  x.fillStyle='#F3E9D8';x.beginPath();x.ellipse(310,788,120,14,0,0,7);x.fill();
+  dibujarPJ(x,p.pj,310,786,1.9,1,0,'idle',{});
   /* pie */
   x.fillStyle='#355C59';x.font='700 16px Nunito,sans-serif';
-  x.fillText('Fecha: '+new Date().toLocaleDateString('es-AR')+'   ·   Tiempo de juego: '+mmssT(seg),310,812);
+  x.fillText('Fecha: '+new Date().toLocaleDateString('es-AR')+'   ·   Tiempo de juego: '+mmssT(seg),310,818);
   x.fillStyle='#A06A1E';x.font='800 17px Nunito,sans-serif';
-  x.fillText('Código de verificación: '+cod,310,838);
+  x.fillText('Código de verificación: '+cod,310,844);
 }
 var _verFinal0=verFinal;
 verFinal=function(){
