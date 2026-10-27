@@ -1844,7 +1844,8 @@ NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[
     var oc=P_(x+30,622,60,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
   plat.push(P_(x0,610,W-x0+60,160,'solid','epi'));
   for(x=200;x<W-500;x+=300+r()*60)plat.push(P_(x,Math.floor(x/300)%2?330:450,150+r()*40,40,'one','celula'));
-  estX.forEach(function(x,i){items.push({x:x+GAP/2,y:640,tp:'co2',oculto:true,yObj:330+((i*53)%130)});});
+  var vxs=[2200,4300,6400,8500];
+  estX.forEach(function(x,i){var ix=x+GAP/2;vxs.forEach(function(vx){if(ix>vx-60&&ix<vx+560)ix=vx-90;});items.push({x:ix,y:640,tp:'co2',oculto:true,yObj:330+((i*53)%130)});});
   var MO='Eso era oxígeno: en la fotosíntesis no entra, sale de la hoja. Junta solo dióxido de carbono.';
   [1500,3300,5000,6900,8700].forEach(function(t,i){items.push(trampa(t+(i%2)*120,i%2?520:400,'o2',MO));});
   items.push({x:5600,y:270,tp:'cor'});
