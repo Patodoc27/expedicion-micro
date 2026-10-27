@@ -1911,23 +1911,31 @@ NIV.F1=function(VW,VH){var W=7800,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,w
   var MO='Eso era oxígeno: la planta lo libera por las hojas, no lo toma del suelo.';
   [[0.2,'glu',MG],[0.36,'glu',MG],[0.5,'o2',MO],[0.64,'glu',MG],[0.8,'glu',MG]].forEach(function(d){var s=S[Math.floor(n*d[0])];if(s)items.push(trampa(s.x+s.w*0.6,s.y-130,d[1],d[2]));});
   S.forEach(function(s,j){if(j>0&&j<n-1&&j%3===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
-  var gusanos=[0.32,0.6,0.85].map(function(d,i){var s=S[Math.min(n-1,Math.floor(n*d))];return {tp:'gusano',x0:s.x+30,x1:s.x+s.w-140,x:s.x+60,y:s.y-40,v:55+i*15,
+  var gusanos=[0.08,0.2,0.33,0.46,0.58,0.72,0.88].map(function(d,i){var s=S[Math.min(n-1,Math.floor(n*d))];return {tp:'gusano',x0:s.x+30,x1:s.x+s.w-140,x:s.x+60,y:s.y-40,v:50+(i%3)*15,
     caja:function(h){return {x:h.x+12,y:h.y+10,w:96,h:28};},
     update:function(h,dt){h.x+=h.v*dt;if(h.x>h.x1||h.x<h.x0)h.v*=-1;},
     dibujar:function(c,h,L){var dir=h.v>0?1:-1;
-      c.save();c.fillStyle='rgba(40,25,10,.22)';c.beginPath();c.ellipse(h.x+62,h.y+36,58,9,0,0,7);c.fill();c.restore();
-      c.save();c.translate(h.x+62,0);c.scale(dir,1);
-      for(var k=0;k<8;k++){var t=k/7,xx=-46+t*96,yy=30-Math.sin(t*2.2)*9+Math.sin(L.t*6+k*0.85)*2.4,r=15-t*4.5;
-        c.fillStyle=k%2?'#F8F3E7':'#ECE1C6';c.beginPath();c.arc(xx,yy,r,0,7);c.fill();
-        c.strokeStyle='rgba(110,85,50,.55)';c.lineWidth=1.8;c.stroke();}
+      c.save();c.fillStyle='rgba(40,25,10,.22)';c.beginPath();c.ellipse(h.x+52,h.y+46,56,9,0,0,7);c.fill();c.restore();
+      c.save();c.translate(h.x+52,h.y);c.scale(dir,1);
+      /* larva gorda arrastrandose: cuerpo cremoso y regordete, la cola
+         levantada en curva (gesto de C), cabeza castaña con mandibulas
+         y 3 pares de patitas toracicas */
+      for(var k=10;k>=0;k--){var t=k/10;
+        var xx=-52+t*84, yy=14+Math.sin(t*1.3)*16+Math.sin(L.t*5+k*0.9)*2.2;
+        var r=11+Math.sin(t*2.6)*5;
+        c.fillStyle=t<0.14?'#C9B48F':(k%2?'#F8F3E7':'#ECE0C4');
+        c.beginPath();c.arc(xx,yy,r,0,7);c.fill();
+        c.strokeStyle='rgba(110,85,50,.5)';c.lineWidth=1.6;c.stroke();}
+      /* 3 pares de patas junto a la cabeza */
       c.strokeStyle='#B8A26A';c.lineWidth=2.6;c.lineCap='round';
-      for(var l=0;l<3;l++){c.beginPath();c.moveTo(20+l*10,32);c.lineTo(16+l*10,40);c.stroke();}
-      c.fillStyle='#8B5A2B';c.beginPath();c.arc(56,16+Math.sin(L.t*6)*2,9.5,0,7);c.fill();
+      for(var l=0;l<3;l++){var lx=14+l*9;c.beginPath();c.moveTo(lx,34);c.lineTo(lx+4,44);c.stroke();}
+      /* cabeza castaña + mandibulas + ojo */
+      c.fillStyle='#8B5A2B';c.beginPath();c.arc(44,22+Math.sin(L.t*5)*1.5,10.5,0,7);c.fill();
       c.strokeStyle='#5E3B16';c.lineWidth=2.6;
-      c.beginPath();c.moveTo(63,12);c.quadraticCurveTo(70,10,71,5);c.stroke();
-      c.beginPath();c.moveTo(63,20);c.quadraticCurveTo(70,23,71,28);c.stroke();
-      c.fillStyle='#241408';c.beginPath();c.arc(54,13,1.7,0,7);c.fill();
-      c.restore();etiqueta(c,'gusano blanco',h.x+62,h.y-8,12);},
+      c.beginPath();c.moveTo(52,17);c.quadraticCurveTo(59,15,60,9);c.stroke();
+      c.beginPath();c.moveTo(52,27);c.quadraticCurveTo(59,30,60,36);c.stroke();
+      c.fillStyle='#241408';c.beginPath();c.arc(42,19,1.8,0,7);c.fill();
+      c.restore();etiqueta(c,'gusano blanco',h.x+52,h.y-8,12);},
     msg:'¡Un gusano blanco! Estas larvas devoran las raíces de las plantas. ¡Sáltalo!',pisable:true};});
   var cps=[Math.floor(n/3),Math.floor(2*n/3)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-145;
   return {isla:'F',nombre:'1 · La raíz: entra el agua',W:W,H:720,plat:plat,peligros:gusanos,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-200,y:380,w:110,h:220},
