@@ -1802,15 +1802,15 @@ NIV.F2=function(VW,VH){
   plat.push(P_(-600,-200,iz+600,H+600,'solid','pared'));plat.push(P_(de,-200,600+W,H+600,'solid','pared'));
   carr.forEach(function(k){var ys=[];for(var y=H+100-k[2];y>=130;y-=SEP)ys.push(y);ys.forEach(function(y){var p=P_(k[0],y,k[1]-k[0],18,'one','racimo');p.cad=1;p.N=ys.length;plat.push(p);cad.push(p);});});
   plat.push(P_(-400,H-60,W+800,200,'solid','raizX'));
-  function burbuja(ln,y,aviso,x){var k=carr[ln];return {x:x!==undefined?x:(k[0]+k[1])/2+(r()-0.5)*60,y:y,r:44+r()*10,ph:r()*6,aviso:aviso||0,pop:0,unaVez:1,
-    caja:function(h){if(h.aviso>0||h.pop)return {x:-9e4,y:-9e4,w:1,h:1};return {x:h.x-h.r*0.72,y:h.y-h.r*0.72,w:h.r*1.44,h:h.r*1.44};},
+  function burbuja(ln,y,aviso,x){var k=carr[ln];return {ln:ln,x:x!==undefined?x:(k[0]+k[1])/2+(r()-0.5)*60,y:y,r:38+r()*8,ph:r()*6,aviso:aviso||0,pop:0,unaVez:1,
+    caja:function(h){if(h.aviso>0||h.pop)return {x:-9e4,y:-9e4,w:1,h:1};return {x:h.x-h.r*0.68,y:h.y-h.r*0.68,w:h.r*1.36,h:h.r*1.36};},
     update:function(h,dt){if(h.aviso>0)h.aviso-=dt;if(h.pop)h.pop+=dt;},
     dibujar:function(c,h,L){if(h.pop){var k=Math.min(1,h.pop/0.4);c.strokeStyle='rgba(150,200,235,'+(1-k)+')';c.lineWidth=4;c.beginPath();c.arc(h.x,h.y,h.r*(1+k),0,7);c.stroke();return;}
       if(h.aviso>0){var pu=0.5+0.5*Math.sin(L.t*16);c.save();c.setLineDash([8,7]);c.strokeStyle='rgba(255,255,255,'+(0.5+0.5*pu)+')';c.lineWidth=4;c.beginPath();c.arc(h.x,h.y,h.r*(1-h.aviso*0.5),0,7);c.stroke();c.restore();etiqueta(c,'¡se forma aire!',h.x,h.y-h.r-10,12,'rgba(255,240,170,.95)');return;}
       var rr2=h.r*(1+Math.sin(L.t*2+h.ph)*0.05),g=c.createRadialGradient(h.x-rr2*0.4,h.y-rr2*0.4,2,h.x,h.y,rr2);g.addColorStop(0,'rgba(255,255,255,.95)');g.addColorStop(0.7,'rgba(225,242,255,.4)');g.addColorStop(1,'rgba(150,195,230,.85)');
       c.fillStyle=g;c.beginPath();c.arc(h.x,h.y,rr2,0,7);c.fill();c.strokeStyle='rgba(110,160,205,.95)';c.lineWidth=2.5;c.stroke();etiqueta(c,'aire',h.x,h.y-rr2-12,12);},
     msg:'¡Burbuja de aire! El aire corta la columna de agua.'};}
-  for(var y=H-700;y>420;y-=330)peli.push(burbuja(Math.floor(r()*3),y));
+  var lnR=Math.floor(r()*3);for(var y=H-700;y>420;y-=470){peli.push(burbuja(lnR,y));lnR=(lnR+1+Math.floor(r()*2))%3;}
   function carril(P){var cx=P.x+15,b=0,bd=1e9;carr.forEach(function(k,i){var d=Math.abs(cx-(k[0]+k[1])/2);if(d<bd){bd=d;b=i;}});return b;}
   return {isla:'F',nombre:'2 · El tallo: el agua sube por el xilema',W:W,H:H,vertical:true,plat:plat,peligros:peli,items:[],minX:iz,maxX:de,cps:[],
     inicio:{x:600,y:H-140},meta:{x:iz,y:0,w:de-iz,h:150},eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],gen:3,quieto:0,
@@ -1819,8 +1819,9 @@ NIV.F2=function(VW,VH){
     update:function(L,dt,P){cad.forEach(function(p){p.dy=-VEL*dt;p.dx=0;p.y+=p.dy;if(p.y<120){p.y+=p.N*SEP;p.dy=0;}});
       L.quieto=(Math.abs(P.vx)<45&&P.suelo)?L.quieto+dt:0;var q=L.quieto>1.5;
       L.gen-=dt*(q?2.2:1);
-      if(L.gen<=0&&P.y>520&&P.y<H-260){L.gen=2.4;var ln=q?carril(P):Math.floor(Math.random()*3),k=carr[ln];
-        peli.push(burbuja(ln,P.y-300,0.9,q?clamp(P.x+15,k[0]+35,k[1]-35):undefined));
+      if(L.gen<=0&&P.y>520&&P.y<H-260){var ln=q?carril(P):((L.rot=(L.rot||0)+1+Math.floor(Math.random()*2))%3),k=carr[ln];
+        var libre=peli.every(function(h){return h.pop||h.ln!==ln||Math.abs(h.y-(P.y-480))>400;});L.gen=libre?3.4:1.2;
+        if(libre)peli.push(burbuja(ln,P.y-480,0.9,q?clamp(P.x+15,k[0]+35,k[1]-35):undefined));
         if(q&&!L.avisoQ){L.avisoQ=1;toast('Si te quedas quieto, se forma aire encima de ti. ¡Cambia de vaso!',null,3.4);}}
       for(var i=peli.length-1;i>=0;i--){var h=peli[i];if(h.y>JG.cam.y+VH+250||h.pop>0.4)peli.splice(i,1);}},
     fondo:fondoVaso,encima:paredVaso,
