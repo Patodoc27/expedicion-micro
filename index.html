@@ -2278,7 +2278,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
         c.save();c.fillStyle='rgba(255,255,255,.92)';c.strokeStyle='#355C59';c.lineWidth=3;
         rr(c,xF-25,metaY-46,260,44,16);c.fill();c.stroke();
         c.font='bold 18px Nunito,sans-serif';c.fillStyle='#244C49';c.textAlign='center';c.fillText('META · Expedición',xF+105,metaY-17);c.restore();};
-      trampaSalida(L,metaVieja,metaOriginal,id==='F1'||id==='F3');
+      trampaSalida(L,metaVieja,metaOriginal,true);
       if(r.detras){var d0=L.detras;L.detras=function(c,l){if(d0)d0(c,l);r.detras(c,l);};}
       return L;};
   }
