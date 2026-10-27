@@ -2568,22 +2568,30 @@ verFinal=function(){
 };
 function cargarTop6(){
   var wrap=$('top6wrap');if(!wrap)return;
-  var respondio=false;
+  var respondio=false,intentos=0;
   function vacio(msg){if(respondio)return;respondio=true;
     $('top6').innerHTML='<div style="font-size:13px;color:#7A6A4A;font-weight:700;padding:4px 2px">'+msg+'</div>';}
-  setTimeout(function(){vacio('Todavía no hay puntajes — ¡sé el primero en llegar al certificado!');},9000);
+  function pedir(){intentos++;var s=document.createElement('script');
+    s.src=SHEETS_URL+'?top=6&callback=emTop6&_='+Date.now();
+    s.onerror=function(){};
+    document.body.appendChild(s);}
+  setTimeout(function reintento(){
+    if(respondio)return;
+    if(intentos<3){pedir();setTimeout(reintento,4000);}
+    else vacio('No se pudo leer la planilla desde esta red. Los puntajes se guardan igual.');},15000);
   window.emTop6=function(lista){
     if(!lista||!lista.length){vacio('Todavía no hay puntajes — ¡sé el primero en llegar al certificado!');return;}
     respondio=true;
     var miNombre=(ST.perfil?(ST.perfil.nom+' '+ST.perfil.ape):'').replace(/\s+/g,' ').toLowerCase();
     $('top6').innerHTML=lista.slice(0,6).map(function(q,i){
       var pos=i+1,c=pos===1?['#F7C948','#A97B0F']:pos===2?['#D9E1E7','#7E8C96']:['#D99A5B','#8F5A28'];
-      var med='<svg width="22" height="26" viewBox="0 0 24 28" style="flex:none"><path d="M8 0l4 9L16 0z" fill="'+c[1]+'" opacity=".85"/><path d="M4.5 0h15l-4.5 8.5H9z" fill="'+c[1]+'"/><circle cx="12" cy="18" r="9" fill="'+c[0]+'" stroke="'+c[1]+'" stroke-width="2.2"/><text x="12" y="22" text-anchor="middle" font-size="9.5" font-weight="800" fill="'+c[1]+'" font-family="Nunito,sans-serif">'+pos+'</text></svg>';
+      var med='<svg width="19" height="23" viewBox="0 0 24 28" style="flex:none"><path d="M8 0l4 9L16 0z" fill="'+c[1]+'" opacity=".85"/><path d="M4.5 0h15l-4.5 8.5H9z" fill="'+c[1]+'"/><circle cx="12" cy="18" r="9" fill="'+c[0]+'" stroke="'+c[1]+'" stroke-width="2.2"/><text x="12" y="22" text-anchor="middle" font-size="9.5" font-weight="800" fill="'+c[1]+'" font-family="Nunito,sans-serif">'+pos+'</text></svg>';
       var esVos=miNombre&&(String(q.nom||'')+' '+String(q.ape||'')).replace(/\s+/g,' ').toLowerCase()===miNombre;
-      return '<div style="display:flex;align-items:center;justify-content:space-between;gap:8px;background:'+(esVos?'#DFF3E3':(i%2?'#FFF6E2':'#FFEFC9'))+';border-radius:9px;padding:4px 10px 4px 6px;font-size:14px;margin:2px 0;'+(esVos?'outline:2px solid #3E8E5A;':'')+'">'+med+'<b style="flex:1">'+(esVos?'<span style="background:#3E8E5A;color:#fff;border-radius:8px;padding:0 7px;font-size:11px;font-weight:800">vos</span> ':'')+'1°'+(q.sec||'')+'</b><b>'+q.pts+' pts</b></div>';
+      return '<div style="display:flex;align-items:center;justify-content:space-between;gap:6px;background:'+(esVos?'#DFF3E3':(i%2?'#FFF6E2':'#FFEFC9'))+';border-radius:8px;padding:3px 8px 3px 5px;font-size:12.5px;margin:0;min-width:0;'+(esVos?'outline:2px solid #3E8E5A;':'')+'">'+med+'<b style="flex:1;white-space:nowrap">'+(esVos?'<span style="background:#3E8E5A;color:#fff;border-radius:8px;padding:0 6px;font-size:10.5px;font-weight:800">vos</span> ':'')+'1°'+(q.sec||'')+'</b><b style="white-space:nowrap">'+q.pts+' pts</b></div>';
     }).join('');
+    $('top6').style.cssText='display:grid;grid-template-columns:1fr 1fr;gap:5px 10px';
   };
-  if(SHEETS_URL){var s=document.createElement('script');s.src=SHEETS_URL+'?top=6&callback=emTop6';document.body.appendChild(s);}
+  if(SHEETS_URL)pedir();
   else{try{var lista=JSON.parse(localStorage.getItem('expedicion-micro-ranking-local-v2')||'[]');window.emTop6(lista.map(function(q){return {nom:(q.nombre||'').split(' ')[0],ape:(q.nombre||'').split(' ').slice(1).join(' '),sec:q.seccion,pts:q.puntos,tiempo:q.tiempo?mmssT(q.tiempo):''};}));}catch(e){}}
 }
 /* ============ LECTURA EN VOZ ALTA DE LA MISIÓN ============ */
