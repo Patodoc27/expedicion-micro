@@ -204,7 +204,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
 .ecu .term.ok{background:#DDF3E5;border-color:#7CC98F}
 .ecu .term img{width:44px;height:44px}
 .ecu .term .tx{display:flex;flex-direction:column;line-height:1}
-.ecu .term .frm{font:600 24px 'Fredoka'}
+.ecu .term .frm{font:700 20px 'Fredoka';color:#22313B;text-transform:capitalize}
 .ecu .term .frm sub{font-size:.6em}
 .ecu .coef,.et .ef .coef{font-weight:700;color:#B4492A;margin-right:4px}
 .ecu .term .nm{font-size:12px;font-weight:800;color:#6B7A85;margin-top:2px}
@@ -226,10 +226,10 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
 .eside small,.fside small,.tulugar > small{font:800 12px 'Nunito';letter-spacing:.12em;text-transform:uppercase;color:#6B7A85}
 .et{display:flex;flex-direction:column;align-items:center;gap:2px;padding:8px 12px;border-radius:16px;background:#F6F1E8;border:3px solid transparent;min-width:110px}
 .et img{width:48px;height:48px}
-.et .ef{font:600 26px 'Fredoka';line-height:1}
+.et .ef{font:700 21px 'Fredoka';line-height:1.1;text-transform:capitalize;color:#22313B}
 .et .ef sub{font-size:.6em}
 .et .ef .coef,.cterm .cn,.cfijo{color:#B4492A}
-.et .enm{font-size:12px;font-weight:800;color:#6B7A85}
+.et .enm{font-size:13px;font-weight:800;color:#6B7A85}
 .et.hl,.earr.hl .eup,.earr.hl .edn.en{border-color:#FFC43D;background:#FFF6D8;box-shadow:0 0 0 4px rgba(255,196,61,.25)}
 .emas{font:600 28px 'Fredoka';color:#6B7A85}
 .earr{display:flex;flex-direction:column;align-items:center;gap:3px;color:#22313B}
@@ -378,7 +378,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
       <small style="font-weight:800;letter-spacing:.1em;color:#6B7A85">CERTIFICADO DE EXPEDICIÓN</small>
       <h1>¡Expedición Micro completada!</h1>
       <div class="rango" id="cRango"></div>
-      <div class="res"><div><b id="cPts">0</b><span>puntos</span></div><div><b id="cEst">0</b><span>estrellas de 21</span></div><div><b id="cPreg">0</b><span>respuestas correctas</span></div></div>
+      <div class="res"><div><b id="cPts">0</b><span>puntos</span></div><div><b id="cEst">0</b><span>estrellas de 21 · más estrellas para recolectar</span></div><div><b id="cPreg">0</b><span>respuestas correctas</span></div></div>
       <div class="comp">
         <div class="cf"><h3 style="color:#1F6B44">Isla Fotosíntesis</h3><p><b>Dónde:</b> en los cloroplastos de las células de la planta (hojas y partes verdes).</p><p><b>Cuándo:</b> cuando hay luz.</p><p><b>Qué ocurre:</b> la planta fabrica materia orgánica (glucosa) a partir de materia inorgánica (agua y dióxido de carbono) y libera oxígeno.</p></div>
         <div class="cr"><h3 style="color:#B4492A">Isla Respiración celular</h3><p><b>Dónde:</b> comienza en el citoplasma y se completa en las mitocondrias de las células de todos los seres vivos, también de las plantas.</p><p><b>Cuándo:</b> todo el tiempo, con luz y sin luz.</p><p><b>Qué ocurre:</b> la glucosa reacciona con el oxígeno; se forman dióxido de carbono y agua y se libera energía.</p></div>
@@ -407,10 +407,10 @@ function shade(hex,f){var n=parseInt(hex.slice(1),16),r=n>>16,g=(n>>8)&255,b=n&2
 
 /* ================== PERSONAJES ================== */
 var PJ={
-  killa:{nom:'Killa',g:'f',desc:'13 años. Le encanta escalar los cerros y sacar fotos de plantas.',skin:'#C48A5F',hair:'#1E1716',shirt:'#F2B134',pants:'#3F6FB5',shoes:'#E8574A',pack:'#2E9E5B',st:'trenza'},
-  sofia:{nom:'Sofía',g:'f',desc:'12 años. Curiosa, siempre lleva su lupa y su cuaderno de campo.',skin:'#F0C6A0',hair:'#7A4526',shirt:'#2BB3A6',pants:'#7A4FB3',shoes:'#FFFFFF',pack:'#E0704A',st:'ondas'},
-  inti:{nom:'Inti',g:'m',desc:'13 años. Juega al fútbol y quiere saber de dónde sale la energía.',skin:'#A56E48',hair:'#141111',shirt:'#E2553F',pants:'#556E34',shoes:'#2C3E50',pack:'#FFC43D',st:'corto'},
-  mateo:{nom:'Mateo',g:'m',desc:'12 años. Fanático de los microscopios y de los experimentos.',skin:'#E7B48D',hair:'#8A4B26',shirt:'#3FA35B',pants:'#46607A',shoes:'#FFC43D',pack:'#3F6FB5',st:'rulos'}
+  killa:{nom:'Killa',g:'f',desc:'13 años. Le encanta escalar los cerros y sacar fotos de plantas.',skin:'#C48A5F',hair:'#1E1716',shirt:'#F2B134',pants:'#3F6FB5',shoes:'#E8574A',pack:'#2E9E5B',st:'trenza',acc:'#FFF2B4',det:'#2E9E5B',item:'hoja'},
+  sofia:{nom:'Sofía',g:'f',desc:'12 años. Curiosa, siempre lleva su lupa y su cuaderno de campo.',skin:'#F0C6A0',hair:'#7A4526',shirt:'#2BB3A6',pants:'#7A4FB3',shoes:'#FFFFFF',pack:'#E0704A',st:'ondas',acc:'#FFF5D6',det:'#FFC43D',item:'lupa'},
+  inti:{nom:'Inti',g:'m',desc:'13 años. Juega al fútbol y quiere saber de dónde sale la energía.',skin:'#A56E48',hair:'#141111',shirt:'#E2553F',pants:'#556E34',shoes:'#2C3E50',pack:'#FFC43D',st:'corto',acc:'#FFD8B8',det:'#FFE07A',item:'rayo'},
+  mateo:{nom:'Mateo',g:'m',desc:'12 años. Fanático de los microscopios y de los experimentos.',skin:'#E7B48D',hair:'#8A4B26',shirt:'#3FA35B',pants:'#46607A',shoes:'#FFC43D',pack:'#3F6FB5',st:'rulos',acc:'#EAF7FF',det:'#8ED6FF',item:'cuaderno'}
 };
 var PJ_ORDEN=['killa','sofia','inti','mateo'];
 
@@ -423,7 +423,22 @@ function limb(c,x,y,a1,l1,a2,l2,w,col,col2){
   return {x:fx,y:fy,kx:kx,ky:ky};
 }
 function shoe(c,p,col,a){c.save();c.translate(p.x,p.y);c.rotate(a||0);c.fillStyle=col;rr(c,-4,-3.5,13,7,3.5);c.fill();
-  c.fillStyle='rgba(0,0,0,.25)';c.fillRect(-4,1.6,13,1.8);c.restore();}
+  c.fillStyle='rgba(0,0,0,.25)';c.fillRect(-4,1.6,13,1.8);c.fillStyle='rgba(255,255,255,.25)';c.fillRect(-2,-1.5,8,1.4);c.restore();}
+function accesorioPJ(c,P,tx,ty,esc){c.save();c.translate(tx,ty);c.scale(esc,esc);c.lineCap='round';c.lineJoin='round';
+  if(P.item==='hoja'){
+    c.fillStyle=P.acc;c.beginPath();c.moveTo(0,-5);c.quadraticCurveTo(7,-3,8,5);c.quadraticCurveTo(2,10,-5,7);c.quadraticCurveTo(-8,0,0,-5);c.fill();
+    c.strokeStyle=shade(P.det,-0.1);c.lineWidth=1.2;c.beginPath();c.moveTo(-2,5);c.lineTo(5,-2);c.moveTo(0,3);c.lineTo(4,3);c.stroke();
+  }else if(P.item==='lupa'){
+    c.strokeStyle='#2C3E50';c.lineWidth=2;c.beginPath();c.arc(-1,-1,5,0,7);c.stroke();c.fillStyle='rgba(255,255,255,.25)';c.beginPath();c.arc(-2,-2,2.4,0,7);c.fill();
+    c.strokeStyle=shade(P.det,-0.2);c.lineWidth=2.4;c.beginPath();c.moveTo(3,3);c.lineTo(8,8);c.stroke();
+  }else if(P.item==='rayo'){
+    c.fillStyle=P.det;c.strokeStyle=shade(P.det,-0.25);c.lineWidth=1.1;c.beginPath();c.moveTo(1,-7);c.lineTo(-4,1);c.lineTo(1,1);c.lineTo(-2,9);c.lineTo(7,-1);c.lineTo(2,-1);c.closePath();c.fill();c.stroke();
+  }else if(P.item==='cuaderno'){
+    c.fillStyle=P.acc;rr(c,-6,-7,12,14,2.5);c.fill();c.strokeStyle=shade(P.det,-0.25);c.lineWidth=1.2;c.strokeRect(-6,-7,12,14);
+    c.strokeStyle='#7A4FB3';c.beginPath();c.moveTo(-2,-7);c.lineTo(-2,7);c.moveTo(1,-3);c.lineTo(4,-3);c.moveTo(1,0);c.lineTo(4,0);c.moveTo(1,3);c.lineTo(4,3);c.stroke();
+  }
+  c.restore();}
+var SPR={};
 
 /* dibuja personaje con los pies en (x,y). s=escala, f=+1 mira a la derecha, -1 izquierda */
 function dibujarPJ(c,id,x,y,s,f,t,est,extra){
@@ -446,15 +461,19 @@ function dibujarPJ(c,id,x,y,s,f,t,est,extra){
   var hB=limb(c,-1,shY,arB,11,arB+0.6,10.5,6.5,shade(P.shirt,-0.25),shade(P.skin,-0.18));
   c.fillStyle=shade(P.skin,-0.18);c.beginPath();c.arc(hB.x,hB.y,3.3,0,7);c.fill();
   // mochila
-  c.fillStyle=P.pack;rr(c,-19,-57+bob,12,24,5);c.fill();c.fillStyle=shade(P.pack,-0.25);rr(c,-19,-44+bob,12,9,4);c.fill();
+  c.fillStyle=P.pack;rr(c,-19,-57+bob,12,24,5);c.fill();c.strokeStyle=shade(P.pack,-0.34);c.lineWidth=1.4;c.stroke();
+  c.fillStyle=shade(P.pack,-0.25);rr(c,-19,-44+bob,12,9,4);c.fill();
   c.fillStyle=shade(P.pack,0.35);rr(c,-17,-54+bob,4,8,2);c.fill();
+  c.fillStyle='rgba(255,255,255,.18)';rr(c,-17,-55+bob,8,4,2);c.fill();
   // pierna delantera
   var pA=limb(c,2,hipY,aA,15.5,bA,15.5,8.5,P.pants);shoe(c,pA,P.shoes,air?0.25:0);
   // torso
   var gr=c.createLinearGradient(-10,0,12,0);gr.addColorStop(0,shade(P.shirt,-0.18));gr.addColorStop(0.6,P.shirt);gr.addColorStop(1,shade(P.shirt,0.15));
-  c.fillStyle=gr;rr(c,-10,-59+bob,22,29,8);c.fill();
-  c.fillStyle=P.pants;rr(c,-10,-36+bob,22,8,3);c.fill();
+  c.fillStyle=gr;rr(c,-10,-59+bob,22,29,8);c.fill();c.strokeStyle=shade(P.shirt,-0.33);c.lineWidth=1.4;c.stroke();
+  c.fillStyle=P.pants;rr(c,-10,-36+bob,22,8,3);c.fill();c.strokeStyle=shade(P.pants,-0.28);c.stroke();
   c.fillStyle='rgba(255,255,255,.55)';c.fillRect(-2,-50+bob,10,2.2);
+  c.fillStyle=P.acc;rr(c,-3,-53+bob,9,9,3);c.fill();c.strokeStyle=shade(P.acc,-0.2);c.lineWidth=1;c.stroke();
+  accesorioPJ(c,P,1.5,-48+bob,0.7);
   c.strokeStyle=shade(P.pack,-0.3);c.lineWidth=2.6;c.beginPath();c.moveTo(-8,-57+bob);c.lineTo(-3,-38+bob);c.stroke();
   // cuello
   c.fillStyle=shade(P.skin,-0.12);c.fillRect(0,-63+bob,6,6);
@@ -469,7 +488,7 @@ function dibujarPJ(c,id,x,y,s,f,t,est,extra){
   if(P.st==='ondas'){c.fillStyle=P.hair;c.beginPath();c.moveTo(hx-12,hy-6);
     c.quadraticCurveTo(hx-19,hy+6,hx-14,hy+17);c.quadraticCurveTo(hx-10,hy+21,hx-6,hy+17);c.quadraticCurveTo(hx-3,hy+21,hx+1,hy+16);c.lineTo(hx,hy);c.closePath();c.fill();}
   var gh=c.createRadialGradient(hx+3,hy-4,3,hx,hy,15);gh.addColorStop(0,shade(P.skin,0.12));gh.addColorStop(1,P.skin);
-  c.fillStyle=gh;c.beginPath();c.ellipse(hx,hy,12.2,13,0,0,7);c.fill();
+  c.fillStyle=gh;c.beginPath();c.ellipse(hx,hy,12.2,13,0,0,7);c.fill();c.strokeStyle='rgba(70,45,32,.45)';c.lineWidth=1.1;c.stroke();
   // oreja
   c.fillStyle=shade(P.skin,-0.08);c.beginPath();c.ellipse(hx-5,hy+1,3,3.8,0,0,7);c.fill();
   // pelo
@@ -500,6 +519,9 @@ function dibujarPJ(c,id,x,y,s,f,t,est,extra){
   // brazo delantero
   var hA=limb(c,4,shY,arA,11,arA+(air?0.2:0.55),10.5,6.8,P.shirt,P.skin);
   c.fillStyle=P.skin;c.beginPath();c.arc(hA.x,hA.y,3.4,0,7);c.fill();
+  // detalles de ropa y contorno final
+  c.fillStyle='rgba(255,255,255,.18)';c.fillRect(-8,-34+bob,7,1.5);c.fillRect(4,-34+bob,7,1.5);
+  c.strokeStyle='rgba(40,33,25,.32)';c.lineWidth=1;c.beginPath();c.moveTo(-4,-28+bob);c.lineTo(-4,-18+bob);c.moveTo(4,-28+bob);c.lineTo(4,-18+bob);c.stroke();
   c.restore();
 }
 
@@ -566,6 +588,15 @@ function icoClorofila(){if(ICO.clo)return ICO.clo;var k=document.createElement('
   c.save();c.translate(60,60);c.rotate(-0.4);var g=c.createLinearGradient(0,-30,0,30);g.addColorStop(0,'#7CD36A');g.addColorStop(1,'#2E8A48');c.fillStyle=g;c.beginPath();c.ellipse(0,0,48,28,0,0,7);c.fill();
   c.strokeStyle='#1F6B44';c.lineWidth=3;c.stroke();for(var i=-2;i<=2;i++){c.fillStyle='#3FA65A';rr(c,i*16-6,-14,12,28,4);c.fill();c.strokeStyle='#22713F';c.lineWidth=1.5;for(var j=-1;j<=1;j++){c.beginPath();c.moveTo(i*16-6,j*7);c.lineTo(i*16+6,j*7);c.stroke();}}
   c.restore();ICO.clo=k.toDataURL();return ICO.clo;}
+function spriteItem(tp){
+  if(SPR[tp])return SPR[tp];
+  var k=document.createElement('canvas');k.width=k.height=150;var x=k.getContext('2d');x.setTransform(1,0,0,1,0,0);
+  if(tp==='cor')corazonCv(x,75,74,1.55);
+  else if(tp==='est')estrellaCv(x,75,74,1.85);
+  else if(MOL[tp]){dibujarMol(x,tp,75,67,tp==='glu'?1.44:2.05);if(MOL[tp].f)formula(x,MOL[tp].f,75,tp==='glu'?129:112,18,'#22313B');}
+  SPR[tp]=k;return k;
+}
+function dibujarSpriteItem(c,tp,x,y,sc,rot){var sp=spriteItem(tp),w=sp.width*sc,h=sp.height*sc;c.save();c.translate(x,y);if(rot)c.rotate(rot);c.drawImage(sp,-w/2,-h/2,w,h);c.restore();}
 
 /* SVG de íconos de interfaz */
 var SVG={
@@ -587,7 +618,26 @@ var ST={perfil:null,prog:{},quiz:{},faro:{},pts:0,sonido:true};
 var LIBRE=/[?&]libre\b/.test(location.search);
 function guardar(){try{localStorage.setItem(CLAVE,JSON.stringify(ST));}catch(e){}}
 function cargar(){try{var s=JSON.parse(localStorage.getItem(CLAVE)||'null');if(s&&s.perfil){ST=s;if(ST.sonido===undefined)ST.sonido=true;}}catch(e){}}
-function totalPts(){var t=0,k;for(k in ST.prog)t+=ST.prog[k].pts||0;for(k in ST.quiz)t+=(ST.quiz[k]||0)*50;for(k in ST.faro)if(ST.faro[k])t+=150;return t;}
+function totalPts(){var t=0,k;for(k in ST.prog)t+=ST.prog[k].pts||0;for(k in ST.quiz)t+=(ST.quiz[k]||0)*75;for(k in ST.faro)if(ST.faro[k])t+=150;return t;}
+function guardarRanking(){
+  if(!ST.perfil)return;
+  try{var clave='expedicion-micro-ranking-local-v2',lista=JSON.parse(localStorage.getItem(clave)||'[]');
+    if(!Array.isArray(lista))lista=[];
+    var nombre=(ST.perfil.nom||'')+' '+(ST.perfil.ape||''),sec=ST.perfil.sec||'';
+    var id=(nombre+'|'+sec).toLowerCase(),pts=totalPts();
+    var reg=lista.find(function(q){return q.id===id;});
+    if(reg){reg.puntos=Math.max(reg.puntos||0,pts);reg.fecha=new Date().toLocaleDateString('es-AR');}
+    else lista.push({id:id,nombre:nombre,seccion:sec,puntos:pts,fecha:new Date().toLocaleDateString('es-AR')});
+    lista.sort(function(a,b){return b.puntos-a.puntos;});
+    localStorage.setItem(clave,JSON.stringify(lista.slice(0,60)));
+  }catch(e){}
+}
+function mostrarRanking(){var lista=[];try{lista=JSON.parse(localStorage.getItem('expedicion-micro-ranking-local-v2')||'[]');}catch(e){}
+  var contenido=lista.length?lista.slice(0,20).map(function(q,i){return '<div style="display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;background:'+(i%2?'#F2F6F2':'#FFFFFF')+';border-radius:12px;padding:10px 15px;font-size:18px"><b>N° '+(i+1)+'</b><span>'+escapeRanking(q.nombre)+' · '+escapeRanking(q.seccion)+'</span><b>'+q.puntos+' pts</b></div>';}).join(''):'<p>Todavía no hay puntajes registrados.</p>';
+  abrirModal(cabeza('n','Clasificación','Ranking de exploradores')+'<div class="cuerpo"><p><b>Ranking de este dispositivo.</b> Los datos se guardan únicamente en este navegador; no reúne estudiantes de diferentes computadoras.</p><div style="display:grid;gap:4px;max-height:48vh;overflow:auto">'+contenido+'</div><div class="pie"><button class="btn" id="rankingCerrar">Volver</button></div></div>');
+  $('rankingCerrar').onclick=cerrarModal;
+}
+function escapeRanking(t){return String(t||'').replace(/[&<>"']/g,function(ch){return {'&':'&amp;','<':'&lt;','>':'&gt;','"':'&quot;',"'":'&#39;'}[ch];});}
 function totalEst(){var t=0;for(var k in ST.prog)t+=ST.prog[k].est||0;return t;}
 function totalPreg(){var t=2;for(var k in TXT)t+=TXT[k].quiz.length;return t;}
 function totalCorrectas(){var t=0;for(var k in ST.quiz)t+=ST.quiz[k]||0;for(var f in ST.faro)if(ST.faro[f])t+=1;return t;}
@@ -608,20 +658,38 @@ function sfx(tipo){if(!ST.sonido)return;try{if(!AC)AC=new (window.AudioContext||
 
 /* ================== CANVAS Y ENTRADA ================== */
 var cv,c,DPR=1,SC=1,VW=1280,VH=720,T=0;
-function ajustar(){var w=window.innerWidth,h=window.innerHeight;DPR=Math.min(window.devicePixelRatio||1,2);
+var PERF=(function(){
+  var cores=navigator.hardwareConcurrency||4, mem=navigator.deviceMemory||4;
+  var touch=('ontouchstart' in window)||navigator.maxTouchPoints>0;
+  var small=Math.min(screen.width||1200,screen.height||800)<820;
+  var low=(cores<=4)||(mem<=4)||(touch&&small);
+  return {
+    dprMax:low?1.3:1.6,
+    step:low?1/80:1/90,
+    maxSteps:low?5:6,
+    rays:low?3:5,
+    ambCount:low?30:42,
+    lejCount:low?5:7,
+    fgCount:low?5:7,
+    initFloaters:low?10:14,
+    itemGlow:!low,
+    postQuality:low?0.85:1
+  };
+})();
+function ajustar(){var w=window.innerWidth,h=window.innerHeight;DPR=Math.min(window.devicePixelRatio||1,PERF.dprMax);
   SC=h/720;VW=w/SC;VH=720;if(VW<1000){SC=w/1000;VW=1000;VH=h/SC;}
   cv.width=Math.round(w*DPR);cv.height=Math.round(h*DPR);}
 var K={l:0,r:0,u:0},jBuf=0;
 function tecla(e,v){var k=e.key,m=null;
   if(k==='ArrowLeft'||k==='a'||k==='A')m='l';else if(k==='ArrowRight'||k==='d'||k==='D')m='r';else if(k==='ArrowUp'||k===' '||k==='w'||k==='W'||k==='Spacebar')m='u';
   if(!m)return;if($('juego').className.indexOf('on')<0||$('velo').className.indexOf('on')>=0)return;
-  e.preventDefault();if(m==='u'&&v&&!K.u)jBuf=0.14;K[m]=v;}
+  e.preventDefault();if(m==='u'&&v&&!K.u)jBuf=0.16;K[m]=v;}
 window.addEventListener('keydown',function(e){if(e.key==='Escape'&&JG.L&&!JG.pausa&&$('velo').className.indexOf('on')<0){pausar();return;}tecla(e,1);});
 window.addEventListener('keyup',function(e){tecla(e,0);});
 window.addEventListener('blur',function(){K.l=K.r=K.u=0;});
 
 /* ================== JUEGO ================== */
-var GRAV=2350,JUMP=900,RUN=330;
+var GRAV=2900,JUMP=990,RUN=410;
 var JG={L:null,P:null,cam:{x:0,y:0},pausa:false,acc:0,ult:0,toastT:0};
 
 function nuevoJugador(x,y){return {x:x,y:y,w:30,h:74,vx:0,vy:0,face:1,suelo:null,coy:0,inv:0,est:'idle',hist:[],cola:[],aura:0};}
@@ -630,10 +698,10 @@ function iniciarNivel(id){
   var def=NIV[id](VW,VH);var L=def;L.id=id;L.t=0;L.cor=3;L.pts=0;L.fx=[];L.textos=[];L.fin=false;L.vistos={};
   L.plat.forEach(function(p){p.ox=p.x;p.oy=p.y;p.dx=0;p.dy=0;if(p.on===undefined)p.on=true;if(p.mv&&p.mv.cond){p.x=p.ox+Math.sin(p.mv.ph||0)*(p.mv.ax||0);p.y=p.oy+Math.sin(p.mv.ph||0)*(p.mv.ay||0);}});
   L.items.forEach(function(it){it.got=false;it.ph=Math.random()*6;});
-  L.cp={x:L.inicio.x,y:L.inicio.y};
+  L.cp={x:L.inicio.x,y:L.inicio.y};L.estTomadas=0;L.estNecesarias=L.estNecesarias||Math.min(6,Math.max(3,Math.ceil(L.items.filter(function(it){return it.tp==='est';}).length*.3)));
   var P=nuevoJugador(L.inicio.x,L.inicio.y);P.cola=(L.cola0||[]).slice();
   JG.L=L;JG.P=P;JG.pausa=false;JG.shake=0;JG.toastT=0;$('toast').className='toast';K.l=K.r=K.u=0;
-  for(var i=0;i<400;i++)P.hist.push({x:P.x+15,y:P.y+40});
+  for(var i=0;i<125;i++)P.hist.push({x:P.x+15,y:P.y+40});
   camSeguir(1);
   $('hIsla').textContent=L.isla==='F'?'Isla Fotosíntesis':'Isla Respiración celular';
   $('hNivel').textContent=L.nombre;pintarCor();pintarEcu();pintarObj();$('hPts').textContent=totalPts();
@@ -662,8 +730,8 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
   if(!L.fin||L.cor>0){
   if(P.suelo&&P.suelo.on!==false){P.x+=P.suelo.dx;P.y+=P.suelo.dy;}
   var ax=(K.r?1:0)-(K.l?1:0);if(L.bloqueo)ax=0;
-  P.vx+=(ax*RUN*(L.vel||1)-P.vx)*Math.min(1,dt*(P.suelo?16:8));if(ax)P.face=ax;
-  P.coy=P.suelo?0.1:P.coy-dt;jBuf-=dt;
+  P.vx+=(ax*RUN*(L.vel||1)-P.vx)*Math.min(1,dt*(P.suelo?20:11));if(ax)P.face=ax;
+  P.coy=P.suelo?0.12:P.coy-dt;jBuf-=dt;
   if(jBuf>0&&P.coy>0&&!L.bloqueo){P.vy=-JUMP;jBuf=0;P.coy=0;P.suelo=null;sfx('salto');polvo(L,P.x+15,P.y+P.h,4);}
   var g=GRAV;if(!K.u&&P.vy<0)g*=2.1;
   P.vy+=g*dt;
@@ -684,8 +752,8 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
   // estado de animación
   P.est=P.suelo?(Math.abs(P.vx)>30?'run':'idle'):(P.vy<0?'jump':'fall');
   if(P.inv>0)P.inv-=dt;
-  P.hist.unshift({x:P.x+15-P.face*6,y:P.y+40});if(P.hist.length>420)P.hist.pop();
-  L.items.forEach(function(it){if(it.got||it.oculto||it.sube||it.mal)return;var dx=P.x+15-it.x,dy=P.y+37-it.y,d=Math.sqrt(dx*dx+dy*dy);if(d<125){it.x+=dx*Math.min(1,dt*3.4);it.y+=dy*Math.min(1,dt*3.4);}});
+  P.hist.unshift({x:P.x+15-P.face*6,y:P.y+40});if(P.hist.length>125)P.hist.pop();
+  L.items.forEach(function(it){if(it.got||it.oculto||it.sube||it.mal||it.tp==='est')return;var dx=P.x+15-it.x,dy=P.y+37-it.y,d=Math.sqrt(dx*dx+dy*dy);if(d<125){it.x+=dx*Math.min(1,dt*3.4);it.y+=dy*Math.min(1,dt*3.4);}});
   // moléculas
   L.items.forEach(function(it){if(it.got||it.oculto)return;var dx=it.x-(P.x+15),dy=it.y-(P.y+37);if(Math.abs(dx)<34&&Math.abs(dy)<48){if(it.mal&&P.inv>0)return;it.got=true;tomar(L,P,it);}});
   // peligros
@@ -696,7 +764,7 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
   // puntos de control
   if(L.cps)L.cps.forEach(function(q){if(!q.ok&&(L.vertical?P.y<q.y:P.x>q.x)){q.ok=true;L.cp={x:q.x,y:q.y-80};toast('Punto de control guardado.',null,1.6);}});
   // meta
-  if(L.meta&&!L.fin&&choca(P,L.meta)){var r=L.metaOK(L);if(r===true){L.fin=true;L.bloqueo=true;if(L.alLlegar)L.alLlegar(L,P);else completar();}
+  if(L.meta&&!L.fin&&choca(P,L.meta)){var r=(L.estTomadas||0)<(L.estNecesarias||0)?'Conseguí '+(L.estNecesarias-L.estTomadas)+' estrella(s) más para abrir la salida.':L.metaOK(L);if(r===true){L.fin=true;L.bloqueo=true;if(L.alLlegar)L.alLlegar(L,P);else completar();}
     else if(r&&(!L.avisoT||L.t-L.avisoT>3)){L.avisoT=L.t;toast(r,null,2.6);}}
   }
   // efectos
@@ -709,10 +777,10 @@ function paso(dt){var L=JG.L,P=JG.P;if(!L)return;L.t+=dt;T+=dt;
 function tomar(L,P,it){
   if(it.mal){danio(L,P);toast(it.mal,iconoMol(it.tp),4.6);for(var q=0;q<10;q++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(q*0.63)*170,vy:Math.sin(q*0.63)*170,t:0,d:0.5,dib:function(c,f,k){c.fillStyle='rgba(224,80,60,'+k+')';c.beginPath();c.arc(f.x,f.y,5*k+1,0,7);c.fill();}});return;}
   if(it.tp==='cor'){sfx('ok');if(L.cor<3){L.cor++;pintarCor();toast('¡Recuperaste un corazón!',null,2);}else{L.pts+=20;L.textos.push({x:it.x,y:it.y-30,t:0,s:'+20'});}return;}
-  if(it.tp==='est'){sfx('ok');L.pts+=15;$('hPts').textContent=totalPts()+L.pts;L.textos.push({x:it.x,y:it.y-30,t:0,s:'+15'});
+  if(it.tp==='est'){sfx('ok');L.estTomadas=(L.estTomadas||0)+1;L.pts+=40;$('hPts').textContent=totalPts()+L.pts;L.textos.push({x:it.x,y:it.y-30,t:0,s:'+40'});pintarObj();
     for(var i2=0;i2<8;i2++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(i2*0.79)*140,vy:Math.sin(i2*0.79)*140-70,t:0,d:0.5,tp:'chispa'});return;}
-  sfx('mol');L.pts+=10;$('hPts').textContent=totalPts()+L.pts;
-  L.textos.push({x:it.x,y:it.y-30,t:0,s:'+10'});if(MOL[it.tp].f)L.textos.push({x:it.x,y:it.y-64,t:0,fm:MOL[it.tp].f});
+  sfx('mol');
+  L.textos.push({x:it.x,y:it.y-30,t:0,s:'¡Sustancia!'});if(MOL[it.tp].f)L.textos.push({x:it.x,y:it.y-64,t:0,fm:MOL[it.tp].f});
   for(var i=0;i<10;i++)L.fx.push({x:it.x,y:it.y,vx:Math.cos(i*0.63)*160,vy:Math.sin(i*0.63)*160,t:0,d:0.45,tp:'chispa'});
   if(it.tp!=='luz')P.cola.push(it.tp);
   if(L.eq&&L.eq[it.tp]!==undefined)L.eq[it.tp]++;
@@ -730,15 +798,13 @@ function dibujar(){var L=JG.L,P=JG.P,cm=JG.cam;if(!L)return;
   L.plat.forEach(function(p){if(p.on===false&&!p.fantasma)return;if(p.x+p.w<cm.x-60||p.x>cm.x+VW+60||p.y>cm.y+VH+200||p.y+p.h<cm.y-200)return;if(p.h<=60&&p.on!==false){c.fillStyle='rgba(30,40,30,.14)';rr(c,p.x+8,p.y+p.h*0.5+12,p.w-8,Math.max(12,p.h*0.6),12);c.fill();}(ESTILO[p.st]||ESTILO.base)(c,p,L);});
   if(L.meta&&L.dibMeta)L.dibMeta(c,L);
   if(L.cps)L.cps.forEach(function(q){bandera(c,q.x,q.y,q.ok);});
-  L.items.forEach(function(it){if(it.got||it.oculto)return;var by=Math.sin(L.t*2.4+it.ph)*5;if(it.tp==='cor'){corazonCv(c,it.x,it.y+by,1.7+0.12*Math.sin(L.t*4));return;}
-    if(it.tp==='est'){estrellaCv(c,it.x,it.y+by,1.15+0.1*Math.sin(L.t*4+it.ph));return;}
-    var hc=HALO[it.tp]||'255,255,255',pu=0.5+0.5*Math.sin(L.t*3+it.ph);c.save();var g=c.createRadialGradient(it.x,it.y+by,2,it.x,it.y+by,48);g.addColorStop(0,'rgba(255,255,255,.95)');g.addColorStop(0.35,'rgba('+hc+',.45)');g.addColorStop(1,'rgba('+hc+',0)');c.fillStyle=g;c.beginPath();c.arc(it.x,it.y+by,48,0,7);c.fill();c.strokeStyle='rgba('+hc+','+(0.25+0.4*(1-pu))+')';c.lineWidth=3;c.beginPath();c.arc(it.x,it.y+by,30+pu*16,0,7);c.stroke();c.restore();
-    dibujarMol(c,it.tp,it.x,it.y+by,it.tp==='glu'?1.25:1.35,Math.sin(L.t+it.ph)*0.25);
-    formula(c,MOL[it.tp].f,it.x,it.y+by+(it.tp==='glu'?44:30),15,'#22313B');});
+  L.items.forEach(function(it){if(it.got||it.oculto)return;var by=Math.sin(L.t*2.4+it.ph)*5,pul=1+0.03*Math.sin(L.t*4+it.ph);
+    if(PERF.itemGlow){var hc=HALO[it.tp]||'255,255,255';c.save();c.fillStyle='rgba('+hc+',.14)';c.beginPath();c.arc(it.x,it.y+by,34+Math.sin(L.t*3+it.ph)*5,0,7);c.fill();c.restore();}
+    dibujarSpriteItem(c,it.tp,it.x,it.y+by,(it.tp==='cor'?0.65:it.tp==='est'?0.78:it.tp==='glu'?0.96:0.83)*pul,Math.sin(L.t+it.ph)*0.09);});
   if(L.peligros)L.peligros.forEach(function(h){h.dibujar(c,h,L);});
   // cola de moléculas que acompaña al personaje
   var n=P.cola.length;for(var i=n-1;i>=0;i--){var hh=P.hist[Math.min(P.hist.length-1,10+i*11)];var tp=P.cola[i];
-    dibujarMol(c,tp,hh.x,hh.y+Math.sin(L.t*3+i)*3-10,tp==='glu'?0.8:0.78,Math.sin(L.t*2+i)*0.4);}
+    dibujarSpriteItem(c,tp,hh.x,hh.y+Math.sin(L.t*3+i)*3-10,tp==='glu'?0.54:0.47,Math.sin(L.t*2+i)*0.12);}
   if(P.aura>0){var ga=c.createRadialGradient(P.x+15,P.y+40,10,P.x+15,P.y+40,70);ga.addColorStop(0,'rgba(255,220,90,'+(0.5*P.aura)+')');ga.addColorStop(1,'rgba(255,200,60,0)');c.fillStyle=ga;c.beginPath();c.arc(P.x+15,P.y+40,70,0,7);c.fill();
     for(var e=0;e<5;e++){var an=L.t*2+e*1.26;chispa(c,P.x+15+Math.cos(an)*36,P.y+40+Math.sin(an)*44,P.aura);}}
   var gp=c.createRadialGradient(P.x+15,P.y+P.h-30,4,P.x+15,P.y+P.h-30,70);gp.addColorStop(0,'rgba(255,255,240,.45)');gp.addColorStop(1,'rgba(255,255,240,0)');c.fillStyle=gp;c.beginPath();c.arc(P.x+15,P.y+P.h-30,70,0,7);c.fill();
@@ -755,20 +821,20 @@ function bandera(c,x,y,ok){c.save();c.strokeStyle='#5B4A3A';c.lineWidth=3;c.begi
   if(ok){c.strokeStyle='#fff';c.lineWidth=2.4;c.beginPath();c.moveTo(x+7,y-49);c.lineTo(x+11,y-45);c.lineTo(x+18,y-52);c.stroke();}c.restore();}
 
 function bucle(ts){requestAnimationFrame(bucle);
-  if($('juego').className.indexOf('on')<0||!JG.L)return;
+  if(document.hidden||$('juego').className.indexOf('on')<0||!JG.L){JG.ult=ts;return;}
   var dt=Math.min(0.05,(ts-(JG.ult||ts))/1000);JG.ult=ts;
-  if(!JG.pausa&&$('velo').className.indexOf('on')<0){JG.acc+=dt;var n=0;while(JG.acc>=1/120&&n<8){paso(1/120);JG.acc-=1/120;n++;}}else JG.acc=0;
-  dibujar();}
+  if(!JG.pausa&&$('velo').className.indexOf('on')<0){JG.acc+=dt;var n=0;while(JG.acc>=PERF.step&&n<PERF.maxSteps){paso(PERF.step);JG.acc-=PERF.step;n++;}}else JG.acc=0;
+  if(!JG.ultimoDibujo||ts-JG.ultimoDibujo>=20){dibujar();JG.ultimoDibujo=ts;}}
 
 /* ================== CAPA VISUAL: ambiente, profundidad y ayudas ================== */
 var HALO={h2o:'124,203,242',co2:'170,182,196',o2:'255,138,122',glu:'255,206,80',frag:'255,180,120'};
 function prepAmb(L){var r=rnd(L.id.charCodeAt(0)*31+L.id.charCodeAt(1)*7),a=[],i;
-  for(i=0;i<54;i++)a.push({x:r()*2600,y:r()*900,r:5+r()*30,k:[0.1,0.22,0.4][i%3],a:0.06+r()*0.14,s:r()*6});
-  L.lej=[];for(i=0;i<7;i++)L.lej.push({x:i*420+r()*200,y:150+r()*420,rx:110+r()*120,ry:80+r()*70,a:r()*3});
-  L.amb=a;L.fg=[];for(i=0;i<8;i++)L.fg.push({x:r()*3400,y:r()*760,r:50+r()*90,s:r()*6});}
+  for(i=0;i<PERF.ambCount;i++)a.push({x:r()*2600,y:r()*900,r:5+r()*30,k:[0.1,0.22,0.4][i%3],a:0.06+r()*0.14,s:r()*6});
+  L.lej=[];for(i=0;i<PERF.lejCount;i++)L.lej.push({x:i*420+r()*200,y:150+r()*420,rx:110+r()*120,ry:80+r()*70,a:r()*3});
+  L.amb=a;L.fg=[];for(i=0;i<PERF.fgCount;i++)L.fg.push({x:r()*3400,y:r()*760,r:50+r()*90,s:r()*6});}
 function ambiente(c,L,cm){if(!L.amb)prepAmb(L);var F=L.isla==='F',tint=F?'255,250,205':'255,228,205',i,x,y,g;
   c.save();c.globalCompositeOperation='multiply';g=c.createLinearGradient(0,0,0,VH);g.addColorStop(0,'#FFFFFF');g.addColorStop(1,F?'#C9E6B4':'#F4C2A4');c.fillStyle=g;c.fillRect(0,0,VW,VH);c.globalCompositeOperation='source-over';
-  for(i=0;i<5;i++){x=((i*380-cm.x*0.06+L.t*9)%(VW+700)+VW+700)%(VW+700)-350;
+  for(i=0;i<PERF.rays;i++){x=((i*380-cm.x*0.06+L.t*9)%(VW+700)+VW+700)%(VW+700)-350;
     g=c.createLinearGradient(x,0,x+220,VH);g.addColorStop(0,'rgba('+tint+',.2)');g.addColorStop(1,'rgba('+tint+',0)');c.fillStyle=g;
     c.beginPath();c.moveTo(x,0);c.lineTo(x+70+i*12,0);c.lineTo(x+340,VH);c.lineTo(x+220,VH);c.closePath();c.fill();}
   L.amb.forEach(function(b){x=((b.x-cm.x*b.k)%2600+2600)%2600-200;if(x>VW+100)return;y=((b.y-cm.y*b.k+Math.sin(L.t*0.5+b.s)*14)%900+900)%900-90;
@@ -780,7 +846,7 @@ function post(c,L,cm,P){var i,x,y,g;
   L.fg.forEach(function(b){x=((b.x-cm.x*1.4)%3400+3400)%3400-300;if(x<-200||x>VW+200)return;y=((b.y-cm.y*1.2+Math.sin(L.t*0.4+b.s)*20)%800+800)%800-40;
     g=c.createRadialGradient(x,y,0,x,y,b.r);g.addColorStop(0,'rgba(255,255,255,.13)');g.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=g;c.beginPath();c.arc(x,y,b.r,0,7);c.fill();});
   // viñeta
-  g=c.createRadialGradient(VW/2,VH*0.55,Math.min(VW,VH)*0.45,VW/2,VH*0.55,Math.max(VW,VH)*0.78);g.addColorStop(0,'rgba(25,40,45,0)');g.addColorStop(1,'rgba(25,40,45,.30)');c.fillStyle=g;c.fillRect(0,0,VW,VH);
+  g=c.createRadialGradient(VW/2,VH*0.55,Math.min(VW,VH)*0.45,VW/2,VH*0.55,Math.max(VW,VH)*0.78);g.addColorStop(0,'rgba(25,40,45,0)');g.addColorStop(1,'rgba(25,40,45,'+(0.30*PERF.postQuality)+')');c.fillStyle=g;c.fillRect(0,0,VW,VH);
   // barra de avance del nivel (borde superior)
   var fr=L.vertical?clamp(1-(P.y-200)/(L.H-340),0,1):clamp((P.x+15)/(L.meta?L.meta.x+L.meta.w/2:L.W),0,1);
   c.fillStyle='rgba(255,255,255,.55)';c.fillRect(0,0,VW,7);g=c.createLinearGradient(0,0,VW,0);
@@ -798,27 +864,28 @@ function polvo(L,x,y,n){for(var i=0;i<n;i++)L.fx.push({x:x+(Math.random()-0.5)*2
 
 /* ================== HUD ================== */
 function pintarCor(){var h='';for(var i=0;i<3;i++)h+=i<JG.L.cor?SVG.cor:SVG.corV;$('hCor').innerHTML=h;}
-function pintarObj(){var L=JG.L;$('hObj').innerHTML='<small>Objetivo</small>'+L.objetivo(L);}
+function pintarObj(){var L=JG.L;$('hObj').innerHTML='<small>Objetivo · ★ '+(L.estTomadas||0)+' / '+(L.estNecesarias||0)+'</small>'+L.objetivo(L);}
 function sub(f){return f.replace(/(\d+)/g,'<sub>$1</sub>');}
 /* átomos de cada sustancia: la ecuación cuenta materia */
 var ATOM={h2o:{H:2,O:1},co2:{C:1,O:2},o2:{O:2},glu:{C:6,H:12,O:6}};
 var COLA={C:'#4B5159',H:'#C9D1D8',O:'#E2483C'},NOMA={C:'carbono',H:'hidrógeno',O:'oxígeno'};
 var FLE='<svg class="fle" viewBox="0 0 120 22"><path d="M3 11h104" stroke="currentColor" stroke-width="3.4" stroke-linecap="round"/><path d="M99 3l12 8-12 8" stroke="currentColor" stroke-width="3.4" fill="none" stroke-linecap="round" stroke-linejoin="round"/></svg>';
-function frmHTML(f,coef){return (coef&&coef>1?'<b class="coef">'+coef+'</b>':'')+sub(f);}
-function termHUD(tp,n,max,coef){var ok=n>=max;return '<div class="term'+(ok?' ok':'')+'"><img src="'+iconoMol(tp)+'" alt=""><div class="tx"><span class="frm">'+frmHTML(MOL[tp].f,coef)+'</span><span class="nm">'+MOL[tp].nom+'</span></div><span class="cnt">'+Math.min(n,max)+'/'+max+'</span></div>';}
+function frmHTML(f){return sub(f);}
+function termHUD(tp,n,max){var ok=n>=max,c=max<=1?(ok?'✓':'0/1'):(Math.min(n,max)+'/'+max);return '<div class="term'+(ok?' ok':'')+'"><img src="'+iconoMol(tp)+'" alt=""><div class="tx"><span class="frm">'+MOL[tp].nom+'</span><span class="nm">'+frmHTML(MOL[tp].f)+'</span></div><span class="cnt">'+c+'</span></div>';}
 function pintarEcu(){var L=JG.L,e=L.eq,h,mas='<span class="mas">+</span>';if(!e){$('ecu').style.display='none';return;}$('ecu').style.display='flex';
-  if(L.isla==='F'){h='<div class="lado"><small>materia que entra</small><div class="ts">'+termHUD('co2',e.co2,6,6)+mas+termHUD('h2o',e.h2o,6,6)+'</div></div>'+
+  var mF=L.mMax||{co2:3,h2o:3,glu:1,o2:1},mR=L.mMax||{glu:1,o2:2,co2:2,h2o:2};
+  if(L.isla==='F'){h='<div class="lado"><small>materia que entra</small><div class="ts">'+termHUD('co2',e.co2,mF.co2)+mas+termHUD('h2o',e.h2o,mF.h2o)+'</div></div>'+
     '<div class="arr"><span class="up"><img src="'+icoLuz()+'" alt="">luz · clorofila</span>'+FLE+'<span class="dn">su energía queda en la glucosa</span></div>'+
-    '<div class="lado"><small>materia que sale</small><div class="ts">'+termHUD('glu',e.glu,1,1)+mas+termHUD('o2',e.o2,6,6)+'</div></div>';}
-  else{h='<div class="lado"><small>materia que entra</small><div class="ts">'+termHUD('glu',e.glu,1,1)+mas+termHUD('o2',e.o2,6,6)+'</div></div>'+
+    '<div class="lado"><small>materia que sale</small><div class="ts">'+termHUD('glu',e.glu,mF.glu)+mas+termHUD('o2',e.o2,mF.o2)+'</div></div>';}
+  else{h='<div class="lado"><small>materia que entra</small><div class="ts">'+termHUD('glu',e.glu,mR.glu)+mas+termHUD('o2',e.o2,mR.o2)+'</div></div>'+
     '<div class="arr"><span class="up">en la célula</span>'+FLE+'<span class="dn en'+(e.en?' on':'')+'"><img src="'+icoEnergia()+'" alt="">se libera energía · no es materia</span></div>'+
-    '<div class="lado"><small>materia que sale</small><div class="ts">'+termHUD('co2',e.co2,6,6)+mas+termHUD('h2o',e.h2o,6,6)+'</div></div>';}
+    '<div class="lado"><small>materia que sale</small><div class="ts">'+termHUD('co2',e.co2,mR.co2)+mas+termHUD('h2o',e.h2o,mR.h2o)+'</div></div>';}
   $('ecu').innerHTML=h;}
 function toast(txt,img,d){var el=$('toast');el.innerHTML=(img?'<img src="'+img+'" alt="">':'')+'<span>'+txt+'</span>';el.className='toast on';JG.toastT=d||3;}
 
 /* ecuación grande (intros, faro, balance, certificado) */
-function ecuHTML(is,hl,coefs){hl=hl||[];coefs=coefs||{co2:6,h2o:6,o2:6,glu:1};
-  function t(tp){return '<span class="et'+(hl.indexOf(tp)>=0?' hl':'')+'"><img src="'+iconoMol(tp)+'" alt=""><span class="ef">'+frmHTML(MOL[tp].f,coefs[tp])+'</span><span class="enm">'+MOL[tp].nom+'</span></span>';}
+function ecuHTML(is,hl){hl=hl||[];
+  function t(tp){return '<span class="et'+(hl.indexOf(tp)>=0?' hl':'')+'"><img src="'+iconoMol(tp)+'" alt=""><span class="ef">'+MOL[tp].nom+'</span><span class="enm">'+frmHTML(MOL[tp].f)+'</span></span>';}
   var mas='<span class="emas">+</span>',arr;
   if(is==='F')arr='<span class="earr'+(hl.indexOf('luz')>=0?' hl':'')+'"><span class="eup"><img src="'+icoLuz()+'" alt="">luz · clorofila</span>'+FLE+'<span class="edn">&nbsp;</span></span>';
   else arr='<span class="earr'+(hl.indexOf('en')>=0?' hl':'')+'"><span class="eup">en la célula</span>'+FLE+'<span class="edn en"><img src="'+icoEnergia()+'" alt="">se libera energía</span></span>';
@@ -829,18 +896,26 @@ function bolitas(n,el){var h='';for(var i=0;i<n;i++)h+='<i style="background:'+C
 function balanzaSVG(ang,ltxt,rtxt){var a=ang*Math.PI/180,dx=150*Math.cos(a),dy=150*Math.sin(a);
   return '<svg class="balanza" viewBox="0 0 420 210"><path d="M190 200h40l-10-14h-20z" fill="#8B6B4A"/><rect x="205" y="40" width="10" height="150" rx="4" fill="#A9845C"/>'+
   '<g transform="rotate('+ang.toFixed(1)+' 210 40)"><rect x="60" y="34" width="300" height="12" rx="6" fill="#6B4E31"/></g><circle cx="210" cy="40" r="10" fill="#FFC43D" stroke="#8B6B4A" stroke-width="3"/>'+
-  '<g transform="translate('+(210-dx).toFixed(1)+' '+(40-dy).toFixed(1)+')"><path d="M0 0L-46 70M0 0L46 70" stroke="#6B4E31" stroke-width="2"/><path d="M-60 70h120a60 22 0 0 1-120 0z" fill="#2E9E5B"/><text y="104" text-anchor="middle" font-family="Fredoka" font-size="17" fill="#1F6B44">'+ltxt+'</text></g>'+
-  '<g transform="translate('+(210+dx).toFixed(1)+' '+(40+dy).toFixed(1)+')"><path d="M0 0L-46 70M0 0L46 70" stroke="#6B4E31" stroke-width="2"/><path d="M-60 70h120a60 22 0 0 1-120 0z" fill="#E0704A"/><text y="104" text-anchor="middle" font-family="Fredoka" font-size="17" fill="#B4492A">'+rtxt+'</text></g></svg>';}
-function tablaAtomos(li,ld){var h='<div class="tatom"><div class="th"><span></span><span>entran</span><span></span><span>salen</span></div>';
-  ['C','H','O'].forEach(function(el){var ok=li[el]===ld[el];h+='<div class="tr'+(ok?' ok':' no')+'"><span class="el"><i style="background:'+COLA[el]+'"></i>'+NOMA[el]+'</span><span class="nb"><b>'+li[el]+'</b><em>'+bolitas(Math.min(li[el],24),el)+'</em></span><span class="eq">'+(ok?'=':'≠')+'</span><span class="nb"><b>'+ld[el]+'</b><em>'+bolitas(Math.min(ld[el],24),el)+'</em></span></div>';});
+  '<g transform="translate('+(210-dx).toFixed(1)+' '+(40-dy).toFixed(1)+')"><path d="M0 0L-46 70M0 0L46 70" stroke="#6B4E31" stroke-width="2"/><path d="M-60 70h120a60 22 0 0 1-120 0z" fill="#2E9E5B"/><text y="104" text-anchor="middle" font-family="Fredoka" font-size="16" fill="#1F6B44">'+ltxt+'</text></g>'+
+  '<g transform="translate('+(210+dx).toFixed(1)+' '+(40+dy).toFixed(1)+')"><path d="M0 0L-46 70M0 0L46 70" stroke="#6B4E31" stroke-width="2"/><path d="M-60 70h120a60 22 0 0 1-120 0z" fill="#E0704A"/><text y="104" text-anchor="middle" font-family="Fredoka" font-size="16" fill="#B4492A">'+rtxt+'</text></g></svg>';}
+function tablaAtomos(is){var h='<div class="tatom"><div class="th"><span>átomo</span><span>¿de dónde entra?</span><span></span><span>¿a dónde va?</span></div>';
+  var filas=is==='F'?[
+    ['C','Del dióxido de carbono (aire)','Forma la glucosa'],
+    ['H','Del agua (suelo)','Forma la glucosa'],
+    ['O','Del agua y el CO<sub>2</sub>','Forma glucosa y oxígeno']
+  ]:[
+    ['C','De la glucosa','Sale en el dióxido de carbono'],
+    ['H','De la glucosa','Sale en el agua'],
+    ['O','De la glucosa y el oxígeno','Sale en el CO<sub>2</sub> y el agua']
+  ];
+  filas.forEach(function(f){var el=f[0];h+='<div class="tr ok"><span class="el"><i style="background:'+COLA[el]+'"></i>'+NOMA[el]+' ('+el+')</span><span class="nb"><span style="font-size:14px;font-weight:700;text-align:center">'+f[1]+'</span></span><span class="eq">→</span><span class="nb"><span style="font-size:14px;font-weight:700;text-align:center">'+f[2]+'</span></span></div>';});
   return h+'</div>';}
 /* modal que se abre después de cada reacción completa */
-function balanceMateria(is,cb){var izq=is==='F'?[['co2',6],['h2o',6]]:[['glu',1],['o2',6]],der=is==='F'?[['glu',1],['o2',6]]:[['co2',6],['h2o',6]];
-  var li=contar(izq),ld=contar(der);sfx('ok');
-  abrirModal(cabeza(is,'¿Qué pasó con la materia?',is==='F'?'Balance de la fotosíntesis':'Balance de la respiración celular')+'<div class="cuerpo">'+ecuHTML(is)+
-    '<div class="dos"><div>'+tablaAtomos(li,ld)+'</div><div style="display:grid;gap:12px;justify-items:center">'+balanzaSVG(0,'36 átomos','36 átomos')+
-    '<p style="text-align:center"><b>Entra la misma materia que sale.</b> Los átomos solo se reordenan.</p></div></div>'+
-    '<div class="notaen"><img src="'+(is==='F'?icoLuz():icoEnergia())+'" alt=""><p>'+(is==='F'?'La luz no tiene átomos: no es materia. Por eso va <b>sobre la flecha</b>. Su energía queda guardada en la glucosa.':'La energía no tiene átomos: no es materia. Por eso va <b>junto a la flecha</b>, no sumada.')+'</p></div>'+
+function balanceMateria(is,cb){sfx('ok');
+  abrirModal(cabeza(is,'¿Qué pasó con la materia?',is==='F'?'Transformación en la fotosíntesis':'Transformación en la respiración celular')+'<div class="cuerpo">'+ecuHTML(is)+
+    '<div class="dos"><div>'+tablaAtomos(is)+'</div><div style="display:grid;gap:12px;justify-items:center">'+balanzaSVG(0,'Materia que entra','Materia que sale')+
+    '<p style="text-align:center"><b>Nada se pierde ni aparece de la nada:</b> los mismos átomos de carbono (C), hidrógeno (H) y oxígeno (O) que entran se desarman y se vuelven a unir formando sustancias nuevas.</p></div></div>'+
+    '<div class="notaen"><img src="'+(is==='F'?icoLuz():icoEnergia())+'" alt=""><p>'+(is==='F'?'La <b>luz</b> no está hecha de átomos: es <b>energía</b>, no materia. Por eso va sobre la flecha y su energía queda guardada en la glucosa.':'La <b>energía</b> no está hecha de átomos: no es materia. Por eso va junto a la flecha indicando que se libera para que la célula funcione.')+'</p></div>'+
     '<div class="pie"><button class="btn'+(is==='R'?' terra':'')+'" id="bOk">Continuar</button></div></div>');
   $('bOk').onclick=function(){cerrarModal();if(cb)cb();};}
 
@@ -1017,8 +1092,8 @@ NIV.F4=function(VW,VH){
     alLlegar:function(L,P){var cx=3520,cy=470;L.anim=0;L.armando=true;var cola=P.cola.slice();P.cola=[];
       cola.forEach(function(tp,i){var h=P.hist[Math.min(P.hist.length-1,10+i*11)];L.fx.push({x:h.x,y:h.y,t:0,d:1.6+i*0.05,tp:'vuela',m:tp,x0:h.x,y0:h.y,
         dib:function(c,f,k){var u=Math.min(1,f.t/1.3);var e=u*u*(3-2*u);dibujarMol(c,f.m,lerp(f.x0,cx,e),lerp(f.y0,cy,e)-Math.sin(e*3.14)*80,0.9*(1-e*0.5),f.t*3);}});});
-      setTimeout(function(){sfx('luz');L.eq.glu=1;L.eq.o2=6;pintarEcu();P.cola=['glu'];
-        for(var i=0;i<6;i++)L.fx.push({t:0,d:3.2,i:i,dib:function(c,f){var u=f.t/3.2;dibujarMol(c,'o2',cx-120+f.i*48,cy-u*420,1.1,f.t*2);if(u<0.7)formula(c,'O2',cx-120+f.i*48,cy-u*420+28,14);}});
+      setTimeout(function(){sfx('luz');L.eq.glu=1;L.eq.o2=1;pintarEcu();P.cola=['glu'];
+        for(var i=0;i<3;i++)L.fx.push({t:0,d:3.2,i:i,dib:function(c,f){var u=f.t/3.2;dibujarMol(c,'o2',cx-60+f.i*60,cy-u*420,1.1,f.t*2);if(u<0.7)formula(c,'O2',cx-60+f.i*60,cy-u*420+28,14);}});
         L.fx.push({t:0,d:3.2,dib:function(c,f){var u=Math.min(1,f.t/0.5);c.save();c.globalAlpha=u;dibujarMol(c,'glu',cx,cy,1.5*u,0);formula(c,'C6H12O6',cx,cy+60,18);c.restore();}});
         toast('¡Se formó glucosa y se liberó oxígeno!',iconoMol('glu'),4);},1700);
       setTimeout(function(){balanceMateria('F',completar);},5200);},
@@ -1483,20 +1558,20 @@ var TXT={
   lista:[['h2o','Las 6 H<sub>2</sub>O suben contigo']],
   apr:'El agua sube por el xilema desde la raíz hasta las hojas, como una columna continua. El aire corta esa columna.',
   quiz:[{q:'¿Qué tejido conduce el agua desde la raíz hasta las hojas?',o:['El xilema','El floema','La epidermis','Los estomas'],c:0,e:'El xilema conduce agua y sales minerales hacia arriba. El floema transporta las sustancias orgánicas que fabrica la planta.'},
-   {q:'¿Cuántos átomos tiene una molécula de agua (H<sub>2</sub>O)?',o:['3: dos de hidrógeno y uno de oxígeno','2: uno de hidrógeno y uno de oxígeno','3: dos de oxígeno y uno de hidrógeno','4: dos de hidrógeno y dos de oxígeno, unidos'],c:0,e:'El subíndice 2 indica que hay dos átomos de hidrógeno. El oxígeno no lleva número: hay uno solo.'}]},
+   {q:'¿Qué átomos forman el agua (H<sub>2</sub>O)?',o:['Hidrógeno (H) y oxígeno (O)','Carbono (C) y oxígeno (O)','Solo átomos de hidrógeno (H)','Carbono (C), hidrógeno (H) y oxígeno (O)'],c:0,e:'La fórmula H<sub>2</sub>O nos muestra que el agua está formada por átomos de hidrógeno (H) y de oxígeno (O) unidos.'}]},
  F3:{t:'La hoja: entra el dióxido de carbono',d:'Dentro de la hoja, atrapa el dióxido de carbono que entra del aire por los estomas.',
   intro:'Atrapa <b>6 moléculas de dióxido de carbono</b> que entran por los <b>estomas</b>. No te caigas por un estoma abierto.',
   lista:[['co2','Dióxido de carbono · CO<sub>2</sub> · materia que entra']],
   apr:'El dióxido de carbono del aire entra a la hoja por los estomas. Es el otro reactivo de la fotosíntesis.',
   quiz:[{q:'¿Por dónde entra el dióxido de carbono a la hoja?',o:['Por los estomas','Por la raíz','Por el xilema','Por los pétalos de la flor'],c:0,e:'Los estomas son pequeñas aberturas de la epidermis de la hoja por donde se intercambian gases con el aire.'},
-   {q:'En la ecuación aparece 6 CO<sub>2</sub>. ¿Qué indica el número 6?',o:['Que hay 6 moléculas de CO<sub>2</sub>','Que cada molécula tiene 6 átomos','Que hay 6 átomos de oxígeno en total','Que el CO<sub>2</sub> pesa 6 veces más'],c:0,e:'El número grande delante de la fórmula (coeficiente) cuenta moléculas. Los números chicos (subíndices) cuentan átomos dentro de cada molécula.'}]},
+   {q:'¿Qué átomos forman el dióxido de carbono (CO<sub>2</sub>)?',o:['Carbono (C) y oxígeno (O)','Hidrógeno (H) y oxígeno (O)','Solo carbono (C)','Carbono (C) e hidrógeno (H)'],c:0,e:'El dióxido de carbono (CO<sub>2</sub>) está formado por átomos de carbono (C) y de oxígeno (O).'}]},
  F4:{t:'El cloroplasto: la luz y la fabricación',d:'Dentro de un cloroplasto, la clorofila capta la energía de la luz y se fabrica glucosa.',
   intro:'Párate sobre los 3 grupos de <b>tilacoides</b> cuando les llegue la <b>luz</b>. Después lleva todo a la <b>zona de fabricación</b>.',
   lista:[['luz','Luz: aporta energía, no es materia'],['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · sale'],['o2','Oxígeno · O<sub>2</sub> · sale']],
   apr:'La clorofila capta la energía de la luz. Con ella, el agua y el dióxido de carbono se transforman en glucosa y oxígeno: los átomos se reordenan.',
   quiz:[{q:'¿Qué papel cumple la luz en la fotosíntesis?',o:['Aporta la energía para la reacción','Se convierte en átomos de glucosa','Es un reactivo, igual que el agua','Solo calienta la hoja de la planta'],c:0,e:'La luz no es materia: es energía. La clorofila la capta y esa energía queda guardada en la glucosa.'},
    {q:'¿Por qué la luz no se escribe como reactivo en la ecuación?',o:['Porque es energía, no materia','Porque la planta no la necesita','Porque se escribe como producto','Porque ya está dentro del agua'],c:0,e:'En la ecuación se escriben solo las sustancias (materia). La luz es energía: se anota sobre la flecha, como condición.'},
-   {q:'¿De dónde salen los átomos de carbono de la glucosa?',o:['Del dióxido de carbono del aire','Del agua que absorbe la raíz','De la luz que llega a la hoja','De la clorofila, que se va gastando'],c:0,e:'El único reactivo que tiene carbono es el CO<sub>2</sub>. Sus 6 átomos de carbono terminan formando parte de la glucosa.'}]},
+   {q:'¿De dónde salen los átomos de carbono para fabricar la glucosa?',o:['Del dióxido de carbono del aire','Del agua que absorbe la raíz','De la luz que llega a la hoja','De la clorofila, que se va gastando'],c:0,e:'El único reactivo que tiene carbono (C) es el dióxido de carbono (CO<sub>2</sub>) que entra del aire.'}]},
  R1:{t:'El citoplasma: llegan la glucosa y el oxígeno',d:'En el citoplasma de una célula, junta glucosa y oxígeno. Aquí la glucosa se divide en dos mitades.',
   intro:'Junta <b>1 glucosa</b> y <b>6 moléculas de oxígeno</b>. Pasa por la zona donde la glucosa se divide y entra a la mitocondria.',
   lista:[['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · entra'],['o2','Oxígeno · O<sub>2</sub> · entra']],
@@ -1507,7 +1582,7 @@ var TXT={
   intro:'Lleva cada <b>mitad de glucosa</b> con oxígeno a un <b>puesto de reacción</b>. Se libera <b>energía</b> y con ella funciona el ascensor.',
   lista:[['frag','Mitad de glucosa'],['o2','Oxígeno · O<sub>2</sub>'],['en','Energía: se libera, no es materia']],
   apr:'En la mitocondria, la glucosa reacciona con el oxígeno: se forman dióxido de carbono y agua, y se libera energía.',
-  quiz:[{q:'¿En qué organela se completa la respiración celular?',o:['En la mitocondria','En el cloroplasto','En el ribosoma','En la vacuola central'],c:0,e:'Las mitocondrias están en las células de casi todos los seres vivos, incluidas las plantas.'},
+  quiz:[{q:'¿En qué organela se completa la respiración celular?',o:['En la mitocondria','En el cloroplasto','En el ribosoma','En la vacuola central'],c:0,e:'Las células de plantas y animales tienen mitocondrias. Las bacterias no tienen mitocondrias, pero también obtienen energía de los nutrientes.'},
    {q:'¿Qué les pasa a los átomos de la glucosa y del oxígeno?',o:['Se reordenan y forman CO<sub>2</sub> y H<sub>2</sub>O','Desaparecen y se vuelven energía','Quedan iguales dentro de la célula','Se transforman en luz y calor'],c:0,e:'La materia no desaparece: los mismos átomos de C, H y O forman nuevas sustancias. La energía se libera, pero no está hecha de átomos.'},
    {q:'¿Dónde se escribe la energía en la ecuación de la respiración celular?',o:['Junto a la flecha: no es materia','Como un reactivo, con un signo +','Como un producto, con un signo +','No se escribe en ninguna parte'],c:0,e:'La ecuación cuenta materia: sustancias que entran y salen. La energía se anota junto a la flecha para indicar que se libera.'}]},
  R3:{t:'La célula usa la energía',d:'Usa la energía liberada en tres trabajos de la célula y saca el dióxido de carbono.',
@@ -1515,7 +1590,7 @@ var TXT={
   lista:[['en','Energía para trabajar'],['co2','Dióxido de carbono · CO<sub>2</sub> · sale']],
   apr:'La célula usa la energía para transportar, moverse y fabricar. El dióxido de carbono sale de la célula.',
   quiz:[{q:'¿Para qué usa la célula la energía que libera la respiración?',o:['Transportar, moverse y fabricar','Para fabricar luz y también oxígeno','Para crear átomos nuevos de carbono','No la usa: la guarda para siempre'],c:0,e:'Todas las actividades de la célula necesitan energía; una parte también se pierde como calor.'},
-   {q:'¿Cuándo hacen respiración celular las plantas?',o:['Todo el tiempo, con luz y sin luz','Solo de noche, cuando no hay luz','Solo de día, junto con la fotosíntesis','Nunca: solo hacen fotosíntesis'],c:0,e:'Las células de la planta necesitan energía siempre, por eso respiran todo el tiempo. Con luz, además, hacen fotosíntesis.'}]}
+   {q:'¿Cuándo hacen respiración celular las plantas?',o:['Todo el tiempo, con luz y sin luz','Solo de noche, cuando no hay luz','Solo de día, junto con la fotosíntesis','Nunca: solo hacen fotosíntesis'],c:0,e:'Las células de las plantas necesitan energía tanto de día como de noche. Cuando reciben luz, sus partes verdes también pueden hacer fotosíntesis.'}]}
 };
 var HL={F1:['h2o'],F2:['h2o'],F3:['co2'],F4:['luz','glu','o2'],R1:['glu','o2'],R2:['en','co2','h2o'],R3:['en','co2']};
 
@@ -1538,16 +1613,18 @@ function empezar(){var n=limpio($('inNom').value),a=limpio($('inApe').value),err
   $('iniErr').textContent=err;if(err){sfx('mal');return;}
   if(!ST.perfil||ST.perfil.nom!==n||ST.perfil.ape!==a){ST={perfil:null,prog:{},quiz:{},faro:{},pts:0,sonido:ST.sonido};}
   ST.perfil={nom:n,ape:a,sec:INI.sec,pj:INI.pj};guardar();sfx('ok');irMapa();}
-function animInicio(ts){if($('inicio').className.indexOf('on')<0){INI.raf=requestAnimationFrame(animInicio);return;}
-  var t=ts/1000,k=$('cvIni'),w=window.innerWidth,h=window.innerHeight,d=Math.min(window.devicePixelRatio||1,2);
+function animInicio(ts){INI.raf=requestAnimationFrame(animInicio);if(document.hidden||$('inicio').className.indexOf('on')<0)return;if(INI.ultimo&&ts-INI.ultimo<33)return;INI.ultimo=ts;
+  var t=ts/1000,k=$('cvIni'),w=window.innerWidth,h=window.innerHeight,d=Math.min(window.devicePixelRatio||1,PERF.dprMax);
   if(k.width!==Math.round(w*d)){k.width=Math.round(w*d);k.height=Math.round(h*d);}
   var x=k.getContext('2d');x.setTransform(d,0,0,d,0,0);var g=x.createLinearGradient(0,0,w,h);g.addColorStop(0,'#E3F5D3');g.addColorStop(0.5,'#FFF5E2');g.addColorStop(1,'#FCE0CC');x.fillStyle=g;x.fillRect(0,0,w,h);
-  var r=rnd(3),tps=['h2o','co2','o2','glu','h2o','co2','o2'];for(var i=0;i<16;i++){var px=r()*w,py=r()*h,sp=0.15+r()*0.2;x.save();x.globalAlpha=0.55;
+  var r=rnd(3),tps=['h2o','co2','o2','glu','h2o','co2','o2'];for(var i=0;i<PERF.initFloaters;i++){var px=r()*w,py=r()*h,sp=0.15+r()*0.2;x.save();x.globalAlpha=0.55;
     dibujarMol(x,tps[i%7],px+Math.sin(t*sp+i)*30,(py-t*12*sp*4+h*2)%(h+100)-50,tps[i%7]==='glu'?1.6:1.8,t*sp+i);x.restore();}
   Array.prototype.forEach.call(document.querySelectorAll('.pj canvas'),function(cv2){var W2=cv2.clientWidth,H2=cv2.clientHeight;if(!W2)return;if(cv2.width!==Math.round(W2*d)){cv2.width=Math.round(W2*d);cv2.height=Math.round(H2*d);}
     var y=cv2.getContext('2d');y.setTransform(d,0,0,d,0,0);y.clearRect(0,0,W2,H2);var id=cv2.parentNode.getAttribute('data-pj'),sel=id===INI.pj;
-    var s=Math.min(W2/60,H2/92);y.fillStyle=sel?'#FFE7B8':'#F3E9D8';y.beginPath();y.ellipse(W2/2,H2*0.93,W2*0.32,H2*0.04,0,0,7);y.fill();
-    dibujarPJ(y,id,W2/2,H2*0.93,s,1,t+PJ_ORDEN.indexOf(id),sel?'run':'idle',{vx:sel?120:0});});
+    var s=Math.min(W2/60,H2/92),bg=y.createLinearGradient(0,0,0,H2);bg.addColorStop(0,sel?'#FFF9E0':'#F8F2E8');bg.addColorStop(1,sel?'#FDE8C3':'#EDE2D3');
+    y.fillStyle=bg;rr(y,10,8,W2-20,H2-16,16);y.fill();y.strokeStyle=sel?'#F0B24A':'#D8C8B0';y.lineWidth=2;y.stroke();
+    y.fillStyle=sel?'#FFE7B8':'#F3E9D8';y.beginPath();y.ellipse(W2/2,H2*0.9,W2*0.28,H2*0.04,0,0,7);y.fill();
+    dibujarPJ(y,id,W2/2,H2*0.9,s,1,t+PJ_ORDEN.indexOf(id),sel?'run':'idle',{vx:sel?120:0});});
   INI.raf=requestAnimationFrame(animInicio);}
 
 /* ---------- MAPA ---------- */
@@ -1604,6 +1681,7 @@ function pintarMapa(){var s='<defs><filter id="sh" x="-20%" y="-20%" width="140%
   var av=$('cvAvMapa'),x=av.getContext('2d');x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,116,116);dibujarPJ(x,ST.perfil.pj,58,250,2.6,1,0,'idle',{});
   $('btnFinal').style.opacity=(ST.faro.F&&ST.faro.R)||LIBRE?'1':'.55';}
 function irMapa(){mostrar('mapa');JG.L=null;pintarMapa();
+  if(!$('btnRankingLocal')){var b=document.createElement('button');b.id='btnRankingLocal';b.type='button';b.textContent='★ Ranking';b.style.cssText='position:absolute;right:18px;bottom:18px;z-index:50;background:#FFC43D;color:#22313B;border:3px solid #7D5700;border-radius:16px;padding:12px 20px;font:800 19px Nunito,sans-serif;box-shadow:0 5px 0 #8C6500;cursor:pointer';b.onclick=mostrarRanking;$('mapa').appendChild(b);}
   var sig=null;['F','R'].forEach(function(is){ORDEN[is].concat([is+'F']).forEach(function(id){if(!sig&&desbloqueado(id)&&!(id.charAt(1)==='F'?ST.faro[is]:nivelHecho(id)))sig=id;});});
   mostrarNivel(SEL&&desbloqueado(SEL)?SEL:(sig||'F1'),true);}
 function mostrarNivel(id,silencio){if(!silencio)sfx('clic');SEL=id;pintarMapa();var is=id.charAt(0),faro=id.charAt(1)==='F',ok=desbloqueado(id);
@@ -1626,7 +1704,7 @@ function jugar(id){mostrar('juego');ajustar();iniciarNivel(id);sfx('ok');}
 
 /* ---------- COMPLETAR / PERDER / PAUSA ---------- */
 function completar(){var L=JG.L,id=L.id,is=L.isla;sfx('nivel');var est=L.cor>=3?3:L.cor===2?2:1;var prev=ST.prog[id]||{est:0,pts:0};
-  ST.prog[id]={est:Math.max(prev.est,est),pts:Math.max(prev.pts,L.pts+est*20)};guardar();
+  ST.prog[id]={est:Math.max(prev.est,est),pts:Math.max(prev.pts,L.pts+est*20)};guardar();guardarRanking();
   var o=ORDEN[is],sig=o[o.indexOf(id)+1]||null;
   abrirModal(cabeza(is,'¡Nivel completado!',TXT[id].t)+'<div class="cuerpo"><div class="estgr">'+estrellasHTML(est)+'</div>'+
     '<p style="text-align:center;font-weight:700">'+(est===3?'¡Sin perder ningún corazón!':est===2?'Perdiste un corazón. ¡Muy bien!':'¡Lo lograste!')+' · '+(L.pts+est*20)+' puntos</p>'+
@@ -1642,9 +1720,9 @@ function quiz(id,i,bien,sig){var q=TXT[id].quiz[i],is=id.charAt(0),n=TXT[id].qui
   Array.prototype.forEach.call(bs,function(b){b.onclick=function(){var j=+b.getAttribute('data-j'),ok=j===q.c;
     Array.prototype.forEach.call(bs,function(x){x.disabled=true;if(+x.getAttribute('data-j')===q.c)x.className='bien';});if(!ok)b.className='mal';
     sfx(ok?'ok':'mal');if(ok)bien++;var e=$('qExp');e.className='expl on '+(ok?'bien':'mal');e.innerHTML=(ok?'¡Correcto! ':'No es correcto. ')+q.e;$('qSig').style.display='';};});
-  $('qSig').onclick=function(){if(i+1<n)quiz(id,i+1,bien,sig);else{ST.quiz[id]=Math.max(ST.quiz[id]||0,bien);guardar();finNivel(id,bien,sig);}};}
+  $('qSig').onclick=function(){if(i+1<n)quiz(id,i+1,bien,sig);else{ST.quiz[id]=Math.max(ST.quiz[id]||0,bien);guardar();guardarRanking();finNivel(id,bien,sig);}};}
 function finNivel(id,bien,sig){var is=id.charAt(0),fin=!sig;
-  abrirModal(cabeza(is,'Resultado',TXT[id].t)+'<div class="cuerpo"><p style="text-align:center;font-size:22px"><b>'+bien+' de '+TXT[id].quiz.length+'</b> respuestas correctas (+'+bien*50+' puntos)</p>'+
+  abrirModal(cabeza(is,'Resultado',TXT[id].t)+'<div class="cuerpo"><p style="text-align:center;font-size:22px"><b>'+bien+' de '+TXT[id].quiz.length+'</b> respuestas correctas (+'+bien*75+' puntos)</p>'+
     (fin?'<div class="preg"><h3>¡Completaste todos los niveles de la '+(is==='F'?'Isla Fotosíntesis':'Isla Respiración celular')+'!</h3><p>Ahora te espera el <b>desafío del faro</b>: armar la ecuación '+(is==='F'?'de la fotosíntesis':'de la respiración celular')+'.</p></div>':'')+
     '<div class="pie"><button class="btn claro" id="fMapa">Volver al mapa</button><button class="btn'+(is==='R'?' terra':'')+'" id="fSig">'+(fin?'Ir al faro':'Siguiente nivel')+'</button></div></div>');
   $('fMapa').onclick=function(){cerrarModal();irMapa();};
@@ -1695,41 +1773,45 @@ function abrirFaro(is){var F=FARO[is],st={pos:[],err:0};
     if(!ok){st.err++;sfx('mal');b.className='ficha sacude';setTimeout(function(){b.className='ficha';},420);e.className='expl on mal';e.innerHTML=F.fichas[k][2];return;}
     sfx('ok');st.pos.push(k);b.className='ficha usada';e.className='expl on bien';e.innerHTML=F.fichas[k][2];dibujar();
     if(st.pos.length===F.huecos.length)setTimeout(function(){faroFormulas(is,st);},1100);};});}
-function pasos(n){var t=['Ubicar','Fórmulas','Balancear'],h='<div class="pasos">';for(var i=1;i<=3;i++)h+='<span class="'+(i<n?'hecho':i===n?'act':'')+'"><b>'+i+'</b>'+t[i-1]+'</span>';return h+'</div>';}
+function pasos(n){var t=['1. Sustancias','2. Fórmulas','3. Materia y energía'],h='<div class="pasos">';for(var i=1;i<=3;i++)h+='<span class="'+(i<n?'hecho':i===n?'act':'')+'"><b>'+i+'</b>'+t[i-1]+'</span>';return h+'</div>';}
 function faroFormulas(is,st){var sust=is==='F'?['co2','h2o','glu','o2']:['glu','o2','co2','h2o'],bien={};
-  var filas=sust.map(function(k){var ops=mezclar(FORMS[k]);return '<div class="ffila" data-k="'+k+'">'+img(k)+'<span class="fn">'+MOL[k].nom+'<small>'+(sust.indexOf(k)<2?'materia que entra':'materia que sale')+'</small></span><div class="fops">'+
+  var pistas={h2o:'Agua: tiene hidrógeno (H) y oxígeno (O)',co2:'Dióxido de carbono: tiene carbono (C) y dos oxígenos (O)',o2:'Oxígeno: dos átomos de oxígeno (O) unidos',glu:'Glucosa: azúcar con carbono (C), hidrógeno (H) y oxígeno (O)'};
+  var filas=sust.map(function(k){var ops=mezclar(FORMS[k]);return '<div class="ffila" data-k="'+k+'">'+img(k)+'<span class="fn">'+MOL[k].nom+'<small>'+pistas[k]+'</small></span><div class="fops">'+
     ops.map(function(o){return '<button data-f="'+o[0]+'">'+sub(o[0])+'</button>';}).join('')+'</div></div>';}).join('');
-  abrirModal(cabeza(is,'Desafío del faro · Paso 2 de 3','Las fórmulas químicas')+'<div class="cuerpo">'+pasos(2)+
-    '<p>Cada sustancia tiene su <b>fórmula</b>: las letras dicen qué átomos tiene (C carbono, H hidrógeno, O oxígeno) y los <b>números chicos</b> (subíndices) dicen cuántos de cada uno. Elige la fórmula correcta de cada sustancia.</p>'+
-    '<div class="ftabla">'+filas+'</div><div class="expl" id="fExp"></div><div class="pie"><button class="btn'+(is==='R'?' terra':'')+'" id="fSig" disabled>Paso 3: balancear</button></div></div>');
+  abrirModal(cabeza(is,'Desafío del faro · Paso 2 de 3','Reconocer las fórmulas')+'<div class="cuerpo">'+pasos(2)+
+    '<p>Cada sustancia se representa con su <b>fórmula química</b>: las letras indican qué tipo de átomos la forman (<b>C</b> carbono, <b>H</b> hidrógeno, <b>O</b> oxígeno). Elige la fórmula de cada sustancia:</p>'+
+    '<div class="ftabla">'+filas+'</div><div class="expl" id="fExp"></div><div class="pie"><button class="btn'+(is==='R'?' terra':'')+'" id="fSig" disabled>Paso 3: materia y energía</button></div></div>');
   Array.prototype.forEach.call(document.querySelectorAll('.ffila'),function(fila){var k=fila.getAttribute('data-k');
     Array.prototype.forEach.call(fila.querySelectorAll('button'),function(b){b.onclick=function(){if(bien[k])return;var f=b.getAttribute('data-f'),o=FORMS[k].filter(function(x){return x[0]===f;})[0],e=$('fExp');
-      if(f===FORMS[k][0][0]){bien[k]=1;sfx('ok');b.className='bien';fila.className='ffila ok';e.className='expl on bien';e.innerHTML='Correcto: '+MOL[k].nom+' es '+sub(f)+'.';
+      if(f===FORMS[k][0][0]){bien[k]=1;sfx('ok');b.className='bien';fila.className='ffila ok';e.className='expl on bien';e.innerHTML='¡Muy bien! '+MOL[k].nom.charAt(0).toUpperCase()+MOL[k].nom.slice(1)+' se escribe '+sub(f)+'.';
         if(Object.keys(bien).length===4)$('fSig').disabled=false;}
       else{st.err++;sfx('mal');b.className='mal';e.className='expl on mal';e.innerHTML=o[1];}};});});
   $('fSig').onclick=function(){faroBalance(is,st);};}
-function faroBalance(is,st){var izq=is==='F'?['co2','h2o']:['glu','o2'],der=is==='F'?['glu','o2']:['co2','h2o'],cf={co2:1,h2o:1,o2:1,glu:1},listo=false;
-  function caja(k){var fijo=k==='glu';return '<div class="cterm" data-k="'+k+'">'+(fijo?'<span class="cfijo">1</span>':'<button class="cb" data-d="-1">−</button><span class="cn">'+cf[k]+'</span><button class="cb" data-d="1">+</button>')+
-    img(k)+'<span class="cf"><span>'+sub(MOL[k].f)+'</span><small>'+MOL[k].nom+'</small></span></div>';}
-  var arr=is==='F'?'<span class="earr"><span class="eup"><img src="'+icoLuz()+'" alt="">luz · clorofila</span>'+FLE+'</span>':'<span class="earr"><span class="eup">en la célula</span>'+FLE+'<span class="edn en"><img src="'+icoEnergia()+'" alt="">se libera energía</span></span>';
-  abrirModal(cabeza(is,'Desafío del faro · Paso 3 de 3','Balancear: entra la misma materia que sale')+'<div class="cuerpo">'+pasos(3)+
-    '<p>Los átomos no aparecen ni desaparecen. Usa los botones <b>+</b> y <b>−</b> para elegir cuántas moléculas de cada sustancia hacen falta (el <b>número grande</b>, llamado coeficiente) hasta que entren y salgan los mismos átomos de cada tipo. La glucosa ya está fija: <b>1 molécula</b>.</p>'+
-    '<div class="cecu">'+caja(izq[0])+'<span class="emas">+</span>'+caja(izq[1])+arr+caja(der[0])+'<span class="emas">+</span>'+caja(der[1])+'</div>'+
-    '<div class="dos"><div id="bTab"></div><div id="bBal" style="display:grid;justify-items:center;gap:8px"></div></div>'+
+function faroBalance(is,st){
+  var retos=is==='F'?[
+    {q:'1. ¿De dónde salen los átomos de carbono (C) que forman la glucosa?',o:[['Del dióxido de carbono (CO₂) que entró del aire',1,'¡Exacto! Los átomos de carbono del CO₂ pasan a formar la glucosa.'],['Aparecen gracias a la luz del sol',0,'La luz es energía, no tiene átomos de carbono.'],['Salen del agua (H₂O) que absorbió la raíz',0,'El agua solo tiene hidrógeno (H) y oxígeno (O), no tiene carbono.']]},
+    {q:'2. ¿Qué pasa con la energía de la luz en la fotosíntesis?',o:[['Queda guardada en la glucosa que fabrica la planta',1,'¡Correcto! La energía lumínica se transforma en energía química guardada en la glucosa.'],['Se convierte en átomos de oxígeno',0,'La energía no se convierte en átomos (no es materia).'],['Se gasta y desaparece por completo',0,'La energía no desaparece: queda guardada en la glucosa.']]}
+  ]:[
+    {q:'1. ¿Qué ocurre con los átomos de la glucosa y del oxígeno en la respiración celular?',o:[['Se reordenan para formar dióxido de carbono y agua',1,'¡Exacto! Entra la misma materia que sale, solo cambian las uniones entre los átomos.'],['Se destruyen para convertirse en energía',0,'Los átomos son materia y no se convierten en energía: salen formando agua y CO₂.'],['Desaparecen dentro de la mitocondria',0,'La materia se conserva: ningún átomo desaparece.']]},
+    {q:'2. ¿De dónde sale la energía que libera la respiración celular?',o:[['Estaba guardada en la glucosa',1,'¡Muy bien! Al reaccionar la glucosa con el oxígeno, se libera esa energía para que la célula funcione.'],['Se fabrica a partir de la luz en la mitocondria',0,'La respiración celular no usa luz: ocurre de día y de noche.'],['Viene del dióxido de carbono que entra',0,'El dióxido de carbono es un producto que sale, no aporta energía.']]}
+  ];
+  var resp={};
+  var bloques=retos.map(function(r,idx){var ops=mezclar(r.o);return '<div class="preg" data-i="'+idx+'"><h3>'+r.q+'</h3><div class="ops">'+
+    ops.map(function(o,m){return '<button data-ok="'+o[1]+'" data-ex="'+esc(o[2])+'"><span class="le">'+'ABC'.charAt(m)+'</span>'+o[0]+'</button>';}).join('')+'</div><div class="expl" id="bEx'+idx+'"></div></div>';}).join('');
+  abrirModal(cabeza(is,'Desafío del faro · Paso 3 de 3','¿Qué pasa con la materia y la energía?')+'<div class="cuerpo">'+pasos(3)+ecuHTML(is)+
+    '<div class="dos"><div id="bTab">'+tablaAtomos(is)+'<div id="bBal" style="display:grid;justify-items:center;margin-top:8px">'+balanzaSVG(0,'Materia que entra','Materia que sale')+'</div></div><div style="display:grid;gap:14px">'+bloques+'</div></div>'+
     '<div class="pie"><button class="btn claro" id="fSal">Volver al mapa</button></div></div>');
-  function act(){var li=contar(izq.map(function(k){return [k,cf[k]];})),ld=contar(der.map(function(k){return [k,cf[k]];}));
-    var tl=li.C+li.H+li.O,tr=ld.C+ld.H+ld.O,dif=Math.abs(li.C-ld.C)+Math.abs(li.H-ld.H)+Math.abs(li.O-ld.O),ok=dif===0;
-    var ang=ok?0:clamp((tl>=tr?-1:1)*(3+dif*0.9),-16,16);
-    $('bTab').innerHTML=tablaAtomos(li,ld);$('bBal').innerHTML=balanzaSVG(ang,tl+' átomos',tr+' átomos')+'<p style="text-align:center;font-weight:800;color:'+(ok?'#1F6B44':'#9C3E22')+'">'+(ok?'¡Equilibrada! Entra la misma materia que sale.':'Todavía no: compara cada tipo de átomo.')+'</p>';
-    Array.prototype.forEach.call(document.querySelectorAll('.cterm .cn'),function(s){s.textContent=cf[s.parentNode.getAttribute('data-k')];});
-    if(ok&&!listo){listo=true;sfx('ok');ST.faro[is]=true;guardar();setTimeout(function(){faroListo(is,st.err);},1600);}}
-  Array.prototype.forEach.call(document.querySelectorAll('.cterm .cb'),function(b){b.onclick=function(){if(listo)return;var k=b.parentNode.getAttribute('data-k');cf[k]=clamp(cf[k]+(+b.getAttribute('data-d')),1,6);sfx('clic');act();};});
-  $('fSal').onclick=function(){cerrarModal();irMapa();};act();}
+  Array.prototype.forEach.call(document.querySelectorAll('.preg[data-i]'),function(pr){var idx=pr.getAttribute('data-i'),bs=pr.querySelectorAll('button');
+    Array.prototype.forEach.call(bs,function(b){b.onclick=function(){if(resp[idx])return;var ok=b.getAttribute('data-ok')==='1',ex=b.getAttribute('data-ex'),e=$('bEx'+idx);
+      if(ok){resp[idx]=1;sfx('ok');b.className='bien';Array.prototype.forEach.call(bs,function(x){x.disabled=true;});e.className='expl on bien';e.innerHTML=ex;
+        if(Object.keys(resp).length===retos.length){ST.faro[is]=true;guardar();setTimeout(function(){faroListo(is,st.err);},1100);}}
+      else{st.err++;sfx('mal');b.className='mal';e.className='expl on mal';e.innerHTML=ex;}};});});
+  $('fSal').onclick=function(){cerrarModal();irMapa();};}
 function faroListo(is,err){sfx('nivel');var ambas=ST.faro.F&&ST.faro.R;
   abrirModal(cabeza(is,'¡Faro encendido!',FARO[is].tit)+'<div class="cuerpo">'+ecuHTML(is)+
     '<div class="notaen"><img src="'+(is==='F'?icoLuz():icoEnergia())+'" alt=""><p>'+(is==='F'?'La materia que entra (dióxido de carbono y agua) se transforma en la materia que sale (glucosa y oxígeno). La luz aporta la energía, pero no es materia: va sobre la flecha.':'La materia que entra (glucosa y oxígeno) se transforma en la materia que sale (dióxido de carbono y agua). La energía se libera, pero no es materia: va junto a la flecha.')+'</p></div>'+
     '<p style="text-align:center">'+(err===0?'¡Sin ningún error!':'Errores en el desafío: '+err+'.')+' +150 puntos.</p>'+
-    (ambas?'<div class="preg"><h3>¡Encendiste los dos faros!</h3><p>Compara las dos ecuaciones: lo que sale de una es lo que entra en la otra. Ya puedes ver tu certificado de expedición.</p></div>':'<div class="preg"><h3>Te falta la otra isla</h3><p>Completa también la '+(is==='F'?'Isla Respiración celular':'Isla Fotosíntesis')+' para obtener tu certificado.</p></div>')+
+    (ambas?'<div class="preg"><h3>¡Encendiste los dos faros!</h3><p>Compara las dos ecuaciones: sus sustancias pueden relacionarse, pero son procesos diferentes. Supera la misión de integración para obtener el certificado.</p></div>':'<div class="preg"><h3>Te falta la otra isla</h3><p>Completa también la '+(is==='F'?'Isla Respiración celular':'Isla Fotosíntesis')+' para obtener tu certificado.</p></div>')+
     '<div class="pie"><button class="btn claro" id="lMapa">Volver al mapa</button>'+(ambas?'<button class="btn terra" id="lCert">Ver mi certificado</button>':'')+'</div></div>');
   $('lMapa').onclick=function(){cerrarModal();irMapa();};if(ambas)$('lCert').onclick=function(){cerrarModal();verFinal();};}
 
@@ -1747,7 +1829,7 @@ function verFinal(){if(!(ST.faro.F&&ST.faro.R)&&!LIBRE){abrirModal(cabeza('n','C
 
 /* ---------- CONTROLES TÁCTILES Y BOTONES ---------- */
 function armarTactil(){Array.prototype.forEach.call(document.querySelectorAll('.tbtn'),function(b){var k=b.getAttribute('data-k');
-  function on(e){e.preventDefault();if(k==='u'&&!K.u)jBuf=0.14;K[k]=1;b.className='tbtn act';}
+  function on(e){e.preventDefault();if(k==='u'&&!K.u)jBuf=0.16;K[k]=1;b.className='tbtn act';}
   function off(e){if(e)e.preventDefault();K[k]=0;b.className='tbtn';}
   b.addEventListener('touchstart',on,{passive:false});b.addEventListener('touchend',off,{passive:false});b.addEventListener('touchcancel',off,{passive:false});
   b.addEventListener('mousedown',on);b.addEventListener('mouseup',off);b.addEventListener('mouseleave',function(){if(K[k])off();});});}
@@ -1775,23 +1857,21 @@ function camino(seed,x0,x1,o){var r=rnd(seed),s=[],p=[],x=x0,y=o.y0,i=0;
 function trampa(x,y,tp,msg){return {x:x,y:y,tp:tp,mal:msg};}
 function cuantos(P,tp){return P.cola.filter(function(t){return t===tp;}).length;}
 
-/* ---------- F1: raíz (≈1 min) ---------- */
-NIV.F1=function(VW,VH){var W=11000,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,wMin:300,wMax:560,gMin:110,gMax:165,dy:55,pozo:4,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
+/* ---------- F1: raíz ---------- */
+NIV.F1=function(VW,VH){var W=6400,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,wMin:320,wMax:560,gMin:110,gMax:155,dy:50,pozo:4,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
   S.forEach(function(s){plat.push(P_(s.x,s.y,s.w,400,'solid','grano'));});
   C.p.forEach(function(q){var p=P_(q.x-55,q.y,110,40,'one','granoDer');p.der=1;plat.push(p);});
   var MG='Eso era glucosa: la planta no la toma del suelo, la fabrica en las hojas.',MC='Eso era dióxido de carbono: el que usa la fotosíntesis entra por las hojas, desde el aire, no por la raíz.';
   S.forEach(function(s,j){if(j===0||j===n-1)return;
     if(j%2===1){if(s.w>340){plat.push(P_(s.x+50,s.y-140,210,24,'one','raicilla'));items.push({x:s.x+155,y:s.y-200,tp:'h2o'});}else items.push({x:s.x+s.w/2,y:s.y-120,tp:'h2o'});}
-    else{if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'glu':'co2',j%8===2?MG:MC));
-      if(j%6===0)items.push(trampa(s.x+s.w*0.75,s.y-150,'co2',MC));}});
+    else{if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'glu':'co2',j%8===2?MG:MC));}});
   var sh=S[Math.floor(n*0.6)];items.push({x:sh.x+sh.w*0.85,y:sh.y-120,tp:'cor'});
-  S.forEach(function(s,j){if(j>0&&j<n-1&&j%4===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
-  S.forEach(function(s,j){if(j%4===3&&s.w>340)items.push({x:s.x+155,y:s.y-260,tp:'est'});});
-  var cps=[Math.floor(n/4),Math.floor(n/2),Math.floor(3*n/4)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-145;
+  S.forEach(function(s,j){if(j>0&&j<n-1&&j%3===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
+  var cps=[Math.floor(n/3),Math.floor(2*n/3)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-145;
   return {isla:'F',nombre:'1 · La raíz: entra el agua',W:W,H:720,plat:plat,peligros:[],items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-200,y:380,w:110,h:220},
-    eq:{h2o:0,co2:0,glu:0,o2:0},cola0:[],datos:{h2o:'Agua (H<sub>2</sub>O): materia que entra a la planta.'},
-    objetivo:function(L){return 'Junta 6 moléculas de agua y entra a la raíz ('+Math.min(6,L.eq.h2o)+'/6). Esquiva lo que la raíz no absorbe.';},
-    metaOK:function(L){var f=6-L.eq.h2o;return f<=0?true:'Te faltan '+f+' moléculas de agua.';},
+    mMax:{co2:3,h2o:3,glu:1,o2:1},eq:{h2o:0,co2:0,glu:0,o2:0},cola0:[],datos:{h2o:'Agua (H<sub>2</sub>O): materia que entra a la planta por la raíz.'},
+    objetivo:function(L){return 'Junta 3 gotas de agua (H<sub>2</sub>O) y entra a la raíz ('+Math.min(3,L.eq.h2o)+'/3).';},
+    metaOK:function(L){var f=3-L.eq.h2o;return f<=0?true:'Te faltan '+f+' de agua.';},
     fondo:fondoSuelo,
     detras:function(c,L){var cm=JG.cam,x0=Math.max(-60,cm.x-60),x1=Math.min(W+100,cm.x+VW+60),x;
       for(x=Math.floor(x0/120)*120+40;x<x1;x+=120){var hx=x+((x/120)%3)*12,ll=150+((x/120)%4)*40;c.strokeStyle='#C9A976';c.lineWidth=12;c.lineCap='round';c.beginPath();c.moveTo(hx,150);c.quadraticCurveTo(hx+20,150+ll*0.5,hx+6,150+ll);c.stroke();c.strokeStyle='#F9EED6';c.lineWidth=8;c.stroke();}
@@ -1804,9 +1884,9 @@ NIV.F1=function(VW,VH){var W=11000,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,
       nucleo(c,mx,480,14);var gg=c.createRadialGradient(mx,520,5,mx,520,70);gg.addColorStop(0,'rgba(255,255,255,.9)');gg.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=gg;c.beginPath();c.arc(mx,520,70,0,7);c.fill();
       etiqueta(c,'entrar a la raíz',mx,350,15);}};};
 
-/* ---------- F2: xilema (≈1 min, burbujas si te quedas quieto) ---------- */
+/* ---------- F2: xilema ---------- */
 NIV.F2=function(VW,VH){
-  var W=1280,H=6200,iz=150,de=1130,plat=[],cad=[],VEL=95,SEP=300,carr=[[180,390,0],[535,745,100],[890,1100,200]],r=rnd(23),peli=[],items=[];
+  var W=1280,H=5700,iz=150,de=1130,plat=[],cad=[],VEL=95,SEP=300,carr=[[180,390,0],[535,745,100],[890,1100,200]],r=rnd(23),peli=[],items=[];
   plat.push(P_(-600,-200,iz+600,H+600,'solid','pared'));plat.push(P_(de,-200,600+W,H+600,'solid','pared'));
   carr.forEach(function(k){var ys=[];for(var y=H+100-k[2];y>=130;y-=SEP)ys.push(y);ys.forEach(function(y){var p=P_(k[0],y,k[1]-k[0],18,'one','racimo');p.cad=1;p.N=ys.length;plat.push(p);cad.push(p);});});
   plat.push(P_(-400,H-60,W+800,200,'solid','raizX'));
@@ -1819,10 +1899,10 @@ NIV.F2=function(VW,VH){
       c.fillStyle=g;c.beginPath();c.arc(h.x,h.y,rr2,0,7);c.fill();c.strokeStyle='rgba(110,160,205,.95)';c.lineWidth=2.5;c.stroke();etiqueta(c,'aire',h.x,h.y-rr2-12,12);},
     msg:'¡Burbuja de aire! El aire corta la columna de agua.'};}
   var lnR=Math.floor(r()*3);for(var y=H-700;y>420;y-=470){peli.push(burbuja(lnR,y));lnR=(lnR+1+Math.floor(r()*2))%3;}
-  [[0,900],[1,1700],[2,2400],[0,3000],[1,3800],[2,4500],[0,5100]].forEach(function(e){var k=carr[e[0]];items.push({x:(k[0]+k[1])/2,y:H-e[1],tp:'est'});});
+  [[0,650],[1,1150],[2,1700],[0,2300],[1,2950],[2,3550],[0,4200],[1,4750],[2,5250]].forEach(function(e){var k=carr[e[0]];items.push({x:(k[0]+k[1])/2,y:H-e[1],tp:'est'});});
   function carril(P){var cx=P.x+15,b=0,bd=1e9;carr.forEach(function(k,i){var d=Math.abs(cx-(k[0]+k[1])/2);if(d<bd){bd=d;b=i;}});return b;}
   return {isla:'F',nombre:'2 · El tallo: el agua sube por el xilema',W:W,H:H,vertical:true,plat:plat,peligros:peli,items:items,minX:iz,maxX:de,cps:[],
-    inicio:{x:600,y:H-140},meta:{x:iz,y:0,w:de-iz,h:150},eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],gen:3,quieto:0,
+    inicio:{x:600,y:H-140},meta:{x:iz,y:0,w:de-iz,h:150},mMax:{co2:3,h2o:3,glu:1,o2:1},eq:{h2o:3,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o'],gen:3.4,quieto:0,
     objetivo:function(L){return 'Súbete al agua que sube y esquiva el aire ('+Math.round(clamp(100*(1-(JG.P.y-150)/(H-290)),0,100))+'%)';},
     metaOK:function(){return true;},
     update:function(L,dt,P){cad.forEach(function(p){p.dy=-VEL*dt;p.dx=0;p.y+=p.dy;if(p.y<120){p.y+=p.N*SEP;p.dy=0;}});
@@ -1847,7 +1927,7 @@ function detrasHoja2(c,L,mx){var cm=JG.cam,x0=Math.floor((cm.x-100)/130)*130,x;
     c.fillStyle='rgba(225,245,255,.55)';rr(c,x+30,112,70,140,30);c.fill();for(var k=0;k<5;k++){cloroLente(c,x+20,116+k*34,12,1.57);cloroLente(c,x+110,116+k*34,12,1.57);}nucleo(c,x+65,250,8);}
   etiqueta(c,'epidermis',300,96,13);etiqueta(c,'células en empalizada',700,300,13);etiqueta(c,'parénquima esponjoso',360,520,13);etiqueta(c,'espacio con aire',1500,560,12);
   c.fillStyle='rgba(255,255,255,.7)';c.beginPath();c.ellipse(mx,505,100,72,0,0,7);c.fill();cloroLente(c,mx,500,62,0);etiqueta(c,'entrar al cloroplasto',mx,410,15);}
-NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[],estX=[],x;
+NIV.F3=function(VW,VH){var W=6400,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[],estX=[],x;
   for(x=700;x<W-900;x+=760+Math.floor(r()*160))estX.push(x);
   estX.forEach(function(x,i){plat.push(P_(x0,610,x-x0,160,'solid','epi'));
     var oc=P_(x,622,GAP,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
@@ -1855,44 +1935,44 @@ NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[
   for(x=200;x<W-500;x+=235+r()*45)plat.push(P_(x,Math.floor(x/300)%2?430:530,150+r()*40,40,'one','celula'));
   estX.forEach(function(x,i){items.push({x:x+GAP/2,y:640,tp:'co2',oculto:true,yObj:390+((i*53)%110)});});
   var MO='Eso era oxígeno: en la fotosíntesis no entra, sale de la hoja. Junta solo dióxido de carbono.';
-  [1500,3300,5000,6900,8700].forEach(function(t,i){items.push(trampa(t+(i%2)*120,318+(i%3)*12,'o2',MO));});
-  items.push({x:5600,y:300,tp:'cor'});
+  [1500,3300,4800].forEach(function(t,i){items.push(trampa(t+(i%2)*120,318+(i%3)*12,'o2',MO));});
+  items.push({x:3600,y:300,tp:'cor'});
   plat.filter(function(p){return p.st==='celula';}).forEach(function(p,i){if(i%3===1)items.push({x:p.x+p.w/2,y:p.y-110,tp:'est'});});
-  var cps=[3,6,9].filter(function(k){return k<estX.length;}).map(function(k){return {x:estX[k]-160,y:610};}),mx=W-140;
+  var cps=[2,4].filter(function(k){return k<estX.length;}).map(function(k){return {x:estX[k]-160,y:610};}),mx=W-140;
   return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:285,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
     peligros:[{dibujar:function(c,h,L){oclusivas(c,L);}}],
     msgCaida:'Saliste de la hoja por un estoma abierto. Vuelves al último punto de control.',
-    eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],
-    datos:{co2:'Dióxido de carbono (CO<sub>2</sub>): viene del aire y entra por los estomas.'},
-    objetivo:function(L){return 'Atrapa 6 moléculas de CO<sub>2</sub> ('+Math.min(6,L.eq.co2)+'/6). Cuidado con el oxígeno.';},
-    metaOK:function(L){var f=6-L.eq.co2;return f<=0?true:'Te faltan '+f+' moléculas de dióxido de carbono.';},
+    mMax:{co2:3,h2o:3,glu:1,o2:1},eq:{h2o:3,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o'],
+    datos:{co2:'Dióxido de carbono (CO<sub>2</sub>): gas del aire que entra por los estomas.'},
+    objetivo:function(L){return 'Atrapa 3 de dióxido de carbono (CO<sub>2</sub>) ('+Math.min(3,L.eq.co2)+'/3) y entra al cloroplasto.';},
+    metaOK:function(L){var f=3-L.eq.co2;return f<=0?true:'Te faltan '+f+' de dióxido de carbono.';},
     update:function(L,dt,P){est.forEach(function(e,i){var ph=((L.t+e.ph)%e.per);e.ab=lerp(e.ab,ph<4?1:0,dt*4);e.pl.on=!(ph<4);
         var it=L.items[i];if(it.oculto&&e.ab>0.8){it.oculto=false;it.sube=true;}if(it.sube){it.y=lerp(it.y,it.yObj,dt*1.2);if(Math.abs(it.y-it.yObj)<2)it.sube=false;}});
       },
     fondo:fondoHoja,
     detras:function(c,L){detrasHoja2(c,L,mx);}};};
 
-/* ---------- F4: cloroplasto (≈1 min, 6 grupos, luz de colores y caídas) ---------- */
-NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','memClo')],granas=[],islas=[],x=870,y=520,k=0,islaEn=[3200,6200];
+/* ---------- F4: cloroplasto ---------- */
+NIV.F4=function(VW,VH){var W=5800,r=rnd(41),plat=[P_(-50,630,800,140,'solid','memClo')],granas=[],islas=[],x=870,y=520,k=0,islaEn=[2700];
   while(x<W-1100){
     if(islaEn.length&&x>islaEn[0]){var isl=P_(x,630,460,140,'solid','memClo');plat.push(isl);islas.push(isl);islaEn.shift();x+=460+130;y=540;continue;}
     if(k%3!==2){var g=P_(x,y,150,96+Math.floor(r()*3)*8,'solid','grana');plat.push(g);granas.push(g);x+=150;}
     else{var lw=200+r()*90,mv=(k%4===3)?{ax:60,per:3.2+r()}:null;plat.push(P_(x,y,lw,14,'one','lamela',mv));x+=lw+(mv?60:0);}
     x+=110+r()*50;k++;y=clamp(y+(r()<0.5?-1:1)*(25+r()*60),380,550);}
   var fin=P_(x,630,W-x+60,140,'solid','memClo');plat.push(fin);
-  var items=[];granas.forEach(function(g,i){if(i%3===1)items.push({x:g.x+g.w/2,y:g.y-140,tp:'est'});});
+  var items=[];granas.forEach(function(g,i){if(i%2===1)items.push({x:g.x+g.w/2,y:g.y-140,tp:'est'});});
   islas.forEach(function(is){items.push({x:is.x+230,y:560,tp:'est'});});
-  var nG=granas.length,marc=[];for(var j=0;j<6;j++){var gm=granas[Math.min(nG-1,Math.round((j+0.5)*nG/6))];gm.meta=true;gm.carga=0;marc.push(gm);}
-  var haces=[];marc.forEach(function(g,i){var cx=g.x+g.w/2;haces.push({b:cx-40,a:200,v:0.55+0.06*(i%3),ph:i*1.3,col:i%2?'B':'R'});if(i%2===1)haces.push({b:cx+170,a:230,v:0.72,ph:i*2+1,col:'G'});});
+  var nG=granas.length,marc=[];for(var j=0;j<3;j++){var gm=granas[Math.min(nG-1,Math.round((j+0.5)*nG/3))];gm.meta=true;gm.carga=0;marc.push(gm);}
+  var haces=[];marc.forEach(function(g,i){var cx=g.x+g.w/2;haces.push({b:cx-40,a:200,v:0.55+0.06*(i%3),ph:i*1.3,col:i%2?'B':'R'});if(i===1)haces.push({b:cx+170,a:230,v:0.72,ph:i*2+1,col:'G'});});
   var COL={R:['255,130,110','luz roja'],B:['120,160,255','luz azul'],G:['120,225,120','luz verde']};
   function hx(h,t){return h.b+Math.sin(t*h.v+h.ph)*h.a;}
   var cx=W-240,cy=470;
   return {isla:'F',nombre:'4 · El cloroplasto: la luz y la fabricación',W:W,H:720,techo:60,plat:plat,items:items,peligros:[],
     cps:islas.map(function(i){return {x:i.x+60,y:630};}),inicio:{x:300,y:540},meta:{x:W-360,y:420,w:240,h:210},
     msgCaida:'Caíste entre los tilacoides y te saliste del cloroplasto. Vuelves al último punto de control.',
-    eq:{h2o:6,co2:6,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o','co2','co2','co2','co2','co2','co2'],
-    objetivo:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n<6?'Carga los tilacoides marcados con luz roja o azul ('+n+'/6)':'Ve a la zona de fabricación';},
-    metaOK:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n>=6?true:'Faltan '+(6-n)+' grupos de tilacoides por cargar con luz.';},
+    mMax:{co2:3,h2o:3,glu:1,o2:1},eq:{h2o:3,co2:3,glu:0,o2:0},cola0:['h2o','h2o','h2o','co2','co2','co2'],
+    objetivo:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n<3?'Carga los 3 tilacoides marcados con luz ('+n+'/3)':'Ve a la zona de fabricación';},
+    metaOK:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n>=3?true:'Faltan '+(3-n)+' grupos de tilacoides por cargar con luz.';},
     update:function(L,dt,P){marc.forEach(function(g){var c0=g.x+g.w/2;
         if(g.activo){if(P.suelo===g){g.sobre=(g.sobre||0)+dt;
             if(g.sobre>5){if(!g.aviso){g.aviso=1;sfx('mal');toast('¡Saltá! Si te quedás sobre el tilacoide pierde la energía captada.',icoLuz(),3);}
@@ -1921,26 +2001,24 @@ NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
       c.save();c.setLineDash([12,8]);c.strokeStyle='#2E9E5B';c.lineWidth=4;rr(c,W-360,400,240,230,26);c.stroke();c.restore();
       c.fillStyle='rgba(255,255,255,.45)';rr(c,W-360,400,240,230,26);c.fill();etiqueta(c,'zona de fabricación (estroma)',cx,380,15);}};};
 
-/* ---------- R1: citoplasma (≈1 min) ---------- */
-NIV.R1=function(VW,VH){var W=10200,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610,wMin:320,wMax:580,gMin:110,gMax:160,dy:50,pozo:3,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
+/* ---------- R1: citoplasma ---------- */
+NIV.R1=function(VW,VH){var W=6400,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610,wMin:340,wMax:580,gMin:110,gMax:155,dy:50,pozo:3,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
   S.forEach(function(s){plat.push(P_(s.x,s.y,s.w,46,'solid','filamento'));});
   C.p.forEach(function(q,i){plat.push(P_(q.x-60,q.y,120,30,'one','vesicula',{ax:110,per:3.2+(i%3)*0.5,ph:i}));});
-  var dS=S.filter(function(s){return s.x>5600&&s.w>=330;})[0],div={x:dS.x+(dS.w-200)/2,w:200,y:dS.y},gS=S.filter(function(s){return s.x>2800;})[0];
+  var dS=S.filter(function(s){return s.x>3400&&s.w>=330;})[0],div={x:dS.x+(dS.w-200)/2,w:200,y:dS.y},gS=S.filter(function(s){return s.x>1500;})[0];
   items.push({x:gS.x+gS.w/2,y:gS.y-130,tp:'glu'});
-  var MC='Eso era dióxido de carbono: no entra para la respiración celular, es lo que sale.',MH='Eso era agua: en la respiración celular no es un reactivo, se forma como producto.',o2=0;
+  var MC='Eso era dióxido de carbono: no entra para la respiración celular, es lo que sale.',MH='Eso era agua: en la respiración celular no es un reactivo, se forma como producto.';
   S.forEach(function(s,j){if(j===0||j===n-1||s===dS||s===gS)return;
     if(j%2===1){if(s.w>380){plat.push(P_(s.x+60,s.y-150,140,30,'one','vesicula'));items.push({x:s.x+130,y:s.y-215,tp:'o2'});}else items.push({x:s.x+s.w/2,y:s.y-120,tp:'o2'});}
-    else if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'co2':'h2o',j%8===2?MC:MH));
-    else if(j>3)items.push(trampa(s.x+s.w*0.7,s.y-150,'co2',MC));});
+    else if(j%4===2)items.push(trampa(s.x+s.w/2,s.y-42,j%8===2?'co2':'h2o',j%8===2?MC:MH));});
   var sh=S[Math.floor(n*0.7)];items.push({x:sh.x+sh.w*0.8,y:sh.y-130,tp:'cor'});
-  S.forEach(function(s,j){if(j>0&&j<n-1&&j%4===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
-  S.forEach(function(s,j){if(j%4===3&&s.w>380)items.push({x:s.x+130,y:s.y-260,tp:'est'});});
-  var cps=[Math.floor(n/4),Math.floor(n/2),Math.floor(3*n/4)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-150;
+  S.forEach(function(s,j){if(j>0&&j<n-1&&j%3===0)items.push({x:s.x+s.w/2,y:s.y-150,tp:'est'});});
+  var cps=[Math.floor(n/3),Math.floor(2*n/3)].map(function(j){return {x:S[j].x+40,y:S[j].y};}),mx=W-150;
   return {isla:'R',nombre:'1 · El citoplasma: llegan la glucosa y el oxígeno',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-300,y:400,w:150,h:200},
-    eq:{glu:0,o2:0,co2:0,h2o:0,en:false},cola0:[],
-    datos:{glu:'Glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>): azúcar con energía guardada.',o2:'Oxígeno (O<sub>2</sub>): entra a la célula.'},
-    objetivo:function(L){return L.dividido?'Entra a la mitocondria (O<sub>2</sub> '+Math.min(6,L.eq.o2)+'/6)':'Junta glucosa y oxígeno; luego pasa por la zona amarilla ('+L.eq.glu+'/1 · '+Math.min(6,L.eq.o2)+'/6)';},
-    metaOK:function(L){if(L.eq.glu<1)return 'Te falta la glucosa.';if(!L.dividido)return 'Primero pasa por la zona amarilla.';var f=6-L.eq.o2;return f<=0?true:'Te faltan '+f+' moléculas de oxígeno.';},
+    mMax:{glu:1,o2:2,co2:2,h2o:2},eq:{glu:0,o2:0,co2:0,h2o:0,en:false},cola0:[],
+    datos:{glu:'Glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>): nutriente con energía guardada.',o2:'Oxígeno (O<sub>2</sub>): gas que entra a la célula.'},
+    objetivo:function(L){return L.dividido?'Entra a la mitocondria (oxígeno '+Math.min(2,L.eq.o2)+'/2)':'Junta 1 glucosa y 2 de oxígeno; luego pasa por la zona amarilla ('+L.eq.glu+'/1 · '+Math.min(2,L.eq.o2)+'/2)';},
+    metaOK:function(L){if(L.eq.glu<1)return 'Te falta la glucosa.';if(!L.dividido)return 'Primero pasa por la zona amarilla para dividir la glucosa.';var f=2-L.eq.o2;return f<=0?true:'Te faltan '+f+' de oxígeno.';},
     update:function(L,dt,P){if(!L.dividido&&L.eq.glu>=1&&P.x+15>div.x&&P.x<div.x+div.w&&P.suelo){L.dividido=true;
         animReac(L,P,div.x+div.w/2,div.y-150,['glu'],['frag','frag'],function(){quitarCola(P,'glu',1);P.cola.unshift('frag','frag');pintarObj();toast('La glucosa se dividió en dos mitades.',iconoMol('frag'),4.2);});quitarCola(P,'glu',1);}},
     fondo:fondoCito2,
@@ -1951,70 +2029,70 @@ NIV.R1=function(VW,VH){var W=10200,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610
       etiqueta(c,'núcleo',1500,80,13);
       puesto(c,div.x,div.y,div.w,'zona de división de la glucosa',L.dividido,null,L);mitoEntrada(c,mx,420);etiqueta(c,'mitocondria: entrar',mx-90,230,15);}};};
 
-/* ---------- R2: mitocondria (≈1 min, juntar oxígeno) ---------- */
-NIV.R2=function(VW,VH){var W=9600,plat=[P_(-50,640,W+100,140,'solid','memMito')],r=rnd(67);
-  [900,1700,2500,3000,4200,5600,6300,7000,8100,8800].forEach(function(x){var h=118+Math.floor(r()*28);plat.push(P_(x,640-h,80,h,'solid','cresta'));});
-  [1300,2100,3800,5200,6600,8400].forEach(function(x){plat.push(P_(x,60,80,230+Math.floor(r()*20),'solid','cresta'));});
-  plat.push(P_(4600,420,140,24,'one','vesicula',{ay:-170,per:4,ph:-Math.PI/2,cond:function(L){return L.est>=1;}}));
-  plat.push(P_(4760,230,100,410,'solid','cresta'));
-  [[1120,440,130,{ax:60,per:3.5}],[2680,470,140],[5900,430,140,{ay:50,per:3}],[7250,450,130,{ax:70,per:3.8}],[8450,470,130]].forEach(function(a){plat.push(P_(a[0],a[1],a[2],26,'one','granulo',a[3]));});
-  var ests=[{x:3350,w:170,hecho:false},{x:7450,w:170,hecho:false}];
-  var items=[[600,560],[1500,520],[2200,470],[2750,410],[4100,540],[5400,520],[5960,370],[6900,450],[7300,390],[8300,520]].map(function(a){return {x:a[0],y:a[1],tp:'o2'};});
-  var MG='Esa era una glucosa entera: se dividió en el citoplasma. A la mitocondria entran sus mitades.',MC='Eso era dióxido de carbono: aquí se forma, no reacciona con la glucosa.';
-  items.push(trampa(1900,560,'glu',MG),trampa(3160,470,'co2',MC),trampa(5750,555,'glu',MG),trampa(6650,560,'co2',MC),trampa(8600,555,'co2',MC),{x:5150,y:520,tp:'cor'});
-  [[1165,370],[2750,400],[3400,540],[5960,360],[6600,540],[7315,380],[8515,400]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
+/* ---------- R2: mitocondria ---------- */
+NIV.R2=function(VW,VH){var W=6000,plat=[P_(-50,640,W+100,140,'solid','memMito')],r=rnd(67);
+  [900,1700,2500,3600,4500,5200].forEach(function(x){var h=118+Math.floor(r()*28);plat.push(P_(x,640-h,80,h,'solid','cresta'));});
+  [1300,2100,3900,4900].forEach(function(x){plat.push(P_(x,60,80,230+Math.floor(r()*20),'solid','cresta'));});
+  plat.push(P_(2850,420,140,24,'one','vesicula',{ay:-170,per:4,ph:-Math.PI/2,cond:function(L){return L.est>=1;}}));
+  plat.push(P_(3010,230,100,410,'solid','cresta'));
+  [[1120,440,130,{ax:60,per:3.5}],[3900,450,130,{ax:70,per:3.8}]].forEach(function(a){plat.push(P_(a[0],a[1],a[2],26,'one','granulo',a[3]));});
+  var ests=[{x:2150,w:170,hecho:false},{x:4750,w:170,hecho:false}];
+  var items=[[600,560],[1500,520],[2000,490],[3400,520],[4300,520]].map(function(a){return {x:a[0],y:a[1],tp:'o2'};});
+  var MC='Eso era dióxido de carbono: aquí se forma como producto, no entra a reaccionar.';
+  items.push(trampa(1850,470,'co2',MC),trampa(4150,555,'co2',MC),{x:3300,y:520,tp:'cor'});
+  [[1165,370],[2200,540],[3950,380],[4800,540]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
   var mx=W-255;
   return {isla:'R',nombre:'2 · La mitocondria: se libera la energía',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,est:0,
-    cps:[{x:2300,y:640},{x:4950,y:640},{x:7700,y:640}],inicio:{x:300,y:560},meta:{x:W-360,y:420,w:200,h:220},
-    eq:{glu:1,o2:0,co2:0,h2o:0,en:false},cola0:['frag','frag'],datos:{o2:'Oxígeno (O<sub>2</sub>): entra a la mitocondria y reacciona con la glucosa.'},
-    objetivo:function(L){return L.est<2?'Lleva una mitad de glucosa y 3 O<sub>2</sub> a cada puesto ('+L.est+'/2 · O<sub>2</sub> que llevas: '+cuantos(JG.P,'o2')+')':'Sal de la mitocondria';},
+    cps:[{x:1600,y:640},{x:3200,y:640}],inicio:{x:300,y:560},meta:{x:W-360,y:420,w:200,h:220},
+    mMax:{glu:1,o2:2,co2:2,h2o:2},eq:{glu:1,o2:0,co2:0,h2o:0,en:false},cola0:['frag','frag'],datos:{o2:'Oxígeno (O<sub>2</sub>): entra a la mitocondria para reaccionar con la glucosa.'},
+    objetivo:function(L){return L.est<2?'Junta oxígeno y lleva cada mitad de glucosa a un puesto ('+L.est+'/2)':'Sal de la mitocondria';},
     metaOK:function(L){return L.est>=2?true:'Todavía falta reaccionar '+(2-L.est)+(L.est===1?' mitad':' mitades')+' de glucosa.';},
     alLlegar:function(){balanceMateria('R',completar);},
     update:function(L,dt,P){P.aura=lerp(P.aura,L.est/2,dt*3);ests.forEach(function(e){if(e.hecho||!P.suelo||P.x+15<e.x||P.x+15>e.x+e.w)return;
-        if(P.cola.indexOf('frag')<0||cuantos(P,'o2')<3){if(L.t-(L.avE||-99)>4){L.avE=L.t;toast('Para reaccionar hacen falta una mitad de glucosa y 3 moléculas de oxígeno. Llevas '+cuantos(P,'o2')+'.',iconoMol('o2'),3.4);}return;}
-        e.hecho=true;quitarCola(P,'frag',1);quitarCola(P,'o2',3);
-        animReac(L,P,e.x+e.w/2,470,['frag','o2','o2','o2'],['co2','co2','co2','h2o','h2o','h2o'],function(){L.est++;L.eq.co2+=3;L.eq.h2o+=3;if(L.est>=2)L.eq.en=true;
-          P.cola.push('co2','co2','co2','h2o','h2o','h2o');L.pts+=40;L.textos.push({x:e.x+e.w/2,y:420,t:0,s:'+40'});pintarEcu();pintarObj();
+        if(P.cola.indexOf('frag')<0||cuantos(P,'o2')<1){if(L.t-(L.avE||-99)>4){L.avE=L.t;toast('Necesitas llevar una mitad de glucosa y oxígeno (O<sub>2</sub>) para que reaccionen.',iconoMol('o2'),3.4);}return;}
+        e.hecho=true;quitarCola(P,'frag',1);quitarCola(P,'o2',1);
+        animReac(L,P,e.x+e.w/2,470,['frag','o2'],['co2','h2o'],function(){L.est++;L.eq.co2+=1;L.eq.h2o+=1;if(L.est>=2)L.eq.en=true;
+          P.cola.push('co2','h2o');L.pts+=40;L.textos.push({x:e.x+e.w/2,y:420,t:0,s:'+40'});pintarEcu();pintarObj();
           toast(L.est===1?'Se formaron CO<sub>2</sub> y agua, y se liberó energía: ¡funciona el ascensor!':'¡La otra mitad también! Más energía para la célula.',icoEnergia(),4.5);});});},
     fondo:fondoMatriz,
     detras:function(c,L){var cm=JG.cam;c.fillStyle='#F6C7A0';c.fillRect(cm.x-40,0,VW+80,66);c.strokeStyle='#C25A32';c.lineWidth=4;c.beginPath();c.moveTo(cm.x-40,46);c.lineTo(cm.x+VW+40,46);c.moveTo(cm.x-40,62);c.lineTo(cm.x+VW+40,62);c.stroke();
       etiqueta(c,'membranas de la mitocondria',cm.x+VW*0.2,26,13);etiqueta(c,'crestas',940,470,13);etiqueta(c,'matriz',cm.x+VW*0.55,120,14);
       ests.forEach(function(e,i){puesto(c,e.x,640,e.w,'puesto de reacción '+(i+1),e.hecho,null,L);});
-      etiqueta(c,L.est>=1?'ascensor: funciona con energía':'ascensor: sin energía',4670,L.est>=1?200:380,13);
+      etiqueta(c,L.est>=1?'ascensor: funciona con energía':'ascensor: sin energía',2920,L.est>=1?200:380,13);
       c.save();var g2=c.createRadialGradient(mx,530,10,mx,530,110);g2.addColorStop(0,'rgba(255,255,255,.95)');g2.addColorStop(1,'rgba(255,255,255,0)');c.fillStyle=g2;c.beginPath();c.ellipse(mx,530,80,110,0,0,7);c.fill();c.restore();
       c.save();c.setLineDash([10,8]);c.lineDashOffset=-L.t*24;c.strokeStyle='#B4492A';c.lineWidth=5;c.beginPath();c.ellipse(mx,530,80,110,0,0,7);c.stroke();c.restore();
       etiqueta(c,'salida al citoplasma',mx,396,15);}};};
 
-/* ---------- R3: la célula usa la energía (≈1 min, energía que se pierde como calor) ---------- */
-NIV.R3=function(VW,VH){var W=10400,plat=[];
-  [[0,1350],[1480,1500],[3120,1100],[4350,800],[5900,800],[6830,1070],[8320,900],[9360,W-9300]].forEach(function(a){plat.push(P_(a[0],600,a[1],46,'solid','filamento'));});
-  var puerta=P_(2300,290,64,312,'solid','compuerta');plat.push(puerta,{x:2300,y:56,w:64,h:234,t:'solid',st:'memV',on:true});
-  plat.push(P_(5525,560,150,26,'one','motor',{ax:300,per:6,ph:-Math.PI/2,cond:function(L){return L.usos.mov;}}));
-  var puente=P_(7900,600,420,40,'solid','puente');puente.on=false;puente.fantasma=true;plat.push(puente);
-  [[620,450,130],[2650,450,130,{ax:70,per:4}],[3500,440,130],[6150,440,130,{ax:60,per:3.6}],[8700,450,130],[9700,440,130,{ay:50,per:3.2}]].forEach(function(a){plat.push(P_(a[0],a[1],a[2],30,'one','vesicula',a[3]));});
-  var ests=[{k:'tra',x:1800,w:180,txt:'transportar: abrir la bomba'},{k:'mov',x:4700,w:180,txt:'moverse: encender la proteína motora'},{k:'fab',x:7400,w:180,txt:'fabricar: armar un puente de proteínas'}];
-  var mitos=[{x:1050,w:170},{x:3900,w:170},{x:6450,w:170}];
-  var items=[];[[480,540],[3300,540],[6000,540],[8800,390]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'frag'});});
-  [[300,520],[690,390],[880,540],[2550,520],[2720,390],[3050,470],[3570,380],[4500,520],[6080,470],[6220,380],[6350,540],[7100,500],[8500,520],[9000,520],[9770,370]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'o2'});});
-  var MC='Eso era dióxido de carbono: es un desecho de la respiración celular, no aporta energía.',MH='Eso era agua: es un producto de la respiración celular, no aporta energía.';
-  items.push(trampa(1300,555,'co2',MC),trampa(2150,555,'co2',MC),trampa(3700,555,'h2o',MH),trampa(5000,555,'co2',MC),trampa(7150,410,'co2',MC),trampa(8100,555,'h2o',MH),trampa(9500,555,'co2',MC),{x:6250,y:300,tp:'cor'});
-  [[685,370],[2715,370],[3565,360],[6215,360],[8765,370],[9765,360],[4100,540],[7600,540]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
-  var COSTO=35;
-  return {isla:'R',nombre:'3 · La célula usa la energía',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,usos:{},energia:50,calorT:0,
-    cps:[{x:2420,y:600},{x:5960,y:600},{x:8400,y:600}],inicio:{x:200,y:520},meta:{x:W-170,y:380,w:170,h:220},
+/* ---------- R3: la célula usa la energía ---------- */
+NIV.R3=function(VW,VH){var W=6400,plat=[];
+  [[0,1850],[1980,1520],[4250,950],[5620,W-5550]].forEach(function(a){plat.push(P_(a[0],600,a[1],46,'solid','filamento'));});
+  var puerta=P_(1500,290,64,312,'solid','compuerta');plat.push(puerta,{x:1500,y:56,w:64,h:234,t:'solid',st:'memV',on:true});
+  plat.push(P_(3800,560,150,26,'one','motor',{ax:280,per:5.5,ph:-Math.PI/2,cond:function(L){return L.usos.mov;}}));
+  var puente=P_(5200,600,420,40,'solid','puente');puente.on=false;puente.fantasma=true;plat.push(puente);
+  [[520,450,130],[2250,450,130,{ax:70,per:4}],[4450,440,130]].forEach(function(a){plat.push(P_(a[0],a[1],a[2],30,'one','vesicula',a[3]));});
+  var ests=[{k:'tra',x:1150,w:180,txt:'1. transportar: abrir la bomba'},{k:'mov',x:3100,w:180,txt:'2. moverse: encender la proteína motora'},{k:'fab',x:4850,w:180,txt:'3. fabricar: armar puente de proteínas'}];
+  var mitos=[{x:750,w:170},{x:2650,w:170},{x:4400,w:170}];
+  var items=[];[[380,520],[2100,520],[4300,520]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'glu'});});
+  [[560,390],[2280,390],[4480,380]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'o2'});});
+  var MC='Eso era dióxido de carbono: es un desecho de la respiración celular, no aporta energía.';
+  items.push(trampa(1720,555,'co2',MC),trampa(3380,555,'co2',MC),{x:2880,y:480,tp:'cor'});
+  [[585,370],[1650,520],[2315,370],[4515,360],[5400,520]].forEach(function(a){items.push({x:a[0],y:a[1],tp:'est'});});
+  var COSTO=30;
+  return {isla:'R',nombre:'3 · La célula usa la energía',W:W,H:720,techo:70,plat:plat,peligros:[],items:items,usos:{},energia:75,calorT:0,
+    cps:[{x:1620,y:600},{x:4280,y:600}],inicio:{x:200,y:520},meta:{x:W-170,y:380,w:170,h:220},
     msgCaida:'¡Caíste! Vuelves al último punto de control.',
-    eq:{glu:1,o2:6,co2:6,h2o:6,en:true},cola0:['co2','co2','co2','co2','co2','co2','h2o','h2o','h2o','h2o','h2o','h2o'],
-    datos:{frag:'Mitad de glucosa: llévala con 3 O<sub>2</sub> a una mitocondria para obtener energía.',o2:'Oxígeno (O<sub>2</sub>): hace falta para liberar la energía de la glucosa.'},
-    objetivo:function(L){var n=Object.keys(L.usos).length;return n<3?'Usa la energía en los 3 trabajos ('+n+'/3). Recarga en las mitocondrias: ½ glucosa + 3 O<sub>2</sub>':'Sal por la membrana celular';},
+    mMax:{glu:1,o2:2,co2:2,h2o:2},eq:{glu:1,o2:2,co2:2,h2o:2,en:true},cola0:['co2','co2','h2o','h2o'],
+    datos:{glu:'Glucosa: llévala con oxígeno a una mitocondria si necesitas recargar energía.',o2:'Oxígeno (O<sub>2</sub>): sirve para liberar la energía de la glucosa en la mitocondria.'},
+    objetivo:function(L){var n=Object.keys(L.usos).length;return n<3?'Usa la energía en los 3 trabajos ('+n+'/3). Si te falta, recarga en una mitocondria':'Sal por la membrana celular';},
     metaOK:function(L){return Object.keys(L.usos).length>=3?true:'Primero usa la energía en los 3 trabajos de la célula.';},
-    update:function(L,dt,P){if(L.fin)return;L.energia=Math.max(0,L.energia-dt*1.4);P.aura=lerp(P.aura,L.energia/100,dt*3);
-      L.vel=L.energia<15?0.6:1;if(L.energia<15&&!L.avBaja){L.avBaja=1;toast('¡Te quedas sin energía! La célula se vuelve lenta. Busca una mitocondria.',icoEnergia(),3.6);}if(L.energia>=25)L.avBaja=0;
-      L.calorT+=dt;if(L.calorT>0.7&&L.energia>0){L.calorT=0;L.fx.push({x:P.x+15+(Math.random()-0.5)*30,y:P.y+20,t:0,d:1.2,dib:function(c,f,k){c.strokeStyle='rgba(230,90,60,'+(0.6*k)+')';c.lineWidth=2.4;c.beginPath();var yy=f.y-(1-k)*50;c.moveTo(f.x,yy);c.bezierCurveTo(f.x-6,yy-8,f.x+6,yy-14,f.x,yy-22);c.stroke();}});}
+    update:function(L,dt,P){if(L.fin)return;L.energia=Math.max(0,L.energia-dt*0.6);P.aura=lerp(P.aura,L.energia/100,dt*3);
+      L.vel=L.energia<15?0.75:1;if(L.energia<15&&!L.avBaja){L.avBaja=1;toast('¡Te queda poca energía! Pasa por una mitocondria con glucosa y oxígeno para recargar.',icoEnergia(),3.6);}if(L.energia>=25)L.avBaja=0;
+      L.calorT+=dt;if(L.calorT>0.9&&L.energia>0){L.calorT=0;L.fx.push({x:P.x+15+(Math.random()-0.5)*30,y:P.y+20,t:0,d:1.2,dib:function(c,f,k){c.strokeStyle='rgba(230,90,60,'+(0.6*k)+')';c.lineWidth=2.4;c.beginPath();var yy=f.y-(1-k)*50;c.moveTo(f.x,yy);c.bezierCurveTo(f.x-6,yy-8,f.x+6,yy-14,f.x,yy-22);c.stroke();}});}
       var sobre=function(e){return P.suelo&&P.x+15>e.x&&P.x+15<e.x+e.w;};
-      mitos.forEach(function(m){if(m.ocupado||!sobre(m))return;if(P.cola.indexOf('frag')<0||cuantos(P,'o2')<3){if(L.t-(L.avM||-99)>4){L.avM=L.t;toast('Mitocondria: trae una mitad de glucosa y 3 O<sub>2</sub> para liberar energía (llevas '+cuantos(P,'o2')+' O<sub>2</sub>).',iconoMol('frag'),3.6);}return;}
-        m.ocupado=true;quitarCola(P,'frag',1);quitarCola(P,'o2',3);sfx('ok');
-        animReac(L,P,m.x+m.w/2,440,['frag','o2','o2','o2'],['co2','co2','co2','h2o','h2o','h2o'],function(){L.energia=Math.min(100,L.energia+45);P.cola.push('co2','co2','co2','h2o','h2o','h2o');L.pts+=20;
-          toast('Se liberó energía y se formaron CO<sub>2</sub> y agua.',icoEnergia(),2.8);setTimeout(function(){m.ocupado=false;},1500);});});
+      mitos.forEach(function(m){if(m.ocupado||!sobre(m))return;if(cuantos(P,'glu')<1||cuantos(P,'o2')<1){if(L.energia<40&&L.t-(L.avM||-99)>4){L.avM=L.t;toast('Mitocondria: necesitas glucosa Y oxígeno para obtener energía.',iconoMol('glu'),3.2);}return;}
+        m.ocupado=true;if(cuantos(P,'glu')>0)quitarCola(P,'glu',1);if(cuantos(P,'o2')>0)quitarCola(P,'o2',1);sfx('ok');
+        animReac(L,P,m.x+m.w/2,440,['glu','o2'],['co2','h2o'],function(){L.energia=Math.min(100,L.energia+55);P.cola.push('co2','h2o');L.pts+=20;
+          toast('¡Recargaste energía en la mitocondria y se formaron CO<sub>2</sub> y agua!',icoEnergia(),2.8);setTimeout(function(){m.ocupado=false;},1500);});});
       ests.forEach(function(e){if(L.usos[e.k]||!sobre(e))return;
         if(L.energia<COSTO){if(L.t-(L.avS||-99)>4){L.avS=L.t;toast('No alcanza la energía para este trabajo. Recarga en una mitocondria.',icoEnergia(),3.2);}return;}
         L.usos[e.k]=1;L.energia-=COSTO;sfx('luz');L.pts+=30;L.textos.push({x:e.x+e.w/2,y:460,t:0,s:'+30'});
@@ -2026,34 +2104,185 @@ NIV.R3=function(VW,VH){var W=10400,plat=[];
       toast('El dióxido de carbono sale de la célula.',iconoMol('co2'),4.5);setTimeout(function(){completar();},3400);},
     fondo:fondoCito2,
     detras:function(c,L){var cm=JG.cam;membranaCel(c,cm.x-30,cm.x+VW+30,0);
-      ests.forEach(function(e){puesto(c,e.x,600,e.w,e.txt+' (−'+COSTO+')',!!L.usos[e.k],null,L);});
-      mitos.forEach(function(m){puesto(c,m.x,600,m.w,'mitocondria: ½ glucosa + 3 O₂',false,null,L);c.save();c.translate(m.x+m.w/2,500);c.scale(0.3,0.3);mitoEntrada(c,0,0);c.restore();});
-      c.strokeStyle='rgba(162,74,44,.55)';c.lineWidth=12;c.beginPath();c.moveTo(5150,604);c.lineTo(5900,604);c.stroke();c.strokeStyle='rgba(246,205,182,.8)';c.lineWidth=5;c.stroke();etiqueta(c,'microtúbulo',5525,640,12);
-      ribosoma(c,7480,330,3);etiqueta(c,'ribosoma',7490,300,12);
-      if(L.usos.tra){bicapaV(c,2319,290,470);}
+      ests.forEach(function(e){puesto(c,e.x,600,e.w,e.txt,!!L.usos[e.k],null,L);});
+      mitos.forEach(function(m){puesto(c,m.x,600,m.w,'mitocondria: recargar energía',false,null,L);c.save();c.translate(m.x+m.w/2,500);c.scale(0.3,0.3);mitoEntrada(c,0,0);c.restore();});
+      c.strokeStyle='rgba(162,74,44,.55)';c.lineWidth=12;c.beginPath();c.moveTo(3450,604);c.lineTo(4150,604);c.stroke();c.strokeStyle='rgba(246,205,182,.8)';c.lineWidth=5;c.stroke();etiqueta(c,'microtúbulo',3800,640,12);
+      ribosoma(c,4930,330,3);etiqueta(c,'ribosoma',4940,300,12);
+      if(L.usos.tra){bicapaV(c,1519,290,470);}
       c.fillStyle='rgba(255,255,255,.55)';c.fillRect(W-170,70,170,530);bicapaV(c,W-98,70,600);
       c.save();c.setLineDash([10,8]);c.lineDashOffset=-L.t*24;c.strokeStyle='#B4492A';c.lineWidth=5;rr(c,W-170,70,170,530,40);c.stroke();c.restore();etiqueta(c,'salida: membrana celular',W-85,340,14);},
-    encima:function(c,L){etiqueta(c,'bomba de transporte',2332,262,13);},
+    encima:function(c,L){etiqueta(c,'bomba de transporte',1532,262,13);},
     frente:function(c,L){var w=380,x=(VW-w)/2,y=150,e=L.energia/100;c.save();c.fillStyle='rgba(255,253,248,.88)';rr(c,x-14,y-24,w+28,54,16);c.fill();
       c.font='800 12px Nunito';c.fillStyle='#6B7A85';c.textAlign='left';c.fillText('ENERGÍA DE LA CÉLULA · una parte se pierde como calor',x,y-8);
       c.fillStyle='#EFE6D6';rr(c,x,y,w,16,8);c.fill();var g=c.createLinearGradient(x,0,x+w,0);g.addColorStop(0,'#FFB020');g.addColorStop(1,'#FFE08A');c.fillStyle=e<0.15?'#E0704A':g;rr(c,x,y,Math.max(8,w*e),16,8);c.fill();
       c.strokeStyle='#22313B';c.lineWidth=2;c.beginPath();c.moveTo(x+w*COSTO/100,y-3);c.lineTo(x+w*COSTO/100,y+19);c.stroke();c.restore();}};};
 
-/* ---------- textos actualizados ---------- */
+/* ---------- textos actualizados (adaptados para 12-13 años, sin estequiometría compleja) ---------- */
 (function(){
-  TXT.F1.intro='Junta <b>6 moléculas de agua</b> y entra a la raíz. Cuidado: en el suelo flotan sustancias que la raíz <b>no absorbe</b>; si las tocas, pierdes un corazón. Algunos granos sueltos se desmoronan si te quedas parado.';
-  TXT.F1.lista=[['h2o','Agua · H<sub>2</sub>O · materia que entra'],['glu','Glucosa: la raíz no la absorbe (trampa)'],['co2','CO<sub>2</sub>: no entra por la raíz (trampa)']];
-  TXT.F2.intro='El agua sube por el <b>xilema</b> como una columna: la hoja la «tira» hacia arriba al transpirar. Súbete al agua y esquiva el <b>aire</b>. Si te quedas quieto, se forman burbujas justo encima de ti: cambia de vaso.';
-  TXT.F3.intro='Atrapa <b>6 moléculas de dióxido de carbono</b> que entran por los <b>estomas</b>. Entre el CO<sub>2</sub> flota <b>oxígeno</b>, que en la fotosíntesis no entra: sale. No te caigas por un estoma abierto.';
-  TXT.F3.lista=[['co2','Dióxido de carbono · CO<sub>2</sub> · materia que entra'],['o2','Oxígeno: sale de la hoja (trampa)']];
-  TXT.F4.intro='Carga los <b>6 grupos de tilacoides</b> marcados parándote sobre ellos cuando llega la luz. La luz <b>roja</b> y la <b>azul</b> sirven; la <b>verde</b> casi no: la clorofila la refleja. Si caes entre los tilacoides, sales del cloroplasto.';
-  TXT.F4.lista=[['luz','Luz roja y azul: la clorofila la absorbe'],['clo','Luz verde: la clorofila la refleja'],['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · sale'],['o2','Oxígeno · O<sub>2</sub> · sale']];
-  TXT.R1.intro='Junta <b>1 glucosa</b> y <b>6 moléculas de oxígeno</b>, pasa por la zona donde la glucosa se divide y entra a la mitocondria. Cuidado: el <b>dióxido de carbono</b> y el <b>agua</b> no son reactivos de la respiración celular.';
-  TXT.R1.lista=[['glu','Glucosa · C<sub>6</sub>H<sub>12</sub>O<sub>6</sub> · entra'],['o2','Oxígeno · O<sub>2</sub> · entra'],['co2','CO<sub>2</sub> y agua: salen (trampas)']];
-  TXT.R2.intro='Junta <b>oxígeno</b> dentro de la mitocondria y lleva cada <b>mitad de glucosa</b> con <b>3 O<sub>2</sub></b> a un puesto de reacción. Se libera <b>energía</b> y con ella funciona el ascensor. Ojo con la glucosa entera y el CO<sub>2</sub>.';
-  TXT.R2.lista=[['frag','Mitad de glucosa (llevas 2)'],['o2','Oxígeno: 3 para cada mitad'],['en','Energía: se libera, no es materia']];
-  TXT.R3.intro='La energía de la célula <b>se pierde de a poco como calor</b>. Úsala en 3 trabajos (cada uno cuesta 35) y recárgala en las <b>mitocondrias</b> llevando ½ glucosa + 3 O<sub>2</sub>. Si te quedas sin energía, te vuelves lento.';
-  TXT.R3.lista=[['en','Energía: se gasta y se pierde como calor'],['frag','½ glucosa + 3 O<sub>2</sub> → energía'],['co2','CO<sub>2</sub> y agua: desechos (trampas)']];
+  TXT.F1.intro='Junta <b>3 muestras de agua</b> entre los granos del suelo y entra a la raíz. Cuidado: esquiva las sustancias que la raíz <b>no absorbe</b> (como la glucosa o el dióxido de carbono).';
+  TXT.F1.lista=[['h2o','Agua (H<sub>2</sub>O) · materia que entra por la raíz'],['glu','Glucosa: la raíz no la absorbe (trampa)'],['co2','Dióxido de carbono: entra por las hojas, no por la raíz']];
+  TXT.F2.intro='El agua sube por el <b>xilema</b> desde la raíz hasta las hojas. Súbete al agua y esquiva las <b>burbujas de aire</b> cambiando de vaso.';
+  TXT.F2.lista=[['h2o','El agua (H<sub>2</sub>O) sube contigo hacia la hoja']];
+  TXT.F3.intro='Atrapa <b>3 muestras de dióxido de carbono</b> que entran del aire por los <b>estomas</b>. Esquiva el <b>oxígeno</b>, que en la fotosíntesis no entra sino que sale.';
+  TXT.F3.lista=[['co2','Dióxido de carbono (CO<sub>2</sub>) · entra del aire'],['o2','Oxígeno (O<sub>2</sub>): sale de la hoja (trampa)']];
+  TXT.F4.intro='Carga los <b>3 grupos de tilacoides</b> marcados cuando les llega la luz (la clorofila aprovecha la luz roja y azul, y refleja la verde). Luego ve a la <b>zona de fabricación</b> para formar glucosa y liberar oxígeno.';
+  TXT.F4.lista=[['luz','Luz: aporta energía (no es materia)'],['glu','Glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) · materia que sale'],['o2','Oxígeno (O<sub>2</sub>) · materia que sale']];
+  TXT.R1.intro='Junta <b>1 glucosa</b> y <b>2 muestras de oxígeno</b>, pasa por la zona amarilla donde la glucosa se divide y entra a la mitocondria. Esquiva el dióxido de carbono y el agua.';
+  TXT.R1.lista=[['glu','Glucosa (C<sub>6</sub>H<sub>12</sub>O<sub>6</sub>) · nutriente que entra'],['o2','Oxígeno (O<sub>2</sub>) · gas que entra'],['co2','CO<sub>2</sub> y agua: son productos que salen (trampas)']];
+  TXT.R2.intro='Junta <b>oxígeno</b> dentro de la mitocondria y lleva cada <b>mitad de glucosa</b> a un puesto de reacción. Se forman dióxido de carbono y agua, y se libera <b>energía</b> para activar el ascensor.';
+  TXT.R2.lista=[['frag','Mitad de glucosa'],['o2','Oxígeno (O<sub>2</sub>): reacciona con la glucosa'],['en','Energía: se libera (no es materia)']];
+  TXT.R3.intro='Usa la <b>energía</b> liberada en los <b>3 trabajos de la célula</b> (transportar, moverse y fabricar). Una parte se pierde como calor: si necesitas más energía, recárgala pasando por una <b>mitocondria</b> con glucosa y oxígeno.';
+  TXT.R3.lista=[['en','Energía para que la célula trabaje'],['glu','Glucosa + oxígeno → recargan energía en la mitocondria'],['co2','Dióxido de carbono: desecho que sale de la célula']];
+})();
+
+
+/* ===== EDICIÓN DIDÁCTICA: EXPEDICIÓN AMPLIADA 2026 ===== */
+(function(){
+  var preguntasExtra={
+    F1:[
+      ['Un cardón tiene raíces bajo tierra. ¿De dónde obtiene el carbono para fabricar azúcares?',['Del dióxido de carbono que entra por sus partes verdes','Del agua que absorben sus raíces','De las sales minerales del suelo','De la luz que llega al tallo'],0,'El carbono de los azúcares proviene del dióxido de carbono del aire.'],
+      ['¿Qué sucedería si una planta no pudiera absorber suficiente agua?',['Le faltaría una sustancia necesaria para la fotosíntesis','Fabricaría más glucosa sin agua','El agua se transformaría en luz','Solo dejaría de respirar durante la noche'],0,'El agua es una de las sustancias que intervienen en la fotosíntesis.']],
+    F2:[
+      ['En un cardón, ¿qué parte verde puede realizar fotosíntesis?',['El tallo verde','Las espinas secas','La raíz enterrada','Las semillas sin germinar'],0,'En el cardón, el tallo verde realiza fotosíntesis.'],
+      ['El agua que viaja por el xilema llega a una parte verde. ¿Para qué puede utilizarse?',['Como sustancia que participa en la fotosíntesis','Como energía luminosa','Como glucosa ya terminada','Como dióxido de carbono'],0,'El agua es materia: participa como reactivo, no es luz ni glucosa.']],
+    F3:[
+      ['¿Cuál de estos grupos contiene organismos capaces de realizar fotosíntesis?',['Cardones, algas y cianobacterias','Perros, hongos y cardones','Hongos, mariposas y personas','Personas, insectos y hongos'],0,'Además de las plantas, muchas algas y cianobacterias realizan fotosíntesis.'],
+      ['Si entra dióxido de carbono a una parte verde, ¿qué aporta para fabricar azúcares?',['Átomos de carbono','Rayos de luz','Energía para saltar','Sales minerales'],0,'El dióxido de carbono aporta el carbono de las moléculas orgánicas.']],
+    F4:[
+      ['La fotosíntesis es un ejemplo de anabolismo porque…',['forma moléculas orgánicas más complejas usando energía','descompone glucosa y libera energía','convierte directamente luz en átomos','utiliza glucosa para formar dióxido de carbono'],0,'Anabolismo: se construyen moléculas más complejas a partir de otras más sencillas; requiere energía.'],
+      ['¿Qué ocurre con la energía luminosa aprovechada en la fotosíntesis?',['Se transforma y queda almacenada como energía química en sustancias orgánicas','Se convierte por completo en átomos de carbono','Desaparece al fabricarse la glucosa','Se guarda sin cambios dentro del agua'],0,'La energía se transforma: parte queda almacenada como energía química en los azúcares.']],
+    R1:[
+      ['Un hongo, una planta y un animal necesitan energía para sus células. ¿Quiénes realizan respiración celular?',['Los tres','Solo el animal','Solo la planta','Solo el hongo'],0,'Plantas, hongos y animales realizan respiración celular.'],
+      ['¿Respirar con pulmones y realizar respiración celular significan exactamente lo mismo?',['No: la respiración celular sucede en las células','Sí: todas las células tienen pulmones','Sí: solo los animales la realizan','No: la respiración celular produce luz'],0,'La respiración celular es un proceso de las células, no el movimiento del aire en los pulmones.']],
+    R2:[
+      ['La respiración celular es un ejemplo de catabolismo porque…',['degrada sustancias orgánicas y permite liberar energía','construye glucosa usando energía luminosa','fabrica moléculas de oxígeno a partir de luz','necesita fabricar clorofila para funcionar'],0,'Catabolismo: se degradan sustancias complejas y se libera energía.'],
+      ['Para representar la respiración celular que estudiaste, ¿qué necesita ingresar junto con la glucosa?',['Oxígeno','Luz solar','Clorofila','Dióxido de carbono'],0,'En el proceso representado en este juego intervienen glucosa y oxígeno.']],
+    R3:[
+      ['¿Qué sucede con la energía liberada durante la respiración celular?',['Una parte se aprovecha para trabajos celulares y otra se transfiere como calor','Toda se convierte en dióxido de carbono','Desaparece cuando la célula se mueve','Toda vuelve a transformarse en luz solar'],0,'La célula aprovecha una parte de la energía; otra se transfiere al entorno como calor.'],
+      ['Por la noche, las células vivas del cardón siguen necesitando energía. ¿Qué proceso continúa?',['La respiración celular','La fotosíntesis impulsada por el Sol','La fabricación de luz por las espinas','La conversión de oxígeno en luz'],0,'La respiración celular no depende directamente de que haya luz.']]
+  };
+  Object.keys(preguntasExtra).forEach(function(id){
+    preguntasExtra[id].forEach(function(a){TXT[id].quiz.push({q:a[0],o:a[1],c:a[2],e:a[3]});});
+  });
+  TXT.F2.apr+=' En los cardones, el tallo verde también puede hacer fotosíntesis.';
+  TXT.F4.apr+=' Es un ejemplo de <b>anabolismo</b>: fabrica moléculas orgánicas más complejas a partir de sustancias sencillas y necesita energía.';
+  TXT.R2.apr+=' Es un ejemplo de <b>catabolismo</b>: se degradan moléculas orgánicas y se libera energía aprovechable por la célula.';
+  TXT.R3.apr+=' La energía no se convierte en materia: una parte se aprovecha y otra se transfiere como calor.';
+  TXT.F4.intro+=' <b>Reto científico:</b> construye una molécula orgánica a partir de sustancias sencillas utilizando energía de la luz: eso es anabolismo.';
+  TXT.R2.intro+=' <b>Reto científico:</b> identifica el catabolismo, que descompone sustancias orgánicas y libera energía.';
+  TXT.R3.intro=TXT.R3.intro.replace('glucosa u oxígeno','glucosa y oxígeno');
+  TXT.R3.lista=[['en','Energía para que la célula trabaje'],['glu','Glucosa y oxígeno: necesarios para recargar'],['co2','Dióxido de carbono: producto que sale de la célula']];
+  TXT.R1.apr+=' La glucosa y el oxígeno son reactivos de la transformación global que representa este juego.';
+  // Más estrellas en puntos alcanzables: cerca de las superficies existentes.
+  var base={};Object.keys(NIV).forEach(function(id){if(!/^[FR][1-4]$/.test(id))return;var fn=NIV[id];base[id]=fn;
+    NIV[id]=function(VW,VH){var L=fn(VW,VH), prev=[];
+      L.plat.filter(function(p){return p.on!==false && p.w>=100 && p.y>280 && p.y<650 && p.x>=0 && p.x<L.W-100 && p.t!=='one' && p.st!=='compuerta';})
+      .sort(function(a,b){return a.x-b.x;}).forEach(function(p){
+        if(prev.length>=10)return;var x=Math.max(120,Math.min(L.W-240,p.x+Math.min(p.w*0.48,250)));
+        if(prev.some(function(z){return Math.abs(z-x)<370;}))return;
+        var y=Math.max(155,p.y-90);
+        if(L.items.some(function(i){return Math.abs(i.x-x)<58 && Math.abs(i.y-y)<70;}))return;
+        L.items.push({x:x,y:y,tp:'est'});prev.push(x);
+      });
+      return L;};
+  });
+  // Estrellas adicionales fuera de la ruta directa: en plataformas alcanzables y saltos laterales.
+  Object.keys(NIV).forEach(function(id){if(!/^[FR][1-4]$/.test(id))return;var anterior=NIV[id];
+    NIV[id]=function(VW,VH){var L=anterior(VW,VH),pl=L.plat.filter(function(p){return p.on!==false&&p.w>60&&p.x>=0&&p.y>170&&p.y<L.H-55;}).sort(function(a,b){return a.x-b.x;});
+      var added=0;
+      pl.forEach(function(p,i){if(added>=22)return;
+        var n=p.w>250?2:1;
+        for(var j=0;j<n;j++){if(added>=22)break;
+          var x=p.x+Math.min(p.w-24,Math.max(28,p.w*(j+1)/(n+1)));
+          var y=p.y-(j===0?64:112);
+          if(x<70||x>L.W-55||y<70||y>L.H-95)continue;
+          if(L.items.some(function(q){return Math.abs(q.x-x)<54&&Math.abs(q.y-y)<60;}))continue;
+          L.items.push({x:x,y:y,tp:'est',sube:true});added++;
+        }
+      });
+      return L;};
+  });
+  // Misión de transferencia: se abre antes del certificado, al completar ambos faros.
+  var finalOriginal=verFinal;
+  var cierre=[
+    ['Un cardón está iluminado. ¿Qué ocurre en las partes verdes de sus células?',['Puede haber fotosíntesis y también respiración celular','Se detiene por completo la respiración celular','Solo ocurre respiración celular','Se convierte la luz directamente en oxígeno'],0,'Con luz y las sustancias necesarias, las partes verdes pueden realizar ambos procesos.'],
+    ['Una noche sin luz, ¿qué proceso puede continuar en las células del cardón?',['La respiración celular','La fotosíntesis gracias a la oscuridad','La producción de glucosa con luz solar','Ningún proceso que requiera energía'],0,'Aunque no hay fotosíntesis impulsada por la luz, la respiración celular puede continuar.'],
+    ['¿Cuál de estas transformaciones necesita un aporte de energía para construir materia orgánica?',['Fotosíntesis: anabolismo','Respiración celular: catabolismo','Respiración celular: fotosíntesis','Fotosíntesis: degradación de glucosa'],0,'La fotosíntesis es un ejemplo de anabolismo: construye azúcares con aporte de energía luminosa.'],
+    ['¿Cuál permite liberar energía de la glucosa para el trabajo celular?',['Respiración celular: catabolismo','Fotosíntesis: anabolismo','Fotosíntesis: digestión de glucosa','Ninguna: la célula solo usa luz'],0,'La respiración celular es un proceso catabólico que permite aprovechar la energía de la glucosa.'],
+    ['¿Qué afirmación diferencia correctamente materia y energía?',['El dióxido de carbono y el agua son materia; la luz es energía','La luz es una molécula de glucosa','El oxígeno es energía pura y no materia','El calor está formado por átomos nuevos'],0,'Las sustancias están formadas por materia. La luz y el calor son formas de transferencia de energía.']
+  ];
+  function misionFinal(i,correctas){var q=cierre[i],is='F',orden=mezclar(q[1].map(function(_,j){return j;}));
+    abrirModal(cabeza(is,'Misión final · '+(i+1)+' de '+cierre.length,'El equilibrio del cardón')+
+    '<div class="cuerpo"><p>Compará los procesos para recuperar el último sello de la expedición.</p><div class="preg"><h3>'+q[0]+'</h3><div class="ops">'+
+    orden.map(function(j,k){return '<button data-j="'+j+'"><span class="le">'+'ABCD'.charAt(k)+'</span>'+q[1][j]+'</button>';}).join('')+
+    '</div><div class="expl" id="qExp"></div></div><div class="pie"><button class="btn" id="retoSig" style="display:none">'+(i===cierre.length-1?'Ver certificado':'Siguiente situación')+'</button></div></div>');
+    Array.prototype.forEach.call(document.querySelectorAll('.ops button'),function(b){b.onclick=function(){var j=+b.getAttribute('data-j'),ok=j===q[2];
+      Array.prototype.forEach.call(document.querySelectorAll('.ops button'),function(el){el.disabled=true;if(+el.getAttribute('data-j')===q[2])el.className='bien';});
+      if(!ok)b.className='mal';sfx(ok?'ok':'mal');var ex=$('qExp');ex.className='expl on '+(ok?'bien':'mal');ex.innerHTML=(ok?'¡Correcto! ':'Revisá la explicación. ')+q[3];$('retoSig').style.display='';
+      $('retoSig').onclick=function(){if(i+1<cierre.length)misionFinal(i+1,correctas+(ok?1:0));else{ST.integracion=true;ST.integracionAciertos=correctas+(ok?1:0);guardar();finalOriginal();}};
+    };});
+  }
+  verFinal=function(){if(ST.faro.F&&ST.faro.R&&!ST.integracion&&!LIBRE){misionFinal(0,0);return;}finalOriginal();};
+  // Texto del acceso al certificado y sección de progreso.
+  var anterior=mostrarNivel;
+  mostrarNivel=function(id,silencio){anterior(id,silencio);};
+})();
+
+
+/* ================== AMPLIACION DE EXPLORACION V4 ==================
+   Alarga los niveles jugables sin alterar reactivos, productos ni ecuaciones.
+   Las estrellas nuevas son un objetivo de exploracion independiente. */
+(function(){
+  var claves=['F1','F3','F4','R1','R2','R3'];
+  claves.forEach(function(id,indice){
+    var original=NIV[id];
+    NIV[id]=function(VW,VH){
+      var L=original(VW,VH),antes=L.W,plataformas=20,px=antes-35,mitad=indice%2===0?550:570;
+      var anteriorMeta=L.meta,metaOriginal=L.metaOK,objetivoOriginal=L.objetivo,encimaOriginal=L.encima;
+      L.itemsExtraMeta=[];
+      // Trayecto de 20 saltos legibles, sin saltos ciegos ni plataformas demasiado estrechas.
+      // Cada cuarto tramo ofrece una pausa de seguridad y un punto de control.
+      for(var n=0;n<plataformas;n++){
+        var gap=(n%5===3?138:(n%3===1?124:104)),ancho=n%4===3?310:205;
+        px+=gap;var y=mitad + [-6,-62,-97,-38,0, -57,-107,-55,0, -45,-98,-34,4,-60,-110,-42,0,-50,-85,-12][n];
+        var tipo=id==='F1'?'grano':id==='F3'?'celula':id==='F4'?'memClo':id==='R1'?'citoplasma':id==='R2'?'memMito':'filamento';
+        // Tipos de plataforma conocidos del motor, para evitar dibujos incompatibles.
+        if(!ESTILO[tipo])tipo=id.charAt(0)==='F'?'grano':'filamento';
+        L.plat.push(P_(px,y,ancho,28,'one',tipo));
+        var cx=px+ancho/2;
+        var a={x:cx,y:y-55,tp:'est',rutaLarga:true};L.items.push(a);L.itemsExtraMeta.push(a);
+        // Estrellas altas opcionales: premiar saltos bien calculados.
+        if(n%3===1){var b={x:cx+45,y:y-117,tp:'est',rutaLarga:true};L.items.push(b);L.itemsExtraMeta.push(b);}
+        if(n===4||n===10||n===16){L.cps=L.cps||[];L.cps.push({x:px+65,y:y});}
+        if(n===9||n===17)L.items.push({x:cx,y:y-145,tp:'cor'});
+        px+=ancho;
+      }
+      // Meta real al final del nuevo recorrido; la anterior deja de cerrar el nivel.
+      var xFinal=px+118;
+      L.plat.push(P_(px+80,mitad+8,410,100,'solid',id.charAt(0)==='F'?'grano':'filamento'));
+      L.W=xFinal+350;
+      L.meta={x:xFinal+120,y:mitad-220,w:120,h:220};
+      L.estNecesarias=12;
+      L.metaOK=function(l){
+        var parte=l.itemsExtraMeta.filter(function(i){return i.got;}).length;
+        if(parte<8)return 'Explora el tramo final y recoge '+(8-parte)+' estrellas nuevas.';
+        return metaOriginal(l);
+      };
+      L.objetivo=function(l){return objetivoOriginal(l)+' · Tramo extra: '+l.itemsExtraMeta.filter(function(i){return i.got;}).length+'/8 estrellas.';};
+      L.encima=function(c,l){
+        if(encimaOriginal)encimaOriginal(c,l);
+        c.save();c.fillStyle='rgba(255,255,255,.92)';c.strokeStyle='#355C59';c.lineWidth=3;
+        rr(c,xFinal+55,mitad-255,240,46,16);c.fill();c.stroke();
+        c.font='bold 19px Nunito,sans-serif';c.fillStyle='#244C49';c.textAlign='center';c.fillText('META · Expedición',xFinal+175,mitad-225);
+        c.restore();
+      };
+      return L;
+    };
+  });
+  // El ascenso del xilema es vertical: se extendio físicamente a 5700 px arriba.
+  // Para que el nuevo tramo sea una parte real del reto, hay más estrellas en altura.
+  var prev=NIV.F2;
+  NIV.F2=function(VW,VH){var L=prev(VW,VH);L.estNecesarias=6;return L;};
 })();
 
 if(document.readyState==='loading')document.addEventListener('DOMContentLoaded',arranque);else arranque();
