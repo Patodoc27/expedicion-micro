@@ -1292,7 +1292,7 @@ ESTILO.grana=function(c,p){var n=Math.max(3,Math.round(p.h/15)),dh=p.h/n;for(var
     var g=c.createLinearGradient(0,y,0,y+dh);g.addColorStop(0,p.activo?'#B3F59A':'#7FD46A');g.addColorStop(1,p.activo?'#4CC05A':'#2E8A48');c.fillStyle=g;rr(c,p.x,y,p.w,dh-2,dh/2);c.fill();
     c.strokeStyle='#185A2E';c.lineWidth=1.6;c.stroke();c.strokeStyle='rgba(220,255,210,.7)';c.lineWidth=1.2;c.beginPath();c.moveTo(p.x+dh/2,y+dh/2-1);c.lineTo(p.x+p.w-dh/2,y+dh/2-1);c.stroke();}
   if(p.meta){c.save();c.strokeStyle=p.activo?'#FFC43D':'rgba(255,255,255,.95)';c.lineWidth=4;c.setLineDash(p.activo?[]:[10,8]);rr(c,p.x-8,p.y-8,p.w+16,p.h+16,18);c.stroke();c.restore();
-    if(p.carga>0&&!p.activo){c.fillStyle='#fff';rr(c,p.x,p.y-30,p.w,10,5);c.fill();c.fillStyle='#FFC43D';rr(c,p.x,p.y-30,p.w*p.carga,10,5);c.fill();}
+    if(p.carga>0&&(!p.activo||p.carga<1)){c.fillStyle='#fff';rr(c,p.x,p.y-30,p.w,10,5);c.fill();c.fillStyle='#FFC43D';rr(c,p.x,p.y-30,p.w*p.carga,10,5);c.fill();}
     if(p.activo){var g2=c.createRadialGradient(p.x+p.w/2,p.y+p.h/2,10,p.x+p.w/2,p.y+p.h/2,p.w);g2.addColorStop(0,'rgba(255,240,140,.45)');g2.addColorStop(1,'rgba(255,240,140,0)');c.fillStyle=g2;c.fillRect(p.x-p.w/2,p.y-p.w/2,p.w*2,p.h+p.w);}}};
 ESTILO.lamela=function(c,p){var g=c.createLinearGradient(0,p.y,0,p.y+p.h);g.addColorStop(0,'#8EDA78');g.addColorStop(1,'#3B9A4E');c.fillStyle=g;rr(c,p.x,p.y,p.w,p.h,p.h/2);c.fill();c.strokeStyle='#185A2E';c.lineWidth=1.4;c.stroke();
   c.strokeStyle='rgba(220,255,210,.7)';c.lineWidth=1;c.beginPath();c.moveTo(p.x+6,p.y+p.h/2);c.lineTo(p.x+p.w-6,p.y+p.h/2);c.stroke();};
@@ -1893,9 +1893,14 @@ NIV.F4=function(VW,VH){var W=9400,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
     eq:{h2o:6,co2:6,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o','co2','co2','co2','co2','co2','co2'],
     objetivo:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n<6?'Carga los tilacoides marcados con luz roja o azul ('+n+'/6)':'Ve a la zona de fabricación';},
     metaOK:function(L){var n=marc.filter(function(g){return g.activo;}).length;return n>=6?true:'Faltan '+(6-n)+' grupos de tilacoides por cargar con luz.';},
-    update:function(L,dt,P){marc.forEach(function(g){if(g.activo)return;var c0=g.x+g.w/2,luz=false,verde=false;
+    update:function(L,dt,P){marc.forEach(function(g){var c0=g.x+g.w/2;
+        if(g.activo){if(P.suelo===g){g.sobre=(g.sobre||0)+dt;
+            if(g.sobre>5){if(!g.aviso){g.aviso=1;sfx('mal');toast('¡Saltá! Si te quedás sobre el tilacoide pierde la energía captada.',icoLuz(),3);}
+              g.carga=Math.max(0,g.carga-dt*0.34);if(g.carga<=0){g.activo=false;g.sobre=0;g.aviso=0;sfx('mal');toast('El tilacoide perdió la energía porque te quedaste encima. Cárgalo otra vez y saltá enseguida.',icoLuz(),3.6);pintarObj();}}}
+          else{g.sobre=0;g.aviso=0;}return;}
+        var luz=false,verde=false;
         haces.forEach(function(h){if(Math.abs(hx(h,L.t)-c0)<130){if(h.col==='G')verde=true;else luz=true;}});
-        if(P.suelo===g){if(luz){g.carga=Math.min(1,g.carga+dt/0.8);if(g.carga>=1){g.activo=true;sfx('luz');L.pts+=30;L.textos.push({x:c0,y:g.y-40,t:0,s:'+30'});toast('¡La clorofila captó la energía de la luz!',icoClorofila(),2.6);pintarObj();}}
+        if(P.suelo===g){if(luz){g.carga=Math.min(1,g.carga+dt/0.8);if(g.carga>=1){g.activo=true;g.sobre=0;g.aviso=0;sfx('luz');L.pts+=30;L.textos.push({x:c0,y:g.y-40,t:0,s:'+30'});toast('¡La clorofila captó la energía de la luz! Saltá al siguiente tilacoide.',icoClorofila(),3);pintarObj();}}
           else{g.carga=Math.max(0,g.carga-dt*0.1);if(verde&&L.t-(L.avG||-99)>6){L.avG=L.t;toast('La luz verde casi no sirve: la clorofila no la absorbe, la refleja. Por eso las hojas se ven verdes.',icoClorofila(),4.4);}
             else if(!verde&&L.t-(L.avL||-99)>7){L.avL=L.t;toast('Sin luz no hay energía: espera un haz rojo o azul.',icoLuz(),2.8);}}}
         else g.carga=Math.max(0,g.carga-dt*0.1);});},
