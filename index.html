@@ -2271,9 +2271,9 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
       L.estNecesarias=12;
       L.metaOK=function(l){
         var parte=l.itemsExtraMeta.filter(function(i){return i.got;}).length;
-        if(parte<8)return 'Explora el tramo final y recoge '+(8-parte)+' estrellas nuevas.';
+        if(parte<5)return 'Recoge '+(5-parte)+' estrellas del tramo final para abrir la salida.';
         return metaOriginal(l);};
-      L.objetivo=function(l){return objetivoOriginal(l)+' · Tramo extra: '+l.itemsExtraMeta.filter(function(i){return i.got;}).length+'/8 estrellas.';};
+      L.objetivo=function(l){return objetivoOriginal(l)+' · Tramo extra: '+l.itemsExtraMeta.filter(function(i){return i.got;}).length+'/5 estrellas.';};
       L.encima=function(c,l){if(encimaOriginal)encimaOriginal(c,l);
         c.save();c.fillStyle='rgba(255,255,255,.92)';c.strokeStyle='#355C59';c.lineWidth=3;
         rr(c,xF-25,metaY-46,260,44,16);c.fill();c.stroke();
