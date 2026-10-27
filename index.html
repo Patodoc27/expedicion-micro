@@ -2571,7 +2571,11 @@ function cargarTop6(){
   var respondio=false,intentos=0;
   function vacio(msg){if(respondio)return;respondio=true;
     $('top6').innerHTML='<div style="font-size:13px;color:#7A6A4A;font-weight:700;padding:4px 2px">'+msg+'</div>';}
-  function pedir(){intentos++;var s=document.createElement('script');
+  function pedir(){intentos++;
+    try{fetch(SHEETS_URL+'?top=6&_='+Date.now()).then(function(r){return r.text();}).then(function(t){
+      var m=/\(([\s\S]*)\)/.exec(t);if(m)window.emTop6(JSON.parse(m[1]));
+    }).catch(function(){});}catch(e){}
+    var s=document.createElement('script');
     s.src=SHEETS_URL+'?top=6&callback=emTop6&_='+Date.now();
     s.onerror=function(){};
     document.body.appendChild(s);}
