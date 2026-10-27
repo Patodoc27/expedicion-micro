@@ -1849,8 +1849,8 @@ function detrasHoja2(c,L,mx){var cm=JG.cam,x0=Math.floor((cm.x-100)/130)*130,x;
   c.fillStyle='rgba(255,255,255,.7)';c.beginPath();c.ellipse(mx,505,100,72,0,0,7);c.fill();cloroLente(c,mx,500,62,0);etiqueta(c,'entrar al cloroplasto',mx,410,15);}
 NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[],estX=[],x;
   for(x=700;x<W-900;x+=760+Math.floor(r()*160))estX.push(x);
-  estX.forEach(function(x,i){plat.push(P_(x0,610,x-x0,160,'solid','epi'));plat.push({x:x,y:618,w:30,h:150,t:'solid',st:'nada'},{x:x+90,y:618,w:30,h:150,t:'solid',st:'nada'});
-    var oc=P_(x+30,622,60,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
+  estX.forEach(function(x,i){plat.push(P_(x0,610,x-x0,160,'solid','epi'));
+    var oc=P_(x,622,GAP,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
   plat.push(P_(x0,610,W-x0+60,160,'solid','epi'));
   for(x=200;x<W-500;x+=235+r()*45)plat.push(P_(x,Math.floor(x/300)%2?430:530,150+r()*40,40,'one','celula'));
   estX.forEach(function(x,i){items.push({x:x+GAP/2,y:640,tp:'co2',oculto:true,yObj:390+((i*53)%110)});});
