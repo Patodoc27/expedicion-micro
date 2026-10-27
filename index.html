@@ -1839,7 +1839,7 @@ NIV.F2=function(VW,VH){
       var gm=c.createLinearGradient(0,0,0,170);gm.addColorStop(0,'rgba(140,210,120,.9)');gm.addColorStop(1,'rgba(140,210,120,0)');c.fillStyle=gm;c.fillRect(iz,0,de-iz,170);
       etiqueta(c,'hacia la hoja',640,70,18);etiqueta(c,'xilema',640,H-330,16);etiqueta(c,'el agua llega desde la raíz',640,H-22,13);etiqueta(c,'anillos de lignina',iz+110,H-420,12);}};};
 
-/* ---------- F3: hoja (≈1 min, corriente de vapor y oxígeno trampa) ---------- */
+/* ---------- F3: hoja (estomas, salto entre células y oxígeno trampa) ---------- */
 function detrasHoja2(c,L,mx){var cm=JG.cam,x0=Math.floor((cm.x-100)/130)*130,x;
   c.fillStyle='#F2E7A6';c.fillRect(cm.x-50,0,VW+100,10);
   for(x=Math.floor((cm.x-100)/90)*90;x<cm.x+VW+100;x+=90){c.fillStyle='#F4FAEC';c.strokeStyle='#9DBE7A';c.lineWidth=3;rr(c,x+2,10,86,72,12);c.fill();c.stroke();}
@@ -1852,15 +1852,14 @@ NIV.F3=function(VW,VH){var W=10800,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[
   estX.forEach(function(x,i){plat.push(P_(x0,610,x-x0,160,'solid','epi'));plat.push({x:x,y:618,w:30,h:150,t:'solid',st:'nada'},{x:x+90,y:618,w:30,h:150,t:'solid',st:'nada'});
     var oc=P_(x+30,622,60,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
   plat.push(P_(x0,610,W-x0+60,160,'solid','epi'));
-  for(x=200;x<W-500;x+=300+r()*60)plat.push(P_(x,Math.floor(x/300)%2?330:450,150+r()*40,40,'one','celula'));
-  var vxs=[2200,4300,6400,8500];
-  estX.forEach(function(x,i){var ix=x+GAP/2;vxs.forEach(function(vx){if(ix>vx-60&&ix<vx+560)ix=vx-90;});items.push({x:ix,y:640,tp:'co2',oculto:true,yObj:330+((i*53)%130)});});
+  for(x=200;x<W-500;x+=235+r()*45)plat.push(P_(x,Math.floor(x/300)%2?430:530,150+r()*40,40,'one','celula'));
+  estX.forEach(function(x,i){items.push({x:x+GAP/2,y:640,tp:'co2',oculto:true,yObj:390+((i*53)%110)});});
   var MO='Eso era oxígeno: en la fotosíntesis no entra, sale de la hoja. Junta solo dióxido de carbono.';
-  [1500,3300,5000,6900,8700].forEach(function(t,i){items.push(trampa(t+(i%2)*120,i%2?520:400,'o2',MO));});
-  items.push({x:5600,y:270,tp:'cor'});
+  [1500,3300,5000,6900,8700].forEach(function(t,i){items.push(trampa(t+(i%2)*120,318+(i%3)*12,'o2',MO));});
+  items.push({x:5600,y:300,tp:'cor'});
   plat.filter(function(p){return p.st==='celula';}).forEach(function(p,i){if(i%3===1)items.push({x:p.x+p.w/2,y:p.y-110,tp:'est'});});
   var cps=[3,6,9].filter(function(k){return k<estX.length;}).map(function(k){return {x:estX[k]-160,y:610};}),mx=W-140;
-  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:150,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
+  return {isla:'F',nombre:'3 · La hoja: entra el dióxido de carbono',W:W,H:720,techo:285,plat:plat,items:items,cps:cps,inicio:{x:300,y:520},meta:{x:W-220,y:430,w:160,h:180},
     peligros:[{dibujar:function(c,h,L){oclusivas(c,L);}}],
     msgCaida:'Saliste de la hoja por un estoma abierto. Vuelves al último punto de control.',
     eq:{h2o:6,co2:0,glu:0,o2:0},cola0:['h2o','h2o','h2o','h2o','h2o','h2o'],
