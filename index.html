@@ -374,7 +374,7 @@ button{font-family:'Fredoka','Nunito',sans-serif;cursor:pointer;border:none}
 <!-- ============ FINAL ============ -->
 <section class="scr" id="final">
   <div class="cert">
-    <div class="cizq"><canvas id="cvCert" width="600" height="720"></canvas><b id="cNom"></b><span id="cSec" style="font-weight:800;color:#6B7A85"></span></div>
+    <div class="cizq"><canvas id="cvCert" width="620" height="877" style="max-height:76vh"></canvas><b id="cNom"></b><span id="cSec" style="font-weight:800;color:#6B7A85"></span></div>
     <div class="cder">
       <small style="font-weight:800;letter-spacing:.1em;color:#6B7A85">CERTIFICADO DE EXPEDICIÓN</small>
       <h1>¡Expedición Micro completada!</h1>
@@ -1882,7 +1882,8 @@ function faroListo(is,err){sfx('nivel');var ambas=ST.faro.F&&ST.faro.R;
 
 
 /* ---------- FINAL ---------- */
-function rangoOf(pts,f){return pts<2800?(f?'Novata':'Novato'):pts<4200?(f?'Bioexploradora':'Bioexplorador'):pts<5400?'Bioaprendiz':pts<6600?'Bioespecialista':pts<7600?(f?'Bioexperta':'Bioexperto'):'Bioleyenda';}
+function rangoOf(pts,f){return pts<3000?(f?'Novata':'Novato'):pts<5500?(f?'Bioexploradora':'Bioexplorador'):pts<7800?'Bioaprendiz':pts<9800?'Bioespecialista':pts<11500?(f?'Bioexperta':'Bioexperto'):'Bioleyenda';}
+function rangoColor(r){return {Novato:'#8A7B6B',Novata:'#8A7B6B',Bioexplorador:'#4A90D9',Bioexploradora:'#4A90D9',Bioaprendiz:'#3E8E5A',Bioespecialista:'#8E44AD',Bioexperto:'#B4492A',Bioexperta:'#B4492A',Bioleyenda:'#C9A227'}[r]||'#1F6B44';}
 function verFinal(){if(!(ST.faro.F&&ST.faro.R)&&!LIBRE){abrirModal(cabeza('n','Certificado','Todavía no')+'<div class="cuerpo"><p>Para obtener el certificado tienes que completar los niveles de las dos islas y encender los dos faros.</p><div class="pie"><button class="btn" id="nOk">Entendido</button></div></div>');$('nOk').onclick=cerrarModal;return;}
   mostrar('final');var p=ST.perfil,e=totalEst(),f=PJ[p.pj].g==='f';
   $('cNom').textContent=p.nom+' '+p.ape;$('cSec').textContent='Sección '+p.sec;$('cPts').textContent=totalPts();$('cEst').textContent=e;$('cPreg').textContent=totalCorrectas()+' de '+totalPreg();$('cEcuF').innerHTML=ecuHTML('F');$('cEcuR').innerHTML=ecuHTML('R');
@@ -2527,7 +2528,7 @@ function limpiarProgreso(){
 }
 function pdfDescargar(){
   var cv=$('cvCert'),jpg=cv.toDataURL('image/jpeg',0.88).split(',')[1],bin=atob(jpg),n=bin.length;
-  var W=612,H=792,iw=540,ih=Math.round(540*cv.height/cv.width),ox=Math.round((W-iw)/2),oy=Math.round((H-ih)/2);
+  var W=595,H=842,iw=540,ih=Math.round(540*cv.height/cv.width),ox=Math.round((W-iw)/2),oy=Math.round((H-ih)/2);
   var cont='q '+iw+' 0 0 '+ih+' '+ox+' '+oy+' cm /Im0 Do Q';
   var head='%PDF-1.4\n';
   var o1='1 0 obj\n<< /Type /Catalog /Pages 2 0 R >>\nendobj\n';
@@ -2546,6 +2547,53 @@ function pdfDescargar(){
   var a=document.createElement('a');a.href=URL.createObjectURL(new Blob([bytes],{type:'application/pdf'}));
   a.download='certificado-expedicion-micro-'+codigoCert()+'.pdf';a.click();setTimeout(function(){URL.revokeObjectURL(a.href);},5000);
 }
+/* Certificado A4 completo: todo dibujado en el canvas porque el PDF
+   embebe solo esa imagen. */
+function pintarCert(){
+  var p=ST.perfil,k=$('cvCert'),x=k.getContext('2d'),W=620,H=877;
+  var pts=totalPts(),est=totalEst(),preg=totalCorrectas(),totP=totalPreg();
+  var f=PJ[p.pj].g==='f',rg=rangoOf(pts,f),col=rangoColor(rg);
+  var cod=codigoCert(),seg=ST.t0?Math.round((Date.now()-ST.t0)/1000):0;
+  x.setTransform(1,0,0,1,0,0);x.clearRect(0,0,W,H);
+  var g=x.createLinearGradient(0,0,0,H);g.addColorStop(0,'#FFFDF6');g.addColorStop(1,'#FFEFCB');x.fillStyle=g;x.fillRect(0,0,W,H);
+  x.strokeStyle='#C9A227';x.lineWidth=7;x.strokeRect(16,16,W-32,H-32);
+  x.strokeStyle='#1F6B44';x.lineWidth=2;x.strokeRect(28,28,W-56,H-56);
+  x.textAlign='center';
+  x.fillStyle='#6B7A85';x.font='800 14px Nunito,sans-serif';
+  x.fillText('E X P E D I C I Ó N   M I C R O',310,78);
+  x.fillStyle='#1F6B44';x.font='800 46px Fredoka,"Nunito",sans-serif';
+  x.fillText('Certificado',310,128);
+  x.strokeStyle='#C9A227';x.lineWidth=2.5;x.beginPath();x.moveTo(170,148);x.lineTo(450,148);x.stroke();
+  x.fillStyle='#355C59';x.font='700 19px Nunito,sans-serif';x.fillText('Se otorga a',310,192);
+  var nm=p.nom+' '+p.ape,nf=42;
+  x.font='800 '+nf+'px Fredoka,"Nunito",sans-serif';
+  while(x.measureText(nm).width>520&&nf>20){nf-=2;x.font='800 '+nf+'px Fredoka,"Nunito",sans-serif';}
+  x.fillStyle='#A06A1E';x.fillText(nm,310,240);
+  x.fillStyle='#355C59';x.font='700 18px Nunito,sans-serif';
+  x.fillText('1°'+(p.sec||'')+'  ·  completó los 7 niveles de las dos islas',310,272);
+  x.fillText('Isla Fotosíntesis e Isla Respiración celular',310,296);
+  /* stats */
+  rr(x,70,325,W-140,92,16);x.fillStyle='#FFF6E0';x.fill();x.strokeStyle='#EAD9A8';x.lineWidth=2;x.stroke();
+  var sc=[[pts,'puntos'],[est+'/21','estrellas'],[preg+'/'+totP,'respuestas']];
+  for(var si=0;si<3;si++){var cx=70+(W-140)/6+si*(W-140)/3;
+    x.fillStyle='#1F6B44';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(String(sc[si][0]),cx,368);
+    x.fillStyle='#8A7B6B';x.font='700 13px Nunito,sans-serif';x.fillText(sc[si][1],cx,394);}
+  /* rango */
+  x.fillStyle='#6B7A85';x.font='800 13px Nunito,sans-serif';x.fillText('R A N G O   A L C A N Z A D O',310,452);
+  var pw=340;rr(x,(W-pw)/2,466,pw,64,32);x.fillStyle=col;x.fill();
+  x.fillStyle='#fff';x.font='800 30px Fredoka,"Nunito",sans-serif';x.fillText(rg,310,508);
+  if(rg==='Bioleyenda'){x.fillStyle='rgba(255,255,255,.35)';x.beginPath();x.arc((W-pw)/2+30,498,10,0,7);x.fill();x.beginPath();x.arc((W+pw)/2-30,498,10,0,7);x.fill();}
+  /* decor: moléculas y personaje */
+  dibujarMol(x,'co2',100,625,1.4,-0.3);dibujarMol(x,'h2o',520,625,1.4,0.3);
+  dibujarMol(x,'glu',100,750,1.4,0.2);dibujarMol(x,'o2',520,750,1.5,0.5);
+  x.fillStyle='#F3E9D8';x.beginPath();x.ellipse(310,792,140,17,0,0,7);x.fill();
+  dibujarPJ(x,p.pj,310,790,2.7,1,0,'idle',{});
+  /* pie */
+  x.fillStyle='#355C59';x.font='700 16px Nunito,sans-serif';
+  x.fillText('Fecha: '+new Date().toLocaleDateString('es-AR')+'   ·   Tiempo de juego: '+mmssT(seg),310,812);
+  x.fillStyle='#A06A1E';x.font='800 17px Nunito,sans-serif';
+  x.fillText('Código de verificación: '+cod,310,838);
+}
 var _verFinal0=verFinal;
 verFinal=function(){
   var antesFaro=ST.faro.F&&ST.faro.R;
@@ -2553,11 +2601,7 @@ verFinal=function(){
   if(!antesFaro&&!LIBRE)return;
   if($('final').className.indexOf('on')<0)return;
   var cod=codigoCert(),seg=ST.t0?Math.round((Date.now()-ST.t0)/1000):0;
-  var x=$('cvCert').getContext('2d');
-  x.font='bold 15px Nunito,sans-serif';x.fillStyle='#355C59';x.textAlign='center';
-  x.fillText('Fecha: '+new Date().toLocaleDateString('es-AR')+'  ·  Tiempo de juego: '+mmssT(seg),300,672);
-  x.font='bold 17px Nunito,sans-serif';x.fillStyle='#A06A1E';
-  x.fillText('Código de verificación: '+cod,300,697);
+  pintarCert();
   var info=document.getElementById('cCod');
   if(!info){info=document.createElement('div');info.id='cCod';info.style.cssText='text-align:center;font-weight:800;color:#A06A1E;font-size:16px;margin:6px 0';$('cNiv').parentNode.insertBefore(info,$('cNiv'));}
   info.textContent='Código de verificación: '+cod+'  ·  Tiempo: '+mmssT(seg);
