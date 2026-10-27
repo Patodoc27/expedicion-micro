@@ -633,7 +633,7 @@ function guardarRanking(){
   }catch(e){}
 }
 function mostrarRanking(){var lista=[];try{lista=JSON.parse(localStorage.getItem('expedicion-micro-ranking-local-v2')||'[]');}catch(e){}
-  var contenido=lista.length?lista.slice(0,20).map(function(q,i){return '<div style="display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;background:'+(i%2?'#F2F6F2':'#FFFFFF')+';border-radius:12px;padding:10px 15px;font-size:18px"><b>N° '+(i+1)+'</b><span>'+escapeRanking(q.nombre)+' · '+escapeRanking(q.seccion)+'</span><b>'+q.puntos+' pts</b></div>';}).join(''):'<p>Todavía no hay puntajes registrados.</p>';
+  var contenido=lista.length?lista.slice(0,20).map(function(q,i){return '<div style="display:grid;grid-template-columns:48px 1fr auto;align-items:center;gap:12px;background:'+(i%2?'#F2F6F2':'#FFFFFF')+';border-radius:12px;padding:10px 15px;font-size:18px"><b>N° '+(i+1)+'</b><span>'+escapeRanking(q.nombre)+' · '+escapeRanking(q.seccion)+'</span><b>'+q.puntos+' pts'+(q.tiempo?' · '+Math.floor(q.tiempo/60)+':'+('0'+q.tiempo%60).slice(-2):'')+'</b></div>';}).join(''):'<p>Todavía no hay puntajes registrados.</p>';
   abrirModal(cabeza('n','Clasificación','Ranking de exploradores')+'<div class="cuerpo"><p><b>Ranking de este dispositivo.</b> Los datos se guardan únicamente en este navegador; no reúne estudiantes de diferentes computadoras.</p><div style="display:grid;gap:4px;max-height:48vh;overflow:auto">'+contenido+'</div><div class="pie"><button class="btn" id="rankingCerrar">Volver</button></div></div>');
   $('rankingCerrar').onclick=cerrarModal;
 }
@@ -1859,7 +1859,7 @@ function trampa(x,y,tp,msg){return {x:x,y:y,tp:tp,mal:msg};}
 function cuantos(P,tp){return P.cola.filter(function(t){return t===tp;}).length;}
 
 /* ---------- F1: raíz ---------- */
-NIV.F1=function(VW,VH){var W=6400,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,wMin:320,wMax:560,gMin:110,gMax:155,dy:50,pozo:4,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
+NIV.F1=function(VW,VH){var W=7800,C=camino(7,0,W-900,{y0:600,yMin:500,yMax:620,wMin:320,wMax:560,gMin:110,gMax:155,dy:50,pozo:4,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
   S.forEach(function(s){plat.push(P_(s.x,s.y,s.w,400,'solid','grano'));});
   C.p.forEach(function(q){var p=P_(q.x-55,q.y,110,40,'one','granoDer');p.der=1;plat.push(p);});
   for(var bi=0;bi<3-C.p.length;bi++){var bj=Math.floor(n*(0.3+bi*0.3)),bs=S[bj],bn=S[Math.min(n-1,bj+1)],bb=P_(bs.x+bs.w+20,Math.min(bs.y,bn.y)-25,110,40,'one','granoDer');bb.der=1;plat.push(bb);C.p.push({x:bb.x+55,y:bb.y});}
@@ -1931,7 +1931,7 @@ function detrasHoja2(c,L,mx){var cm=JG.cam,x0=Math.floor((cm.x-100)/130)*130,x;
     c.fillStyle='rgba(225,245,255,.55)';rr(c,x+30,112,70,140,30);c.fill();for(var k=0;k<5;k++){cloroLente(c,x+20,116+k*34,12,1.57);cloroLente(c,x+110,116+k*34,12,1.57);}nucleo(c,x+65,250,8);}
   etiqueta(c,'epidermis',300,96,13);etiqueta(c,'células en empalizada',700,300,13);etiqueta(c,'parénquima esponjoso',360,520,13);etiqueta(c,'espacio con aire',1500,560,12);
   c.fillStyle='rgba(255,255,255,.7)';c.beginPath();c.ellipse(mx,505,100,72,0,0,7);c.fill();cloroLente(c,mx,500,62,0);etiqueta(c,'entrar al cloroplasto',mx,410,15);}
-NIV.F3=function(VW,VH){var W=6400,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[],estX=[],x;
+NIV.F3=function(VW,VH){var W=7400,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[],estX=[],x;
   for(x=700;x<W-900;x+=760+Math.floor(r()*160))estX.push(x);
   estX.forEach(function(x,i){plat.push(P_(x0,610,x-x0,160,'solid','epi'));
     var oc=P_(x,622,GAP,150,'solid','oclusiva');plat.push(oc);est.push({x:x,pl:oc,per:6+(i%3)*0.8,ph:i*1.7,ab:0});x0=x+GAP;});
@@ -1957,7 +1957,7 @@ NIV.F3=function(VW,VH){var W=6400,GAP=120,plat=[],est=[],x0=0,r=rnd(31),items=[]
     detras:function(c,L){detrasHoja2(c,L,mx);}};};
 
 /* ---------- F4: cloroplasto ---------- */
-NIV.F4=function(VW,VH){var W=5800,r=rnd(41),plat=[P_(-50,630,800,140,'solid','memClo')],granas=[],islas=[],x=870,y=520,k=0,islaEn=[2700];
+NIV.F4=function(VW,VH){var W=6600,r=rnd(41),plat=[P_(-50,630,800,140,'solid','memClo')],granas=[],islas=[],x=870,y=520,k=0,islaEn=[2700];
   while(x<W-1100){
     if(islaEn.length&&x>islaEn[0]){var isl=P_(x,630,460,140,'solid','memClo');plat.push(isl);islas.push(isl);islaEn.shift();x+=460+130;y=540;continue;}
     if(k%3!==2){var g=P_(x,y,150,96+Math.floor(r()*3)*8,'solid','grana');plat.push(g);granas.push(g);x+=150;}
@@ -2006,7 +2006,7 @@ NIV.F4=function(VW,VH){var W=5800,r=rnd(41),plat=[P_(-50,630,800,140,'solid','me
       c.fillStyle='rgba(255,255,255,.45)';rr(c,W-360,400,240,230,26);c.fill();etiqueta(c,'zona de fabricación (estroma)',cx,380,15);}};};
 
 /* ---------- R1: citoplasma ---------- */
-NIV.R1=function(VW,VH){var W=6400,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610,wMin:340,wMax:580,gMin:110,gMax:155,dy:50,pozo:3,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
+NIV.R1=function(VW,VH){var W=7400,C=camino(53,0,W-700,{y0:600,yMin:500,yMax:610,wMin:340,wMax:580,gMin:110,gMax:155,dy:50,pozo:3,W:W,yFin:600}),S=C.s,n=S.length,plat=[],items=[];
   S.forEach(function(s){plat.push(P_(s.x,s.y,s.w,46,'solid','filamento'));});
   C.p.forEach(function(q,i){plat.push(P_(q.x-60,q.y,120,30,'one','vesicula',{ax:110,per:3.2+(i%3)*0.5,ph:i}));});
   var dS=S.filter(function(s){return s.x>3400&&s.w>=330;})[0],div={x:dS.x+(dS.w-200)/2,w:200,y:dS.y},gS=S.filter(function(s){return s.x>1500;})[0];
@@ -2233,58 +2233,184 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
 })();
 
 
-/* ================== AMPLIACION DE EXPLORACION V4 ==================
-   Alarga los niveles jugables sin alterar reactivos, productos ni ecuaciones.
-   Las estrellas nuevas son un objetivo de exploracion independiente. */
+/* ================== AMPLIACION DE EXPLORACION V5 ==================
+   Cada nivel cierra con una mecanica distinta (no siempre cadena de saltos).
+   La salida vieja queda a mitad de camino como trampa: entrar o saltar en ella
+   completa el nivel antes de tiempo y se pierden las estrellas del tramo nuevo. */
 (function(){
-  var claves=['F1','F3','F4','R1','R2','R3'];
-  claves.forEach(function(id,indice){
+  function estrella(L,x,y){var a={x:x,y:y,tp:'est',rutaLarga:true};L.items.push(a);L.itemsExtraMeta.push(a);return a;}
+  function cp(L,x,y){L.cps=L.cps||[];L.cps.push({x:x,y:y});}
+  function trampaSalida(L,metaVieja,metaOriginal,soloAire){
+    var u0=L.update,aviso=0;
+    L.update=function(l,dt,P){if(u0)u0(l,dt,P);
+      if(!l.fin&&choca(P,metaVieja)&&(!soloAire||!P.suelo)){
+        var rr=metaOriginal(l);
+        if(rr===true){l.fin=true;l.bloqueo=true;completar();}
+        else if(rr&&l.t-aviso>3){aviso=l.t;toast(rr,null,2.6);}}};
+  }
+  function extiende(id,fn){
     var original=NIV[id];
     NIV[id]=function(VW,VH){
-      var L=original(VW,VH),antes=L.W,plataformas=20,px=antes-35,mitad=indice%2===0?550:570;
-      var anteriorMeta=L.meta,metaOriginal=L.metaOK,objetivoOriginal=L.objetivo,encimaOriginal=L.encima;
+      var L=original(VW,VH),metaVieja=L.meta,metaOriginal=L.metaOK,objetivoOriginal=L.objetivo,encimaOriginal=L.encima;
       L.itemsExtraMeta=[];
-      // Trayecto de 20 saltos legibles, sin saltos ciegos ni plataformas demasiado estrechas.
-      // Cada cuarto tramo ofrece una pausa de seguridad y un punto de control.
-      for(var n=0;n<plataformas;n++){
-        var gap=(n%5===3?138:(n%3===1?124:104)),ancho=n%4===3?310:205;
-        px+=gap;var y=mitad + [-6,-62,-97,-38,0, -57,-107,-55,0, -45,-98,-34,4,-60,-110,-42,0,-50,-85,-12][n];
-        var tipo=id==='F1'?'grano':id==='F3'?'celula':id==='F4'?'memClo':id==='R1'?'citoplasma':id==='R2'?'memMito':'filamento';
-        // Tipos de plataforma conocidos del motor, para evitar dibujos incompatibles.
-        if(!ESTILO[tipo])tipo=id.charAt(0)==='F'?'grano':'filamento';
-        L.plat.push(P_(px,y,ancho,28,'one',tipo));
-        var cx=px+ancho/2;
-        var a={x:cx,y:y-55,tp:'est',rutaLarga:true};L.items.push(a);L.itemsExtraMeta.push(a);
-        // Estrellas altas opcionales: premiar saltos bien calculados.
-        if(n%3===1){var b={x:cx+45,y:y-117,tp:'est',rutaLarga:true};L.items.push(b);L.itemsExtraMeta.push(b);}
-        if(n===4||n===10||n===16){L.cps=L.cps||[];L.cps.push({x:px+65,y:y});}
-        if(n===9||n===17)L.items.push({x:cx,y:y-145,tp:'cor'});
-        px+=ancho;
-      }
-      // Meta real al final del nuevo recorrido; la anterior deja de cerrar el nivel.
-      var xFinal=px+118;
-      L.plat.push(P_(px+80,mitad+8,410,100,'solid',id.charAt(0)==='F'?'grano':'filamento'));
-      L.W=xFinal+350;
-      L.meta={x:xFinal+120,y:mitad-220,w:120,h:220};
+      var r=fn(L,L.W-35)||{},xF=r.xF,piso=r.piso,estilo=r.estilo,metaY=r.metaY;
+      L.plat.push(P_(xF-280,piso,560,160,'solid',estilo));
+      L.W=xF+360;
+      L.meta={x:xF+40,y:metaY,w:140,h:220};
       L.estNecesarias=12;
       L.metaOK=function(l){
         var parte=l.itemsExtraMeta.filter(function(i){return i.got;}).length;
         if(parte<8)return 'Explora el tramo final y recoge '+(8-parte)+' estrellas nuevas.';
-        return metaOriginal(l);
-      };
+        return metaOriginal(l);};
       L.objetivo=function(l){return objetivoOriginal(l)+' · Tramo extra: '+l.itemsExtraMeta.filter(function(i){return i.got;}).length+'/8 estrellas.';};
-      L.encima=function(c,l){
-        if(encimaOriginal)encimaOriginal(c,l);
+      L.encima=function(c,l){if(encimaOriginal)encimaOriginal(c,l);
         c.save();c.fillStyle='rgba(255,255,255,.92)';c.strokeStyle='#355C59';c.lineWidth=3;
-        rr(c,xFinal+55,mitad-255,240,46,16);c.fill();c.stroke();
-        c.font='bold 19px Nunito,sans-serif';c.fillStyle='#244C49';c.textAlign='center';c.fillText('META · Expedición',xFinal+175,mitad-225);
-        c.restore();
-      };
-      return L;
-    };
-  });
-  // El ascenso del xilema es vertical: se extendio físicamente a 5700 px arriba.
-  // Para que el nuevo tramo sea una parte real del reto, hay más estrellas en altura.
+        rr(c,xF-25,metaY-46,260,44,16);c.fill();c.stroke();
+        c.font='bold 18px Nunito,sans-serif';c.fillStyle='#244C49';c.textAlign='center';c.fillText('META · Expedición',xF+105,metaY-17);c.restore();};
+      trampaSalida(L,metaVieja,metaOriginal,id==='F1'||id==='F3');
+      if(r.detras){var d0=L.detras;L.detras=function(c,l){if(d0)d0(c,l);r.detras(c,l);};}
+      return L;};
+  }
+
+  /* F1 · corredor bajo tierra: correr eligiendo moléculas, pozos y puentes que se desmoronan */
+  extiende('F1',function(L,px){
+    var MG='Eso era glucosa: la planta no la toma del suelo, la fabrica en las hojas.',
+        MO='Eso era oxígeno: la planta lo libera por las hojas, no lo toma del suelo.',
+        MC='Eso era dióxido de carbono: entra por las hojas desde el aire, no por la raíz.';
+    var msgs={glu:MG,o2:MO,co2:MC},tr=['glu','co2','glu','o2','co2','glu','o2'],kk=0,n=0,fin=px+4300;
+    while(px<fin){
+      if(n%4===2){var bp=P_(px+10,572,120,40,'one','granoDer');bp.der=1;L.plat.push(bp);estrella(L,px+70,470);px+=150;n++;continue;}
+      var w=380+((n*97)%180);
+      L.plat.push(P_(px,600,w,400,'solid','grano'));
+      if(n%2===0)L.items.push({x:px+w*0.5,y:558,tp:'h2o'});
+      var tp=tr[kk%7];kk++;if(n%3===1)L.items.push(trampa(px+w*0.55,n%3===1?540:468,tp,msgs[tp]));
+      if(n%2===1)estrella(L,px+w*0.5,545);else estrella(L,px+w*0.3,468);
+      if(n%5===2){L.plat.push(P_(px+w*0.35,440,150,24,'one','raicilla'));estrella(L,px+w*0.35+75,368);}
+      if(n===3)L.items.push({x:px+w*0.5,y:520,tp:'cor'});
+      if(n===2||n===5)cp(L,px+40,600);
+      px+=w+110+(n%3)*30;n++;}
+    return {xF:px,piso:600,estilo:'grano',metaY:380};});
+
+  /* F3 · pasillo de estomas: cada poro tiene su ritmo y suelta CO2 al abrir */
+  extiende('F3',function(L,px){
+    var MH='Eso era agua: por las hojas no entra, entra por la raíz.',
+        MO='Eso era oxígeno: la hoja lo libera, no lo junta.',
+        MG='Eso era glucosa: se fabrica adentro del cloroplasto, no viene de afuera.';
+    var msgs={h2o:MH,o2:MO,glu:MG},tr=['h2o','o2','glu','o2','h2o','glu'],kk=0,n=0,est=[],fin=px+4400;
+    var u0=L.update;
+    L.update=function(l,dt,P){if(u0)u0(l,dt,P);
+      est.forEach(function(e){var ph=((l.t+e.ph)%e.per);e.ab=lerp(e.ab,ph<4?1:0,dt*4);e.pl.on=!(ph<4);
+        var it=e.it;if(it.oculto&&e.ab>0.8){it.oculto=false;it.sube=true;}if(it.sube){it.y=lerp(it.y,it.yObj,dt*1.4);if(Math.abs(it.y-it.yObj)<2)it.sube=false;}});};
+    while(px<fin){
+      var ancho=560+(n%3)*70;
+      L.plat.push(P_(px,610,ancho,160,'solid','epi'));
+      var oc=P_(px+ancho,622,120,150,'solid','oclusiva');L.plat.push(oc);
+      var it={x:px+ancho+60,y:640,tp:'co2',oculto:true,yObj:400+(n%3)*70};L.items.push(it);
+      est.push({pl:oc,per:4.5+(n%4)*0.9,ph:n*1.9,ab:0,it:it});
+      if(n%2===0){var tp=tr[kk%6];kk++;L.items.push(trampa(px+ancho*0.4,545,tp,msgs[tp]));}
+      else L.items.push({x:px+ancho*0.45,y:555,tp:'co2'});
+      estrella(L,px+ancho*0.5,540);
+      if(n%3===1){L.plat.push(P_(px+ancho*0.3,460,160,40,'one','celula'));estrella(L,px+ancho*0.3+80,388);}
+      estrella(L,px+ancho+60,552);
+      if(n===2)L.items.push({x:px+ancho*0.6,y:520,tp:'cor'});
+      if(n===2||n===4)cp(L,px+60,610);
+      px+=ancho+120;n++;}
+    var mx2=px+150;
+    return {xF:px,piso:610,estilo:'epi',metaY:390,
+      detras:function(c,l){c.fillStyle='rgba(255,255,255,.7)';c.beginPath();c.ellipse(mx2,500,100,72,0,0,7);c.fill();cloroLente(c,mx2,495,62,0);etiqueta(c,'entrar al cloroplasto',mx2,405,15);}};});
+
+  /* F4 · carrera de luz: el haz barre el estroma y solo bajo la luz se ven las estrellas */
+  extiende('F4',function(L,px){
+    var haz={b:0,a:0,v:0.5,ph:0},u0=L.update,fin=px+4300;haz.b=(px+fin)/2;haz.a=(fin-px)/2-80;
+    L.update=function(l,dt,P){if(u0)u0(l,dt,P);
+      var hx=haz.b+Math.sin(l.t*haz.v+haz.ph)*haz.a;
+      l.itemsExtraMeta.forEach(function(it){if(!it.got)it.oculto=Math.abs(it.x-hx)>230;});};
+    var n=0;
+    while(px<fin){
+      var w=520+(n%3)*80;
+      L.plat.push(P_(px,630,w,140,'solid','memClo'));
+      if(n%3===1){L.plat.push(P_(px+w*0.35,470,170,14,'one','lamela'));estrella(L,px+w*0.35+85,398);}
+      else if(n%3===2){L.plat.push(P_(px+w*0.5,430,150,80,'solid','grana'));estrella(L,px+w*0.5+75,350);}
+      estrella(L,px+w*0.4,560);estrella(L,px+w*0.72,575);
+      if(n===3)L.items.push({x:px+w*0.5,y:540,tp:'cor'});
+      if(n===2||n===5)cp(L,px+60,630);
+      px+=w+120;n++;}
+    return {xF:px,piso:630,estilo:'memClo',metaY:410,
+      detras:function(c,l){var hx=haz.b+Math.sin(l.t*haz.v+haz.ph)*haz.a;
+        var g=c.createLinearGradient(hx-230,60,hx+230,60);g.addColorStop(0,'rgba(255,240,170,0)');g.addColorStop(0.5,'rgba(255,240,170,.45)');g.addColorStop(1,'rgba(255,240,170,0)');
+        c.fillStyle=g;c.fillRect(hx-230,60,460,l.H-60);}};});
+
+  /* R1 · autopista de vesículas: los huecos grandes solo se cruzan subido a una vesícula */
+  extiende('R1',function(L,px){
+    var MC='Eso era dióxido de carbono: en la respiración celular es un producto, no entra a reaccionar.',
+        MH='Eso era agua: se forma al final de la respiración, no es un reactivo.';
+    var msgs={co2:MC,h2o:MH},tr=['co2','h2o'],kk=0,n=0,fin=px+4400;
+    while(px<fin){
+      var w=300+(n%2)*90;
+      L.plat.push(P_(px,600,w,46,'solid','filamento'));
+      if(n%2===0)L.items.push({x:px+w*0.5,y:540,tp:'o2'});
+      else{var tp=tr[kk%2];kk++;L.items.push(trampa(px+w*0.5,540,tp,msgs[tp]));}
+      estrella(L,px+w*0.35,530);
+      var gap=290+(n%2)*40;
+      L.plat.push(P_(px+w+gap/2-65,585,130,30,'one','vesicula',{ax:gap/2-60,per:3.8+(n%3)*0.6,ph:n*1.3}));
+      if(n%3===1){L.plat.push(P_(px+w+gap-160,450,120,30,'one','vesicula',{ay:-90,per:4.4,ph:n}));estrella(L,px+w+gap-100,378);}
+      estrella(L,px+w+gap/2+15,505);
+      if(n===3)L.items.push({x:px+w*0.5,y:540,tp:'cor'});
+      if(n===2||n===5)cp(L,px+40,600);
+      px+=w+gap;n++;}
+    return {xF:px,piso:600,estilo:'filamento',metaY:380};});
+
+  /* R2 · escalera de crestas con pulsos de calor: la energía que se pierde como calor */
+  extiende('R2',function(L,px){
+    var MC='Eso era dióxido de carbono: es el producto que sale de la mitocondria, no un reactivo.';
+    var n=0,fin=px+4300,pulsos=[];
+    L.plat.push(P_(px,640,4600,140,'solid','memMito'));
+    while(px<fin){
+      var ancho=230+(n%3)*60,h=90+((n*37)%50),ty=640-h-30;
+      L.plat.push(P_(px+40,640-h,80,h,'solid','cresta'));
+      L.plat.push(P_(px-40,ty,ancho,30,'one','granulo'));
+      if(n%3===1)pulsos.push({x:px-40+ancho/2,y:ty,per:3.4+(n%4)*0.5,ph:n*1.1});
+      if(n%2===0)L.items.push({x:px-40+ancho*0.5,y:ty-72,tp:'o2'});
+      else L.items.push(trampa(px-40+ancho*0.5,ty-72,'co2',MC));
+      estrella(L,px-40+ancho*0.4,ty-92);
+      if(n%4===3)estrella(L,px-40+ancho+70,ty-42);
+      if(n===3)L.items.push({x:px+ancho*0.3,y:560,tp:'cor'});
+      if(n===2||n===5)cp(L,px,640);
+      px+=ancho+130;n++;}
+    L.peligros=L.peligros||[];
+    pulsos.forEach(function(q){L.peligros.push({q:q,
+      caja:function(h){var ph=((JG.L.t+h.q.ph)%h.q.per);return (ph>1.1&&ph<2.4)?{x:h.q.x-45,y:h.q.y-110,w:90,h:110}:{x:0,y:0,w:0,h:0};},
+      dibujar:function(c,h,l){var ph=((l.t+h.q.ph)%h.q.per);if(ph<1.1)return;
+        c.save();c.globalAlpha=(ph<2.4?0.55:0.25);var g=c.createLinearGradient(h.q.x,h.q.y-110,h.q.x,h.q.y);
+        g.addColorStop(0,'rgba(255,120,60,0)');g.addColorStop(1,'rgba(255,140,70,.9)');c.fillStyle=g;
+        c.fillRect(h.q.x-45,h.q.y-110,90,110);c.restore();},
+      msg:'Pulso de calor: la respiración libera energía y una parte se pierde como calor.'});});
+    return {xF:px,piso:640,estilo:'memMito',metaY:420};});
+
+  /* R3 · compuertas de membrana: canales que se abren y se cierran */
+  extiende('R3',function(L,px){
+    var MC='Eso era dióxido de carbono: ya salió de la célula como producto, no suma.';
+    var doors=[],n=0,fin=px+4300;
+    while(px<fin){
+      var w=520+(n%3)*60;
+      L.plat.push(P_(px,600,w,46,'solid','filamento'));
+      if(n%2===0)L.items.push({x:px+w*0.4,y:545,tp:'glu'});
+      else L.items.push({x:px+w*0.4,y:545,tp:'o2'});
+      if(n%2===1)L.items.push(trampa(px+w*0.7,545,'co2',MC));
+      estrella(L,px+w*0.5,530);
+      var d=P_(px+w,295,60,307,'solid','compuerta');L.plat.push(d);
+      doors.push({pl:d,per:4.6+(n%3)*0.7,ph:n*1.6});
+      estrella(L,px+w+30,545);
+      if(n%3===2){L.plat.push(P_(px+w+150,470,130,30,'one','vesicula',{ax:110,per:3.6,ph:n}));estrella(L,px+w+215,398);}
+      if(n===2||n===4)cp(L,px+60,600);
+      px+=w+60;n++;}
+    L.peligros=L.peligros||[];
+    L.peligros.push({update:function(h,dt,l){doors.forEach(function(d){var ph=((l.t+d.ph)%d.per);d.pl.on=!(ph<3.2);});},
+      dibujar:function(c,h,l){doors.forEach(function(d){if(d.pl.on)return;
+        c.save();c.globalAlpha=0.55;c.strokeStyle='#7BD3F7';c.lineWidth=3;rr(c,d.pl.x+8,d.pl.y+8,d.pl.w-16,150,10);c.stroke();c.restore();});}});
+    return {xF:px,piso:600,estilo:'filamento',metaY:380};});
+
+  /* F2 vertical: solo marca la cantidad de estrellas necesarias */
   var prev=NIV.F2;
   NIV.F2=function(VW,VH){var L=prev(VW,VH);L.estNecesarias=6;return L;};
 })();
