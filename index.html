@@ -2428,7 +2428,7 @@ NIV.R3=function(VW,VH){var W=6400,plat=[];
 })();
 
 /* ============ PLANILLA · CERTIFICADO PDF · REINICIO LIMPIO ============ */
-var SHEETS_URL=''; /* pegar aqui la URL del Apps Script (termina en /exec) */
+var SHEETS_URL='https://script.google.com/macros/s/AKfycbx0WzrVmOIeuQV7--sDY34h3YhRZW3wsZTayHySlAxQZ3t0ZHpsBoj7ohZAeun_klU4/exec';
 function mmssT(s){s=Math.round(s);return Math.floor(s/60)+':'+('0'+(s%60)).slice(-2);}
 function codigoCert(){if(!ST.codigo){var r=function(){return ('000'+Math.floor(Math.random()*46656).toString(36).toUpperCase()).slice(-4);};ST.codigo='EM-'+r()+'-'+r();}return ST.codigo;}
 var _perdiste0=perdiste;
